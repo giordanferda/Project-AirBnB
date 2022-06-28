@@ -74,7 +74,7 @@ JWT_SECRET=«generate_strong_secret_here»
 JWT_EXPIRES_IN=604800
 ```
 
-Assign `PORT` to `8000`, add a user password and a strong JWT secret.
+Assign `PORT` to `8000`, and a strong JWT secret.
 
 > Recommendation to generate a strong secret: create a random string using
 > `openssl` (a library that should already be installed in your Ubuntu/MacOS
