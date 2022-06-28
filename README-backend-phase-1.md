@@ -78,7 +78,12 @@ If you get an error, check your backend server logs in the terminal where you
 ran `npm start`. Also, check your `fetch` request syntax and your API router
 setup.
 
-After you finish testing, commit your code!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add an API router"
 
 [helmet on the `npm` registry]: https://www.npmjs.com/package/helmet
 [Express error-handling middleware]: https://expressjs.com/en/guide/using-middleware.html#middleware.error-handling

@@ -9,6 +9,21 @@ In this section, you will add the following routes to your Express application:
 - Signup: `POST /api/users`
 - Get session user: `GET /api/session`
 
+## Login Git Feature Branch
+
+Checkout the `dev` branch and make a new feature branch called `login` from the
+`dev` branch.
+
+```bash
+git checkout dev
+git checkout -b login
+```
+
+You will be making commits for adding a login endpoint to your backend
+server.
+
+## Session Router
+
 First, create a file called `session.js` in the `backend/routes/api` folder.
 This file will hold the resources for the route paths beginning with
 `/api/session`. Create and export an Express router from this file.
@@ -181,7 +196,56 @@ fetch('/api/session', {
 You should get a `Login failed` error back with an invalid `password` for the
 user with that `credential`.
 
-Commit your code for the login route once you are done testing!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add User login backend endpoint"
+
+## Merge your feature branch into your dev branch
+
+Once you thoroughly test that your `login` feature branch is working,
+merge the branch into the `dev` branch.
+
+To do this, first checkout the `dev` branch:
+
+```bash
+git checkout dev
+```
+
+Then, make sure you have the latest changes in the development branch from
+your remote repository in your local repository (this is useful when
+collaborating with other developers):
+
+```bash
+git pull origin dev
+```
+
+Then, merge the feature branch into the `dev` branch:
+
+```bash
+git merge login
+```
+
+Finally, push your changes to the development branch to the remote repository:
+
+```bash
+git push origin dev
+```
+
+## Logout Git Feature Branch
+
+Checkout the `dev` branch and make a new feature branch called `logout` from the
+`dev` branch.
+
+```bash
+git checkout dev
+git checkout -b logout
+```
+
+You will be making commits for adding a logout endpoint to your backend
+server.
 
 ## User Logout API Route
 
@@ -233,7 +297,56 @@ If you don't see this expected behavior while testing, then check your backend
 server logs in the terminal where you ran `npm start` as well as the syntax in
 the `session.js` route file.
 
-Commit your code for the logout route once you are done testing!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add User logout backend endpoint"
+
+## Merge your feature branch into your dev branch
+
+Once you thoroughly test that your `logout` feature branch is working,
+merge the branch into the `dev` branch.
+
+To do this, first checkout the `dev` branch:
+
+```bash
+git checkout dev
+```
+
+Then, make sure you have the latest changes in the development branch from
+your remote repository in your local repository (this is useful when
+collaborating with other developers):
+
+```bash
+git pull origin dev
+```
+
+Then, merge the feature branch into the `dev` branch:
+
+```bash
+git merge logout
+```
+
+Finally, push your changes to the development branch to the remote repository:
+
+```bash
+git push origin dev
+```
+
+## Signup Git Feature Branch
+
+Checkout the `dev` branch and make a new feature branch called `signup` from the
+`dev` branch.
+
+```bash
+git checkout dev
+git checkout -b signup
+```
+
+You will be making commits for adding a signup endpoint to your backend
+server.
 
 ## User Signup API Route
 
@@ -328,7 +441,56 @@ which should give back a `Validation error`:
 If you don't see the `Validation error` for any of these, check the syntax in
 your `backend/db/models/user.js` model file.
 
-Commit your code for the signup route once you are done testing!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add User signup backend endpoint"
+
+## Merge your feature branch into your dev branch
+
+Once you thoroughly test that your `signup` feature branch is working,
+merge the branch into the `dev` branch.
+
+To do this, first checkout the `dev` branch:
+
+```bash
+git checkout dev
+```
+
+Then, make sure you have the latest changes in the development branch from
+your remote repository in your local repository (this is useful when
+collaborating with other developers):
+
+```bash
+git pull origin dev
+```
+
+Then, merge the feature branch into the `dev` branch:
+
+```bash
+git merge signup
+```
+
+Finally, push your changes to the development branch to the remote repository:
+
+```bash
+git push origin dev
+```
+
+## Get Session Git Feature Branch
+
+Checkout the `dev` branch and make a new feature branch called `get-session`
+from the `dev` branch.
+
+```bash
+git checkout dev
+git checkout -b get-session
+```
+
+You will be making commits for adding an endpoint to get the current user
+session to your backend server.
 
 ## Get Session User API Route
 
@@ -373,7 +535,43 @@ If you don't see this expected behavior, then check your backend server logs in
 your terminal where you ran `npm start` and the syntax in the `session.js` route
 file and the `restoreUser` middleware function.
 
-Commit your code for the get session user route once you are done testing!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add a backend endpoint to get the current user session"
+
+## Merge your feature branch into your dev branch
+
+Once you thoroughly test that your `get-session` feature branch is working,
+merge the branch into the `dev` branch.
+
+To do this, first checkout the `dev` branch:
+
+```bash
+git checkout dev
+```
+
+Then, make sure you have the latest changes in the development branch from
+your remote repository in your local repository (this is useful when
+collaborating with other developers):
+
+```bash
+git pull origin dev
+```
+
+Then, merge the feature branch into the `dev` branch:
+
+```bash
+git merge get-session
+```
+
+Finally, push your changes to the development branch to the remote repository:
+
+```bash
+git push origin dev
+```
 
 [helmet on the `npm` registry]: https://www.npmjs.com/package/helmet
 [Express error-handling middleware]: https://expressjs.com/en/guide/using-middleware.html#middleware.error-handling

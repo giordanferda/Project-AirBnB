@@ -121,7 +121,12 @@ handlers **after** your route connections in `app.js` (i.e., after
 You will test the Sequelize error handler later when you populate the
 database with a table.
 
-Before moving onto the next task, commit your error handling code!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add error-handling middleware for common errors and debugging"
 
 [helmet on the `npm` registry]: https://www.npmjs.com/package/helmet
 [Express error-handling middleware]: https://expressjs.com/en/guide/using-middleware.html#middleware.error-handling

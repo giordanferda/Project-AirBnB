@@ -17,6 +17,41 @@ production, not just in development, and configure the `package.json` scripts
 for `install` and `start` scripts to install and start the Express production
 server.
 
+## Best Deployment practices
+
+For this project, try to deploy your backend every time you complete a feature!
+Essentially, anytime you merge a feature branch into the development branch.
+
+To do this, merge the `dev` branch into the `main` branch.
+
+First, checkout the `main` branch:
+
+```bash
+git checkout main
+```
+
+Then, make sure you have the latest changes in the `main` branch (production
+branch) from your remote repository in your local repository (this is useful
+when collaborating with other developers):
+
+```bash
+git pull origin main
+```
+
+Then, merge the `dev` branch into the `main` branch:
+
+```bash
+git merge dev
+```
+
+Finally, push the `main` branch to the remote repository:
+
+```bash
+git push origin main
+```
+
+Then follow the deployment instructions below.
+
 ## Phase 1: Heroku Connection
 
 If you haven't created a Heroku account yet, create one [here][Create Heroku
@@ -197,6 +232,29 @@ You can also open your site in the browser with `heroku open`. If it works,
 congratulations, you've created a production-ready, dynamic, full-stack website
 that can be securely accessed anywhere in the world! Give yourself a pat on the
 back. You're a web developer!
+
+## Re-deployment
+
+To redeploy your `main` branch changes, push the `main` branch to the Heroku
+remote Git repository:
+
+```bash
+git push heroku main
+```
+
+Then, migrate the production database if you made anymore migration files:
+
+```bash
+heroku run npm run sequelize db:migrate
+```
+
+Then, seed the production database if you made anymore seeder files:
+
+```bash
+heroku run npm run sequelize db:seed:all
+```
+
+Finally, open up the application in Heroku to test it!
 
 [Heroku Dashboard]: https://dashboard.heroku.com/
 [Create Heroku Account]: https://signup.heroku.com/

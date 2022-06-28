@@ -11,8 +11,25 @@ checks a particular key on the request body. `validationResult` gathers the
 results of all the `check` middlewares that were run to determine which parts of
 the body are valid and invalid.
 
+## Validate Login Inputs Git Feature Branch
+
+Checkout the `dev` branch and make a new feature branch called
+`validate-login-inputs` from the `dev` branch.
+
+```bash
+git checkout dev
+git checkout -b validate-login-inputs
+```
+
+You will be making commits for adding user input validation on user login
+requests to the backend server.
+
+## Dependencies
+
 Run `npm install express-validator` to install the dependency that you will use
 to validate user input from request bodies.
+
+## Validation Middleware
 
 In the `backend/utils` folder, add a file called `validation.js`. In this file,
 define an Express middleware called `handleValidationErrors` that will call
@@ -177,7 +194,57 @@ fetch('/api/session', {
 }).then(res => res.json()).then(data => console.log(data));
 ```
 
-Once you finish testing, commit your code!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add User input validation on user login backend endpoint"
+
+## Merge your feature branch into your dev branch
+
+Once you thoroughly test that your `validate-login-inputs` feature branch is
+working,
+merge the branch into the `dev` branch.
+
+To do this, first checkout the `dev` branch:
+
+```bash
+git checkout dev
+```
+
+Then, make sure you have the latest changes in the development branch from
+your remote repository in your local repository (this is useful when
+collaborating with other developers):
+
+```bash
+git pull origin dev
+```
+
+Then, merge the feature branch into the `dev` branch:
+
+```bash
+git merge validate-login-inputs
+```
+
+Finally, push your changes to the development branch to the remote repository:
+
+```bash
+git push origin dev
+```
+
+## Validate Signup Inputs Git Feature Branch
+
+Checkout the `dev` branch and make a new feature branch called
+`validate-signup-inputs` from the `dev` branch.
+
+```bash
+git checkout dev
+git checkout -b validate-signup-inputs
+```
+
+You will be making commits for adding user input validation on user signup
+requests to the backend server.
 
 ## Validating Signup Request Body
 
@@ -304,7 +371,44 @@ cases which should give back a `Bad Request` error:
 If you don't see the `Bad Request` error for any of these, check your syntax for
 the `validateSignup` middleware.
 
-Commit your code once you're done testing!
+## Commit your code
+
+Now is a good time to commit and push your code to GitHub!
+
+Here's a recommendation for what to write as your commit message:
+"Add User input validation on user signup backend endpoint"
+
+## Merge your feature branch into your dev branch
+
+Once you thoroughly test that your `validate-signup-inputs` feature branch is
+working,
+merge the branch into the `dev` branch.
+
+To do this, first checkout the `dev` branch:
+
+```bash
+git checkout dev
+```
+
+Then, make sure you have the latest changes in the development branch from
+your remote repository in your local repository (this is useful when
+collaborating with other developers):
+
+```bash
+git pull origin dev
+```
+
+Then, merge the feature branch into the `dev` branch:
+
+```bash
+git merge validate-signup-inputs
+```
+
+Finally, push your changes to the development branch to the remote repository:
+
+```bash
+git push origin dev
+```
 
 ## Wrapping up the Backend
 
