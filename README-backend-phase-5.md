@@ -334,7 +334,7 @@ syntax in the `users.js` route file as well as the `handleValidationErrors`
 middleware.
 
 First, test the signup route with an empty `password` field. You should get a
-`Bad Request` error back with `'Please provide a password'` as one of the
+`Bad Request` error back with `Password must be 6 characters or more.` as one of the
 errors.
 
 ```js
