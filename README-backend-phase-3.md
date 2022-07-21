@@ -144,7 +144,7 @@ module.exports = {
 Migrate the `Users` table by running the following command:
 
 ```bash
-dotenv npx sequelize db:migrate
+npx dotenv sequelize db:migrate
 ```
 
 If there is an error when migrating, check your migration file and make changes.
@@ -155,7 +155,7 @@ afterwards, undo the migration first, change the file, then migrate again.
 Command to undo the migration:
 
 ```bash
-dotenv npx sequelize db:migrate:undo
+npx dotenv sequelize db:migrate:undo
 ```
 
 You can check out the `Users` table schema created in your SQLite3 database
@@ -292,7 +292,7 @@ After you finish creating your demo user seed file, migrate the seed file by
 running the following command:
 
 ```bash
-dotenv npx sequelize db:seed:all
+npx dotenv sequelize db:seed:all
 ```
 
 If there is an error with seeding, check your seed file and make changes.
@@ -303,13 +303,13 @@ to undo the seed first, change the file, then seed again.
 Command to undo the migration for the most recent seed file:
 
 ```bash
-dotenv npx sequelize db:seed:undo
+npx dotenv sequelize db:seed:undo
 ```
 
 Command to undo the migrations for all the seed files:
 
 ```bash
-dotenv npx sequelize db:seed:undo:all
+npx dotenv sequelize db:seed:undo:all
 ```
 
 Check your database to see if the users have been successfully created by

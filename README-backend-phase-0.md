@@ -221,7 +221,7 @@ Finally, migrate the database using `sequelize-cli` to make sure you set
 everything up correctly.
 
 ```bash
-dotenv npx sequelize db:migrate
+npx dotenv sequelize db:migrate
 ```
 
 Remember, any `sequelize db:` commands need to be prefixed with `dotenv` to load
