@@ -15,19 +15,29 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init({
     id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
     userId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+      onDelete: 'CASCADE',
+
+
     },
     spotId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     startDate: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
     },
     endDate: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
     },
   }, {
     sequelize,

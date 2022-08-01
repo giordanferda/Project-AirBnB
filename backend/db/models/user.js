@@ -37,15 +37,19 @@ module.exports = (sequelize, DataTypes) => {
       return { id, username, email };
     }
     static associate(models) {
-      // define association here
+      User.hasMany(models.Image, {foreignKey : 'userId'});
+      User.hasMany(models.Spot, {foreignKey: 'ownerId'});
+      User.hasMany(models.Review, {foreignKey: 'userId'});
+      User.hasMany(models.Spot, {foreignKey: 'ownerId'})
     }
   };
 
   User.init(
     {
       username: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
+        unique: true,
         validate: {
           len: [4, 30],
           isNotEmail(value) {
@@ -56,15 +60,17 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       firstName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
+        unique: false,
         validate: {
           len: [1, 50]
         }
       },
-      firstName: {
-        type: DataTypes.STRING,
+      lastName: {
+        type: DataTypes.STRING(50),
         allowNull: false,
+        unique: false,
         validate: {
           len: [1, 50]
         }
@@ -72,8 +78,9 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
-          len: [3, 256]
+          len: [3, 200]
         }
       },
       hashedPassword: {
