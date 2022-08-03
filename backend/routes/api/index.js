@@ -28,7 +28,7 @@ router.post('/test', function(req, res) {
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
     where: {
-      username: 'Demo-lition'
+      username: 'TOTHEMOON'
     }
   });
   setTokenCookie(res, user);
