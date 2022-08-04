@@ -28,5 +28,37 @@ return res.json({ Reviews: reviews })
 });
 
 
+//Add an Image to a Review based on the Reviews id
+
+router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
+  const reviewid = req.params.id
+  const user = req.user.id
+  const findreview = await Review.findByPk(reviewid, {
+    include: [
+      {model: Image, attributes: [] , where: {previewImage: true}}
+    ]
+  })
+
+  if (!findreview){
+    res.status(404)
+    res.json({
+      "message": "Review couldn't be found",
+      "statusCode": 404
+    })
+  }
+  const { url, previewImage } = req.body
+  let image = Image.create({
+    url: url,
+    previewImage: previewImage,
+    reviewId: reviewid,
+    userId: user
+  })
+  res.status(200)
+  res.json(image)
+
+
+})
+
+
 
   module.exports = router;
