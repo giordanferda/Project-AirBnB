@@ -26,57 +26,57 @@ router.get('/', async (req, res, next) => {
     res.json({ Spot: Allspots })
   })
 
-  //Get all spots owned by the current user
-  // router.get('/current', restoreUser, requireAuth, async (req,res) => {
-  //   const ownedSpots = await Spot.findAll({
-  //     where: {
-  //       ownerId: req.user.id
-  //     },
-  //     include: [
-  //       {model: Review, attributes: [] }
-  //     ],
-  //     attributes: {
-  //       include: [
-  //         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
-  //       ]
-  //     },
-  //     group: ['Spot.id'],
+  // Get all spots owned by the current user
+  router.get('/current', restoreUser, requireAuth, async (req,res) => {
+    const ownedSpots = await Spot.findAll({
+      where: {
+        ownerId: req.user.id
+      },
+      include: [
+        {model: Review, attributes: [] }
+      ],
+      attributes: {
+        include: [
+          [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
+        ]
+      },
+      group: ['Spot.id'],
 
-  //   })
-  //   for (let i = 0; i < ownedSpots.length; i++){
-  //     let spot = ownedSpots[i]
-  //     let img = await Image.findOne({
-  //       attributes: ['url'],
-  //       where: { previewImage: true, spotId: spot.id}
-  //     })
-  //     spot.dataValues.previewImage = img
-  //   }
+    })
+    for (let i = 0; i < ownedSpots.length; i++){
+      let spot = ownedSpots[i]
+      let img = await Image.findOne({
+        attributes: ['url'],
+        where: { previewImage: true, spotId: spot.id}
+      })
+      spot.dataValues.previewImage = img
+    }
+    res.status(200)
+    res.json({Spot: ownedSpots})
 
-  //   res.json({Spots: ownedSpots})
-  // })
+  })
 
 
 
 // Get details of a spot from an id
 router.get('/:spotId', async (req, res) => {
   const spotId = req.params.spotId
-  let spots = await Spot.findByPk(spotId, {
+  let spots = await Spot.findOne(spotId, {
+    where: {
+      id: spotId
+    },
     include: [
       { model: Review, attributes: [] },
       { model: Image, attributes: [], where: {previewImage: true} },
-      { model : Image, attributes: []}
     ],
     attributes: {
       include: [
-        [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating' ],
+        [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ],
         [ sequelize.fn('COUNT', sequelize.col('Reviews.stars'), 'numReviews')]
-        [ sequelize.literal('Images.url'), 'Images' ]
       ]
     },
-    group: ['Spot.id'],
-  })
-console.log(spots)
-
+    group: ['Spot.id', 'User.id'],
+  });
   if (!spots) {
       res.status(404)
       return res.json({
@@ -88,8 +88,10 @@ console.log(spots)
 
 
 // Create a spot
-router.post('/', requireAuth, restoreUser, async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
+  const ownersId = req.user.id
   const {address, city, state, country, lat, lng, name, description, price} = req.body
+
   const createdSpot = await Spot.create({
     ownerId: req.user.id,
     address,
@@ -105,13 +107,28 @@ router.post('/', requireAuth, restoreUser, async (req, res) => {
   if(!createdSpot){
     res.status(400);
     res.json({
-      "message": "Validation Error"
+      "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "address": "Street address is required",
+                "city": "City is required",
+                "state": "State is required",
+                "country": "Country is required",
+                "lat": "Latitude is not valid",
+                "lng": "Longitude is not valid",
+                "name": "Name must be less than 50 characters",
+                "description": "Description is required",
+                "price": "Price per day is required"
+            }
     })
   }
+  const OwnerNewSpot = await Spot.create({
+        ownerId: ownersId, address, city, state, country, lat, lng, name, description, price
+    });
 
   res.status(201)
-  return res.json(createdSpot)
-})
+  res.json(OwnerNewSpot)
+});
 
 // Add an image to a spot based on the Spots Id
 
@@ -138,7 +155,6 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
 
 router.put('/:spotId', async (req, res) => {
   let spotId = req.params.spotId
-
 })
 
 
