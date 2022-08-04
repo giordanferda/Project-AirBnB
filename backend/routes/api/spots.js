@@ -6,47 +6,6 @@ const { check } = require('express-validator');
 const {User, Booking, Spot, Image, Review, sequelize} = require('../../db/models')
 
 
-const spotValidCheck = [
-  check('address')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage("Street address is required"),
-  check('city')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage('City is required'),
-  check('state')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage('State is required'),
-  check('country')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage('Country is required'),
-  check('lat')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage('Latitude is not valid'),
-  check('lng')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage('Longitude is not valid'),
-  check('name')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .isLength({max: 50})
-      .withMessage('Name must be less than 50 characters'),
-  check('description')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage('Description is required'),
-  check('price')
-      .exists({checkFalsy: true})
-      .notEmpty()
-      .withMessage('Price per day is required')
-
-]
-
 //Get All Spots
 router.get('/', async (req, res, next) => {
     const Allspots = await Spot.findAll({
@@ -129,7 +88,7 @@ router.get('/:spotId', async (req, res) => {
 
 
 // Create a spot
-router.post('/', spotValidCheck, requireAuth, restoreUser, async (req, res) => {
+router.post('/', requireAuth, restoreUser, async (req, res) => {
   const ownersId = req.user.id
   const {address, city, state, country, lat, lng, name, description, price} = req.body
   const createdSpot = await Spot.create({
@@ -164,8 +123,12 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   }
   imagebody = req.body;
   imagebody.spotId = spotId;
-
-  let image = await Image.create(imagebody)
+  const reviewsId = await Review.findOne({
+    where: { spotId: req.params.spotId }
+});
+  let image = await Image.create(imagebody, {
+    reviewId: reviewsId.spotId
+  })
   image = await Image.findByPk(image.id)
 
   return res.json(image)
