@@ -26,21 +26,36 @@ router.get('/', async (req, res, next) => {
     res.json({ Spot: Allspots })
   })
 
-  router.get('/current', restoreUser, requireAuth, async (req,res) => {
-    let ownerId = req.user.id
-    const ownedSpots = await Spot.findAll({
-      include: [
-        {model: Review, attributes: [] }
-      ],
-      attributes: {
-        include: [
-          [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
-        ]
-      },
-      group: ['Spot.id'],
+  //Get all spots owned by the current user
+  // router.get('/current', restoreUser, requireAuth, async (req,res) => {
+  //   const ownedSpots = await Spot.findAll({
+  //     where: {
+  //       ownerId: req.user.id
+  //     },
+  //     include: [
+  //       {model: Review, attributes: [] }
+  //     ],
+  //     attributes: {
+  //       include: [
+  //         [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
+  //       ]
+  //     },
+  //     group: ['Spot.id'],
 
-    })
-  })
+  //   })
+  //   for (let i = 0; i < ownedSpots.length; i++){
+  //     let spot = ownedSpots[i]
+  //     let img = await Image.findOne({
+  //       attributes: ['url'],
+  //       where: { previewImage: true, spotId: spot.id}
+  //     })
+  //     spot.dataValues.previewImage = img
+  //   }
+
+  //   res.json({Spots: ownedSpots})
+  // })
+
+
 
 // Get details of a spot from an id
 router.get('/:spotId', async (req, res) => {
@@ -74,7 +89,7 @@ console.log(spots)
 
 // Create a spot
 router.post('/', requireAuth, restoreUser, async (req, res) => {
-  const {ownerId, address, city, state, country, lat, lng, name, description, price} = req.body
+  const {address, city, state, country, lat, lng, name, description, price} = req.body
   const createdSpot = await Spot.create({
     ownerId: req.user.id,
     address,
@@ -98,22 +113,7 @@ router.post('/', requireAuth, restoreUser, async (req, res) => {
   return res.json(createdSpot)
 })
 
-//Sign-up new user
-router.post('/', validateSignup, async (req, res) => {
-    const {firstName, lastName, email, password, username } = req.body;
-    const user = await User.signup({firstName, lastName, email, username, password });
-
-     await setTokenCookie(res, user);
-
-    return res.json({
-      user
-    });
-  }
-);
-
-
-
-Add an image to a spot based on the Spots Id
+// Add an image to a spot based on the Spots Id
 
 router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   const spotId = req.params.spotId
