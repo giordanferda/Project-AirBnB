@@ -55,10 +55,56 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
   })
   res.status(200)
   res.json(image)
-
-
 })
 
 
+router.put('/:reviewId', requireAuth, restoreUser, async (req, res) => {
+  let reviewId = req.params.reviewId
+
+  const {review, stars} = req.body
+
+  const getreview = await Review.findByPk(reviewId)
+  if(!getreview){
+    res.status(404)
+    res.json({
+      "message": "Review couldn't be found",
+      "statusCode": 404
+    })
+  }
+  if (!review || !stars || stars < 1 || stars > 5){
+    res.status(400)
+    res.json({
+      "message": "Validation error",
+      "statusCode": 400,
+      "errors": {
+        "review": "Review text is required",
+        "stars": "Stars must be an integer from 1 to 5",
+      }
+    })
+  }
+  getreview.update({review, stars})
+  res.status(200)
+  res.json(getreview)
+})
+
+
+router.delete('/:reviewId', requireAuth, restoreUser, async (req, res) => {
+  const reviewId = req.params.reviewId
+  const review = await Review.findByPk(reviewId)
+
+  if (!review){
+    res.status(404)
+    res.json({
+      "message": "Review couldn't be found",
+      "statusCode": 404
+    })
+  }
+  await review.destroy();
+  res.status(200)
+  res.json({
+    "message": "Successfully deleted",
+    "statusCode": 200
+  })
+})
 
   module.exports = router;
