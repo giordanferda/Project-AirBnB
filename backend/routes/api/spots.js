@@ -192,7 +192,10 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 //get all reviews by a Spots Id.
 router.get('/:spotId/reviews', async (req, res) => {
   const spot = req.params.spotId
-  const reviews = await Review.findByPk(spot, {
+  const reviews = await Review.findByPk({
+    where: {
+      spotId: spot
+    },
     include: [
       { model: User, attributes: ['id', 'firstName', 'lastName'] },
       { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] },
@@ -210,6 +213,20 @@ router.get('/:spotId/reviews', async (req, res) => {
   res.json({Reviews: reviews})
 })
 
+
+//Create a Review for a Spot based on the Spot's id
+
+router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
+  const user = req.user
+  const review = await Review.findByPk(spot)
+  if(!spot){
+    res.status(404)
+    res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+})
 
 
 
