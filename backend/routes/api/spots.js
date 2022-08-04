@@ -217,7 +217,7 @@ router.get('/:spotId/reviews', async (req, res) => {
 //Create a Review for a Spot based on the Spot's id
 
 router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
-  const user = req.user
+  const spot = req.params.id
   const review = await Review.findByPk(spot)
   if(!spot){
     res.status(404)
