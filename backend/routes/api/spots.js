@@ -75,7 +75,7 @@ router.get('/:spotId', async (req, res) => {
         [ sequelize.fn('COUNT', sequelize.col('Reviews.stars'), 'numReviews')]
       ]
     },
-    group: ['Spot.id', 'User.id'],
+    group: ['Spot.id'],
   });
   if (!spots) {
       res.status(404)
@@ -153,9 +153,41 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
 
 });
 
-router.put('/:spotId', async (req, res) => {
+//Edit a spot
+router.put('/:spotId',requireAuth, restoreUser, async (req, res) => {
   let spotId = req.params.spotId
-})
+  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+  const spot = await Spot.findByPk(spotId)
+  if (!spot){
+    res.status(404)
+    res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+  });
+  }
+  if (!req.body){
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {
+        "address": "Street address is required",
+        "city": "City is required",
+        "state": "State is required",
+        "country": "Country is required",
+        "lat": "Latitude is not valid",
+        "lng": "Longitude is not valid",
+        "name": "Name must be less than 50 characters",
+        "description": "Description is required",
+        "price": "Price per day is required"
+      }
+    })
+  }
+  spot.update({address, city, state,country, lat, lng, name, description, price})
+
+  res.status(200);
+  res.json(spot);
+});
 
 
 
