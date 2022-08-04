@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       Spot.hasMany(models.Image, {foreignKey: 'spotId', onDelete: 'CASCADE'});
       Spot.hasMany(models.Review, {foreignKey: 'spotId', onDelete: 'CASCADE'});
       Spot.belongsTo(models.User, {foreignKey: 'ownerId', onDelete: 'CASCADE'})
-
     }
   }
   Spot.init({
     id: {
       type:  DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     ownerId: {
       type:  DataTypes.INTEGER,
