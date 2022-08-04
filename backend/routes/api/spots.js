@@ -189,5 +189,29 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
   })
 });
 
+//get all reviews by a Spots Id.
+router.get('/:spotId/reviews', async (req, res) => {
+  const spot = req.params.spotId
+  const reviews = await Review.findByPk(spot, {
+    include: [
+      { model: User, attributes: ['id', 'firstName', 'lastName'] },
+      { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] },
+    ],
+    group: ['Review.id']
+  })
+  if (!reviews){
+    res.status(404)
+    res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+  res.status(200)
+  res.json({Reviews: reviews})
+})
+
+
+
+
 
 module.exports = router

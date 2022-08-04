@@ -25,7 +25,8 @@ const reviews = await Review.findAll({
 
 res.status(200);
 return res.json({ Reviews: reviews })
-})
+});
+
 
 
   module.exports = router;
