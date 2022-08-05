@@ -11,15 +11,16 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const reviewRouter = require('./review.js')
 const bookingRouter = require('./booking.js')
+const imagesRouter = require('./image.js')
 
 router.use(restoreUser);
 
-router.use('/reviews', reviewRouter)
+router.use('/images', imagesRouter);
+router.use('/reviews', reviewRouter);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
-router.use('/bookings', bookingRouter)
-
+router.use('/bookings', bookingRouter);
 
 
 
