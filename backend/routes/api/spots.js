@@ -348,4 +348,45 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
   }
 })
 
+
+//Add Query Filters to Get All Spots.
+router.get('/', async (req, res, next) => {
+  const { size, page} = req.query
+  if (!page) page = 0
+  if(!size) size = 20
+
+  page = parseInt(page)
+  size = parseInt(size)
+
+ let where = {}
+ if(page >= 1  && size >= 1) {
+  where.limit = size
+  where.offset = size * (page - 1)
+ }
+
+
+
+
+  const Allspots = await Spot.findAll({
+    include: [
+      { model: Review, attributes: [] },
+      { model: Image, attributes: [], where: {previewImage: true} }
+    ],
+    attributes: {
+      include: [
+        [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ],
+        [ sequelize.literal('Images.url'), 'previewImage' ]
+      ]
+    },
+    group: ['Spot.id'],
+    ...where
+  })
+
+  res.status(200)
+  res.json({ Spot: Allspots })
+})
+
+
+
+
 module.exports = router
