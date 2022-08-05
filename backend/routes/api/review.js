@@ -83,6 +83,7 @@ router.put('/:reviewId', requireAuth, restoreUser, async (req, res) => {
     })
   }
   getreview.update({review, stars})
+  await getreview.save()
   res.status(200)
   res.json(getreview)
 })
@@ -108,3 +109,39 @@ router.delete('/:reviewId', requireAuth, restoreUser, async (req, res) => {
 })
 
   module.exports = router;
+
+  router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
+    const spot = req.params.id
+    const user = req.user.id
+    const { review, stars } = req.body
+    const findid = await Review.findByPk(spot)
+    if(!findid){
+      res.status(404)
+      res.json({
+        "message": "Spot couldn't be found",
+        "statusCode": 404
+      })
+    }
+    const reviewed = await Review.findAll({
+    where: {
+      userId: user,
+      spotId: spot
+    }
+
+  })
+  if (reviewed){
+    res.status(403);
+    res.json({
+      "message": "User already has a review for this spot",
+      "statusCode": 403
+    })
+  }
+  const createReview = Review.create({
+    spotId: spot,
+    userId: user,
+    review,
+    stars
+  })
+  res.status(201)
+  res.json(createReview)
+  })

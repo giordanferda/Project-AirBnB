@@ -3,8 +3,11 @@ const router = express.Router()
 const { setTokenCookie, restoreUser, requireAuth} = require('../../utils/auth.js');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
-const {User, Booking, Spot, Image, Review, sequelize} = require('../../db/models')
+const {User, Booking, Spot, Image, Review, sequelize} = require('../../db/models');
+const e = require('express');
 
+
+//Get all of the Current User's Bookings
 router.get('/current', requireAuth, restoreUser, async (req,res) => {
     const user = req.user.id
     const bookings = await Booking.findAll({
@@ -40,7 +43,6 @@ router.get('/current', requireAuth, restoreUser, async (req,res) => {
     res.status(200)
     res.json({Bookings: bookings})
 })
-
 
 
 module.exports = router;
