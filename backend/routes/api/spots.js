@@ -127,7 +127,12 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   imagebody.spotId = spotId;
   const reviewsId = await Review.findOne({
     where: { spotId: req.params.spotId }
-});
+  });
+  let reviewId = null;
+    if (reviewsId) {
+        reviewId = reviewsId.spotId;
+    };
+console.log(reviewsId)
   let image = await Image.create(imagebody, {
     reviewId: reviewsId.spotId
   })
@@ -194,9 +199,9 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 //get all reviews by a Spots Id.
 router.get('/:spotId/reviews', async (req, res) => {
   const spot = req.params.spotId
-  const reviews = await Review.findAll({
+  const reviews = await Review.findByPk({
     where: {
-      spotId: req.params.spotId
+      spotId: spot
     },
     include: [
       { model: User, attributes: ['id', 'firstName', 'lastName'] },
@@ -359,13 +364,10 @@ router.get('/', async (req, res, next) => {
   size = parseInt(size)
 
  let where = {}
- if(page >= 1  && size >= 1) {
+ if(page >= 1 && size >= 1) {
   where.limit = size
   where.offset = size * (page - 1)
  }
-
-
-
 
   const Allspots = await Spot.findAll({
     include: [
