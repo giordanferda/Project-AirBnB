@@ -28,7 +28,7 @@ return res.json({ Reviews: reviews })
 });
 
 
-//Add an Image to a Review based on the Reviews id
+//Add an Image to a Review based on the Reviews id *****
 
 router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
   const reviewid = req.params.id
@@ -57,7 +57,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
   res.json(image)
 })
 
-
+//Edit a review *****
 router.put('/:reviewId', requireAuth, restoreUser, async (req, res) => {
   let reviewId = req.params.reviewId
 

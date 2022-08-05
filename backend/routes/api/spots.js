@@ -58,7 +58,7 @@ router.get('/', async (req, res, next) => {
 
 
 
-// Get details of a spot from an id
+// Get details of a spot from an id ****
 router.get('/:spotId', async (req, res) => {
   const spotId = req.params.spotId
   let spots = await Spot.findOne(spotId, {
@@ -108,7 +108,7 @@ router.post('/', requireAuth, restoreUser, async (req, res) => {
   res.json(createdSpot)
 });
 
-// Add an image to a spot based on the Spots Id
+// Add an image to a spot based on the Spots Id ****
 
 router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   const spotId = req.params.spotId
