@@ -280,9 +280,7 @@ const createReview = Review.create({
   stars
 })
 
-
-
-res.status(201)
+res.status(200)
 res.json(createReview)
 })
 
