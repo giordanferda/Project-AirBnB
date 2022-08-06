@@ -108,13 +108,15 @@ router.get('/:spotId', async (req, res) => {
       spotId
     }
   })
-  spots.avgRating = avgRating
-  spots.numReviews = numReviews
-  spots.image = image
-  spots.owner = isOwner
+  const jsonSpot = spots.toJSON()
+
+    jsonSpot.avgRating = avgRating
+    jsonSpot.numReviews = numReviews
+    jsonSpot.image = image
+    jsonSpot.owner = isOwner
 
   res.status(200)
-  res.json(spots)
+  res.json(jsonSpot)
 })
 
 
