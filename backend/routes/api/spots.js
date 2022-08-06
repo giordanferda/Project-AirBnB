@@ -120,8 +120,7 @@ router.post('/', requireAuth, restoreUser, async (req, res) => {
 // Add an image to a spot based on the Spots Id
 
 router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
-  const spotId = req.params.spotId
-  const spot = await Spot.findByPk(spotId)
+  const spot = await Spot.findByPk(req.params.spotId)
 
   if(spot.ownerId !== req.user.id){
     res.status(404)
@@ -131,7 +130,7 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   }
 
     let image = await Image.create({
-      spotId,
+      spotId: spot.dataValues.id,
       userId: req.user.id,
       url
     })
