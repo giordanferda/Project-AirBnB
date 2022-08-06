@@ -319,11 +319,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
       attributes: ['id', 'firstName', 'lastName']}
 
   });
-  const spots = await Spot.findOne({
-    where: {
-      ownerId: userId
-    }
-  })
+  const spots = await Spot.findOne(req.params.spotId)
   const bookings = await Booking.findAll({
     where: {
       spotId: spotId
