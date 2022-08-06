@@ -32,6 +32,7 @@ return res.json({ Reviews: reviews })
 
 router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
   const reviewId = req.params.reviewId
+  const { url, previewImage } = req.body
   const findReview = await Review.findByPk(reviewId)
 
   if (!findReview){
@@ -44,7 +45,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
   const imgCnt = await Image.count({
     where: { previewImage : true}
   })
-  if (imgCnt >= 10){
+  if (imgCnt.length >= 10){
     res.status(403)
     res.json({
       "message": "Maximum number of images for this resource was reached",
@@ -52,15 +53,15 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     })
 }
 
-  const { url } = req.body
   let image = await Image.create({
     url: url,
     reviewId: reviewId,
-    userId: req.user.id
+    userId: req.user.id,
+    previewImage: previewImage
   })
   const obj = {id: image.id,
-  imageableId: image.reviewId, url: image.url}
-  res.status(200)
+    imageableId: image.reviewId, url: image.url}
+    res.status(200)
   res.json(obj)
 })
 
