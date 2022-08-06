@@ -1,6 +1,5 @@
 'use strict';
 
-const { DATEONLY } = require("sequelize/types");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
