@@ -12,17 +12,24 @@ const { Op } = require('sequelize')
 router.get('/', async (req, res, next) => {
     const Allspots = await Spot.findAll({
       include: [
-        { model: Review, attributes: [] },
-        { model: Image, attributes: [], where: {previewImage: true} }
+        { model: Review, attributes: [] }
       ],
       attributes: {
         include: [
-          [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ],
-          [ sequelize.literal('Images.url'), 'previewImage' ]
+          [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]
         ]
       },
       group: ['Spot.id'],
     })
+    for (let spot of Allspots){
+      let spotImg = Image.findOne({
+        where: {
+          previewImage: true,
+          spotId: spot.id
+        },
+      })
+      spot.dataValues.previewImage = spotImg
+    }
 
     res.status(200)
     res.json({ Spot: Allspots })
