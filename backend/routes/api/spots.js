@@ -267,7 +267,7 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
   }
 
 })
-if (reviewed){
+if (reviewed.length >= 1){
   res.status(403);
   res.json({
     "message": "User already has a review for this spot",
