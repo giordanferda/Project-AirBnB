@@ -47,8 +47,7 @@ router.get('/current', requireAuth, restoreUser, async (req,res) => {
 
 //Edit a booking
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
-    const bookingId = req.params.bookingId
-    const findBooking = await Booking.findByPk(bookingId)
+    const findBooking = await Booking.findByPk(req.params.bookingId)
     const {endDate, startDate} = req.body
     if(!findBooking){
         res.status(404)
@@ -90,13 +89,13 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
               "endDate": "End date conflicts with an existing booking"
             }
           })
-    } else {
+    }
         findBooking.update({startDate, endDate})
         await findBooking.save()
 
         res.status(200)
         res.json(findBooking)
-    }
+
 });
 
 
