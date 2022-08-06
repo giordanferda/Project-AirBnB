@@ -48,7 +48,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     userId: req.user.id
   })
   const obj = {id: image.id,
-  imageableId: image.reviewId}
+  imageableId: image.reviewId, url: image.url}
   res.status(200)
   res.json(obj)
 })
