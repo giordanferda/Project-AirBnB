@@ -66,15 +66,14 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
             }
           })
     }
-    let date = new Date()
-    let todaysDate = Date.parse(date)
-    if(todaysDate >= endDate){
-        res.status(403)
-        res.json({
-            "message": "Past bookings can't be modified",
-            "statusCode": 403
-          })
-    }
+    // let date = new Date()
+    // if(todaysDate >= endDate){
+    //     res.status(403)
+    //     res.json({
+    //         "message": "Past bookings can't be modified",
+    //         "statusCode": 403
+    //       })
+    // }
     const booked = await Booking.findAll({
         where: {
             id: req.params.bookingId
