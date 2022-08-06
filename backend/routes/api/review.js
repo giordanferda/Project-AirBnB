@@ -18,9 +18,7 @@ const reviews = await Review.findAll({
       { model: User, attributes: ['id', 'firstName', 'lastName'] },
       { model: Spot, attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'] },
       { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] }
-  ],
-  group: ['Review.id'],
-  // raw: true
+  ]
 });
 
 res.status(200);
@@ -53,7 +51,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
   res.json(obj)
 })
 
-//Edit a review *****
+//Edit a review
 router.put('/:reviewId', requireAuth, restoreUser, async (req, res) => {
   let reviewId = req.params.reviewId
 
