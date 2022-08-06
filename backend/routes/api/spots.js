@@ -122,7 +122,7 @@ router.post('/', requireAuth, restoreUser, async (req, res) => {
 router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId)
 
-  if(spot.ownerId !== req.user.id){
+  if(!spot){
     res.status(404)
     res.json({
       "message": 'Spot could not be found'
