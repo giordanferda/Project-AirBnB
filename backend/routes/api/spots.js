@@ -226,18 +226,8 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 
 //get all reviews by a Spots Id.
 router.get('/:spotId/reviews', async (req, res) => {
-  const spot = req.params.spotId
-  const reviews = await Review.findOne({
-    where: {
-      spotId: spot
-    },
-    include: [
-      { model: User, attributes: ['id', 'firstName', 'lastName'] },
-      { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] },
-    ],
-    group: ['Review.id']
-  })
-  const findSpot = await Spot.findByPk(spot)
+  const spotId = req.params.spotId
+  const findSpot = await Spot.findByPk(spotId)
   if (!findSpot){
     res.status(404)
     res.json({
@@ -245,6 +235,16 @@ router.get('/:spotId/reviews', async (req, res) => {
       "statusCode": 404
     })
   }
+  const reviews = await Review.findOne({
+    where: {
+      spotId: spotId
+    },
+    include: [
+      { model: User, attributes: ['id', 'firstName', 'lastName'] },
+      { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] },
+    ],
+    group: ['Review.id']
+  })
   res.status(200)
   res.json({Reviews: reviews})
 })
@@ -300,7 +300,12 @@ if (!reviewed){
 })
 
 
-
+// const validateBookings = [
+//   check('endDate')
+//     .exists({ checkFalsy: true })
+//     .withMessage('endDate cannot be on or before startDate'),
+//   handleValidationErrors
+// ];
 //Get all Bookings for a Spot based on the Spot's id
 
 router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
@@ -345,9 +350,12 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
   }
 })
 
+
+//create a booking
 router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
   const spotId = req.params.spotId
   const userId = req.user.id
+  const { startDate, endDate } = req.body
   const spot = await Spot.findByPk(spotId)
   if(!spot){
     res.status(404);
@@ -356,7 +364,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
       "statusCode": 404
     })
   }
-  if (Booking.endDate <= Booking.startDate){
+  if (endDate <= startDate){
     res.status(400)
     res.json({
       "message": "Validation error",
@@ -367,9 +375,13 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
     })
     const bookings = await Booking.findAll({
       where: {
-        spotId: spotId
-      }
-    })
+        spotId: spotId,
+        [Op.and]: [
+          {endDate: {[Op.gte]: startDate}},
+          {startDate: {[Op.lte]: endDate}},
+        ],
+      },
+    });
     if(bookings){
       res.status(403)
       res.json({
@@ -383,7 +395,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
     } else {
       const createBooking = await Booking.create({
         spotId,
-        userId,
+        userId: req.user.id,
         startDate,
         endDate
       })
