@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
     }
 
     res.status(200)
-    res.json({ Spot: Allspots })
+    res.json({ Spots: Allspots })
   })
 
   // Get all spots owned by the current user
@@ -117,11 +117,10 @@ router.post('/', requireAuth, restoreUser, async (req, res) => {
   res.json(createdSpot)
 });
 
-// Add an image to a spot based on the Spots Id ****
+// Add an image to a spot based on the Spots Id
 
 router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   const spotId = req.params.spotId
-  const currentUser = req.user.id
   const spot = await Spot.findByPk(spotId)
 
   if(spot.ownerId !== currentUser){
@@ -130,22 +129,18 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
       "message": 'Spot could not be found'
     });
   }
-  imagebody = req.body;
-  imagebody.spotId = spotId;
-  const reviewsId = await Review.findOne({
-    where: { spotId: req.params.spotId }
-  });
-  let reviewId = null;
-    if (reviewsId) {
-        reviewId = reviewsId.spotId;
-    };
-console.log(reviewsId)
-  let image = await Image.create(imagebody, {
-    reviewId: reviewsId.spotId
-  })
-  image = await Image.findByPk(image.id)
 
-  return res.json(image)
+    let image = await Image.create({
+      spotId,
+      userId: req.user.id,
+      url
+    })
+
+  return res.json({
+    id: image.id,
+    imageableId: image.spotId,
+    url: image.url
+  })
 
 });
 
