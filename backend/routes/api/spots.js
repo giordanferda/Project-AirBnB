@@ -258,45 +258,45 @@ const validateReviews = [
     .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
 ];
-//Create a Review for a Spot based on the Spot's id
+// Create a Review for a Spot based on the Spot's id
 
-// router.post('/:spotId/reviews', requireAuth, validateReviews, async (req, res) => {
-//   const spotId = req.params.spotId
-//   const { review, stars } = req.body
-//   const findid = await Spot.findByPk(spotId)
-//   if(!findid){
-//     res.status(404)
-//     res.json({
-//       "message": "Spot couldn't be found",
-//       "statusCode": 404
-//     })
-//   }
-//   const reviewed = await Review.findOne({
-//   where: {
-//    spotId:spotId, userId: req.user.id
-//   }
-// })
-// if (!reviewed){
-//   const createReview = await Review.create({
-//     spotId: spotId,
-//     userId: req.user.id,
-//     review,
-//     stars
-//   })
-//   res.status(200)
-//   // const result = {}
-//   // result.spotId = createReview.spotId
-//   // result.review = createReview.review
+router.post('/:spotId/reviews', requireAuth, validateReviews, async (req, res) => {
+  const spotId = req.params.spotId
+  const { review, stars } = req.body
+  const findid = await Spot.findByPk(spotId)
+  if(!findid){
+    res.status(404)
+    res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+  const reviewed = await Review.findOne({
+  where: {
+   spotId:spotId, userId: req.user.id
+  }
+})
+if (!reviewed){
+  const createReview = await Review.create({
+    spotId: spotId,
+    userId: req.user.id,
+    review,
+    stars
+  })
+  res.status(200)
+  // const result = {}
+  // result.spotId = createReview.spotId
+  // result.review = createReview.review
 
-//   res.json(createReview)
-// } else {
-//   res.status(403);
-//   res.json({
-//     "message": "User already has a review for this spot",
-//     "statusCode": 403
-//   })
-//   }
-// })
+  res.json(createReview)
+} else {
+  res.status(403);
+  res.json({
+    "message": "User already has a review for this spot",
+    "statusCode": 403
+  })
+  }
+})
 
 
 
