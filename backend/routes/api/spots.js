@@ -8,6 +8,8 @@ const user = require('../../db/models/user.js');
 const { Op } = require('sequelize')
 const Sequelize = require('sequelize')
 
+
+
 //Get All Spots
 router.get('/', async (req, res, next) => {
     const Allspots = await Spot.findAll({
@@ -246,10 +248,19 @@ router.get('/:spotId/reviews', async (req, res) => {
   res.json({Reviews: reviews})
 })
 
-
+const validateReviews = [
+  check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .isInt({ min: 1, max: 5 })
+    .withMessage('Stars must be an integer from 1 to 5'),
+  handleValidationErrors
+];
 //Create a Review for a Spot based on the Spot's id
 
-router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReviews, async (req, res) => {
   const spotId = req.params.spotId
   const { review, stars } = req.body
   const findid = await Spot.findByPk(spotId)
@@ -260,28 +271,31 @@ router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
       "statusCode": 404
     })
   }
-  const reviewed = await Review.findAll({
+  const reviewed = await Review.findOne({
   where: {
-    [Op.and]: [{spotId:spotId}, {userId:req.user.id}]
+   spotId:spotId, userId: req.user.id
   }
-
 })
-if (reviewed){
+if (!reviewed){
+  const createReview = await Review.create({
+    spotId: spotId,
+    userId: req.user.id,
+    review,
+    stars
+  })
+  res.status(200)
+  // const result = {}
+  // result.spotId = createReview.spotId
+  // result.review = createReview.review
+
+  res.json(createReview)
+} else {
   res.status(403);
   res.json({
     "message": "User already has a review for this spot",
     "statusCode": 403
   })
-}
-const createReview = Review.create({
-  spotId: spotId,
-  userId: req.user.id,
-  review,
-  stars
-})
-
-res.status(200)
-res.json(createReview)
+  }
 })
 
 
