@@ -252,7 +252,7 @@ router.get('/:spotId/reviews', async (req, res) => {
 router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
   const spotId = req.params.id
   const { review, stars } = req.body
-  const findid = await Review.findByPk(spot)
+  const findid = await Review.findByPk(spotId)
   if(!findid){
     res.status(404)
     res.json({
