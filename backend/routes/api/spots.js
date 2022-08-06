@@ -70,7 +70,7 @@ router.get('/', async (req, res, next) => {
 // Get details of a spot from an id ****
 router.get('/:spotId', async (req, res) => {
   const spotId = req.params.spotId
-  let spots = await Spot.findOne(spotId, {
+  let spots = await Spot.findOne({
     where: {
       id: spotId
     },
