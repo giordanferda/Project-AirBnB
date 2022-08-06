@@ -48,9 +48,9 @@ router.get('/current', requireAuth, restoreUser, async (req,res) => {
 //Edit a booking
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
     const bookingId = req.params.bookingId
-    const findbooking = await Booking.findByPk(bookingId)
+    const findBooking = await Booking.findByPk(bookingId)
 
-    if(!findbooking){
+    if(!findBooking){
         res.status(404)
         res.json({
             "message": "Booking couldn't be found",
@@ -77,7 +77,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
     }
     const booked = await Booking.findAll({
         where: {
-            bookingid
+            bookingId
         }
     })
     if (booked){
@@ -91,11 +91,11 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
             }
           })
     } else {
-        findbooking.update({startDate, endDate})
-        await findbooking.save()
+        findBooking.update({startDate, endDate})
+        await findBooking.save()
 
         res.status(200)
-        res.json(findbooking)
+        res.json(findBooking)
     }
 });
 
