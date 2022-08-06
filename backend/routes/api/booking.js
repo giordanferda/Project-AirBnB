@@ -49,7 +49,7 @@ router.get('/current', requireAuth, restoreUser, async (req,res) => {
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
     const bookingId = req.params.bookingId
     const findBooking = await Booking.findByPk(bookingId)
-
+    const {endDate, startDate} = req.body
     if(!findBooking){
         res.status(404)
         res.json({
@@ -57,7 +57,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
             "statusCode": 404
           })
     }
-    if (Booking.endDate <= Booking.startDate){
+    if (endDate <= startDate){
         res.status(400)
         res.json({
             "message": "Validation error",
