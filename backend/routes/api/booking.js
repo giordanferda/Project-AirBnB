@@ -47,8 +47,8 @@ router.get('/current', requireAuth, restoreUser, async (req,res) => {
 
 //Edit a booking
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
-    const bookingid = req.params.bookingId
-    const findbooking = await Booking.findAll(bookingid)
+    const bookingId = req.params.bookingId
+    const findbooking = await Booking.findByPk(bookingId)
 
     if(!findbooking){
         res.status(404)
