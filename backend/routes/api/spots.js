@@ -237,7 +237,8 @@ router.get('/:spotId/reviews', async (req, res) => {
     ],
     group: ['Review.id']
   })
-  if (!reviews){
+  const findSpot = await Spot.findByPk(spot)
+  if (!findSpot){
     res.status(404)
     res.json({
       "message": "Spot couldn't be found",
