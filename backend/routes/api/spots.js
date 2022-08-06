@@ -134,12 +134,12 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
       userId: req.user.id,
       url
     })
-
-  return res.json({
+  const obj = {
     id: image.id,
     imageableId: image.spotId,
     url: image.url
-  })
+  }
+  return res.json(obj)
 
 });
 
