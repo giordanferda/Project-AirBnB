@@ -6,7 +6,7 @@ const { check } = require('express-validator');
 const {User, Booking, Spot, Image, Review, sequelize} = require('../../db/models');
 const user = require('../../db/models/user.js');
 const { Op } = require('sequelize')
-
+const Sequelize = require('sequelize')
 
 //Get All Spots
 router.get('/', async (req, res, next) => {
@@ -73,18 +73,8 @@ router.get('/:spotId', async (req, res) => {
   let spots = await Spot.findOne({
     where: {
       id: spotId
-    },
-    include: [
-      { model: Review, attributes: [] },
-      { model: Image, attributes: [], where: {previewImage: true} },
-    ],
-    attributes: {
-      include: [
-        [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ],
-        [ sequelize.fn('COUNT', sequelize.col('Reviews.stars'), 'numReviews')]
-      ]
-    },
-    group: ['Spot.id'],
+    }
+
   });
   if (!spots) {
       res.status(404)
@@ -92,6 +82,39 @@ router.get('/:spotId', async (req, res) => {
           "message": "Spot couldn't be found"
       })
   }
+  let isOwner = await User.findByPk(spots.ownerId, {
+    attributes: [
+      'id', 'firstName', 'lastName'
+    ]
+  })
+  let image = await Image.findAll({
+    where: {
+      spotId
+    },
+    attributes: [
+      'id', ['spotId', 'imageableId'], 'url'
+    ]
+  })
+  let avgRating = await Review.findAll({
+    where: {
+      spotId
+    },
+    attributes: [
+      [Sequelize.fn("AVG", sequelize.col('stars')), 'avgRating']
+    ]
+  })
+  let numReviews = await Review.count({
+    where: {
+      spotId
+    }
+  })
+  spots.avgRating = avgRating
+  spots.numReviews = numReviews
+  spots.image = image
+  spots.owner = isOwner
+
+  res.status(200)
+  res.json(spots)
 })
 
 
