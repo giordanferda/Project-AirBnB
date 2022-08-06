@@ -42,6 +42,13 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
       "statusCode": 404
     })
   }
+  let image = await Image.create({
+    url: url,
+    reviewId: reviewId,
+    userId: req.user.id,
+    previewImage: previewImage
+  })
+
   const imgCnt = await Image.findAll({
     where: {
       [Op.and]:[{ reviewId: reviewId }, { previewImage: previewImage }]
@@ -55,12 +62,6 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     })
 }
 
-  let image = await Image.create({
-    url: url,
-    reviewId: reviewId,
-    userId: req.user.id,
-    previewImage: previewImage
-  })
   const objres = {id: image.id,
     imageableId: image.reviewId, url: image.url}
 
@@ -120,39 +121,3 @@ router.delete('/:reviewId', requireAuth, restoreUser, async (req, res) => {
 })
 
   module.exports = router;
-
-  router.post('/:spotId/reviews', restoreUser, requireAuth, async (req, res) => {
-    const spot = req.params.id
-    const user = req.user.id
-    const { review, stars } = req.body
-    const findid = await Review.findByPk(spot)
-    if(!findid){
-      res.status(404)
-      res.json({
-        "message": "Spot couldn't be found",
-        "statusCode": 404
-      })
-    }
-    const reviewed = await Review.findAll({
-    where: {
-      userId: user,
-      spotId: spot
-    }
-
-  })
-  if (reviewed){
-    res.status(403);
-    res.json({
-      "message": "User already has a review for this spot",
-      "statusCode": 403
-    })
-  }
-  const createReview = Review.create({
-    spotId: spot,
-    userId: user,
-    review,
-    stars
-  })
-  res.status(201)
-  res.json(createReview)
-  })
