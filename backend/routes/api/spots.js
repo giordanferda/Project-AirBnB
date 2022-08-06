@@ -382,7 +382,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
         ],
       },
     });
-    if(bookings){
+    if(bookings.length >= 1){
       res.status(403)
       res.json({
         "message": "Sorry, this spot is already booked for the specified dates",
@@ -392,7 +392,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
           "endDate": "End date conflicts with an existing booking"
         }
       })
-    } else {
+    }
       const createBooking = await Booking.create({
         spotId,
         userId: req.user.id,
@@ -401,7 +401,7 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
       })
       res.status(201)
       res.json(createBooking)
-    }
+
   }
 })
 
