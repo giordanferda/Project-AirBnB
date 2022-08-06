@@ -42,8 +42,10 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
       "statusCode": 404
     })
   }
-  const imgCnt = await Image.count({
-    where: { previewImage : true}
+  const imgCnt = await Image.findAll({
+    where: {
+      [Op.and]:[{ reviewId: reviewId }, { previewImage: previewImage }]
+    }
   })
   if (imgCnt.length >= 10){
     res.status(403)
@@ -59,10 +61,11 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     userId: req.user.id,
     previewImage: previewImage
   })
-  const obj = {id: image.id,
+  const objres = {id: image.id,
     imageableId: image.reviewId, url: image.url}
-    res.status(200)
-  res.json(obj)
+
+  res.status(200)
+  res.json(objres)
 })
 
 //Edit a review
