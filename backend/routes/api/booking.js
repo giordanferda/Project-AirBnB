@@ -77,7 +77,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
     }
     const booked = await Booking.findAll({
         where: {
-            bookingId
+            bookingId: req.params.bookingId
         }
     })
     if (booked){
