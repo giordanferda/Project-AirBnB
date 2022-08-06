@@ -42,7 +42,7 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     })
   }
   const { url } = req.body
-  let image = Image.create({
+  let image = await Image.create({
     url: url,
     reviewId: reviewId,
     userId: req.user.id
