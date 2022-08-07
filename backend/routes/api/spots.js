@@ -31,7 +31,7 @@ router.get('/', async (req, res, next) => {
           spotId: spot.id
         },
       })
-      spot.dataValues.previewImage = spotImg
+      spot.dataValues.previewImage = spotImg.dataValues.url
     }
 
     res.status(200)
