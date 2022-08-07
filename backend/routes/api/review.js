@@ -46,10 +46,10 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     url: url,
     reviewId: reviewId,
     userId: req.user.id,
-    previewImage: previewImage
+    previewImage
   })
 
-  const imgCnt = await Image.findAll({
+  let imgCnt = await Image.findAll({
     where: {
       [Op.and]:[{ reviewId: reviewId }, { previewImage: previewImage }]
     }
@@ -64,8 +64,6 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
 
   const objres = {id: image.id,
     imageableId: image.reviewId, url: image.url}
-
-  res.status(200)
   res.json(objres)
 })
 
