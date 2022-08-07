@@ -42,13 +42,6 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
       "statusCode": 404
     })
   }
-  let image = await Image.create({
-    url: url,
-    reviewId: reviewId,
-    userId: req.user.id,
-    previewImage
-  })
-
   let imgCnt = await Image.findAll({
     where:
       { reviewId: reviewId, previewImage: true },
@@ -60,6 +53,12 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
       "statusCode": 403
     })
 }
+  let image = await Image.create({
+    url: url,
+    reviewId: reviewId,
+    userId: req.user.id,
+    previewImage
+  })
 
   const objres = {id: image.id,
     imageableId: image.reviewId, url: image.url}
