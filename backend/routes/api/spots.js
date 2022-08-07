@@ -24,6 +24,8 @@ router.get('/', async (req, res, next) => {
     })
     for (let spot of Allspots){
       let spotImg = Image.findOne({
+        attributes:
+          ['url'],
         where: {
           previewImage: true,
           spotId: spot.id
