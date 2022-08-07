@@ -38,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         min: 1,
         max: 5,
-        isFloat: true
       }
     },
   }, {
