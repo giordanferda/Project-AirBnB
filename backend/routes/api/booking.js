@@ -34,8 +34,8 @@ router.get('/current', requireAuth, restoreUser, async (req,res) => {
                 'url'
             ]
         })
+        spot.previewImage = image.url
         book.dataValues.Spot = spot
-        book.dataValues.previewImage = image.url
 
     }
 
