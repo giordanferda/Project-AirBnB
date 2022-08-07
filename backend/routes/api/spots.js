@@ -25,12 +25,13 @@ router.get('/', async (req, res, next) => {
     for (let spot of allSpots){
       let spotImg = await Image.findOne({
         attributes:
-          ['url'],
+        ['url'],
         where: {
           previewImage: true,
           spotId: spot.id
         },
       })
+      spot.dataValues.avgRating = Number(avgRating).toFixed(1);
       spot.dataValues.previewImage = spotImg.dataValues.url
     }
 
