@@ -5,7 +5,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const {User, Booking, Spot, Image, Review, sequelize} = require('../../db/models');
 const e = require('express');
-
+const { Op } = require ('sequelize')
 
 //Get all of the Current User's Bookings
 router.get('/current', requireAuth, restoreUser, async (req,res) => {
@@ -35,7 +35,7 @@ router.get('/current', requireAuth, restoreUser, async (req,res) => {
             ]
         })
         book.dataValues.spot = spot
-        book.dataValues.image = image.url
+        book.dataValues.previewImage = image.url
 
     }
 
@@ -76,10 +76,14 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
     }
     const booked = await Booking.findAll({
         where: {
-            id: req.params.bookingId
+            id: req.params.bookingId,
+            [Op.and]: [
+                {startDate: startDate},
+                {endDate: endDate}
+            ]
         }
     })
-    if (booked.length >= 1){
+    if (booked.length){
         res.status(403)
         res.json({
             "message": "Sorry, this spot is already booked for the specified dates",

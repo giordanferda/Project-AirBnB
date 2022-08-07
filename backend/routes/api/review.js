@@ -60,8 +60,11 @@ router.post('/:reviewId/images', restoreUser, requireAuth, async (req, res) => {
     previewImage
   })
 
-  const objres = {id: image.id,
-    imageableId: image.reviewId, url: image.url}
+  const objres = {
+    id: image.id,
+    imageableId: parseInt(image.reviewId),
+    url: image.url
+  }
 
   res.json(objres)
 })

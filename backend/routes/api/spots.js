@@ -15,23 +15,24 @@ router.get('/', async (req, res, next) => {
       include: [
         { model: Review, attributes: [] }
       ],
-      attributes: {
-        include: [
-          [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]
-        ]
-      },
+
       group: ['Spot.id']
     })
     for (let spot of allSpots){
+      const reviewInfo = await spot.getReviews({
+        attributes: [
+          [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ]
+        ]
+      })
+      const avgRating = reviewInfo[0].dataValues.avgRating
+      spot.dataValues.avgRating = parseFloat(avgRating.toFixed(1));
       let spotImg = await Image.findOne({
-        attributes:
-        ['url'],
         where: {
           previewImage: true,
           spotId: spot.id
         },
       })
-      spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+
       spot.dataValues.previewImage = spotImg.dataValues.url
     }
 
@@ -48,21 +49,28 @@ router.get('/', async (req, res, next) => {
       include: [
         {model: Review, attributes: [] }
       ],
-      attributes: {
-        include: [
-          [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
-        ]
-      },
       group: ['Spot.id'],
 
     })
-    for (let i = 0; i < ownedSpots.length; i++){
-      let spot = ownedSpots[i]
-      let img = await Image.findOne({
-        attributes: ['url'],
-        where: { previewImage: true, spotId: spot.id}
+    for (let spot of ownedSpots){
+      const reviewInfo = await spot.getReviews({
+        attributes: [
+          [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ]
+        ]
       })
-      spot.dataValues.previewImage = img
+      const avgRating = reviewInfo[0].dataValues.avgRating
+      if (reviewInfo.avgRating){
+        spot.dataValues.avgRating = parseFloat(avgRating.toFixed(1)); //star rating
+      } else {
+        spot.dataValues.avgRating = 'spot not yet rated' // if there is no rating
+      }
+      let spotImg = await Image.findOne({
+        where: {
+          previewImage: true,
+          spotId: spot.id
+        },
+      })
+      spot.dataValues.previewImage = spotImg.dataValues.url
     }
     res.status(200)
     res.json({Spot: ownedSpots})
@@ -74,16 +82,13 @@ router.get('/', async (req, res, next) => {
 // Get details of a spot from an id ****
 router.get('/:spotId', async (req, res) => {
   const spotId = req.params.spotId
-  let spots = await Spot.findOne({
-    where: {
-      id: spotId
-    }
+  let spots = await Spot.findByPk(spotId)
 
-  });
   if (!spots) {
       res.status(404)
       return res.json({
-          "message": "Spot couldn't be found"
+          "message": "Spot couldn't be found",
+          "statusCode": 404
       })
   }
   let isOwner = await User.findByPk(spots.ownerId, {
@@ -99,22 +104,31 @@ router.get('/:spotId', async (req, res) => {
       'id', ['spotId', 'imageableId'], 'url'
     ]
   })
-  let avgRating = await Review.findAll({
-    where: {
-      spotId
+  let rating = await Spot.findByPk(spotId,{
+    include : {
+      model: Review,
+      attributes: [],
     },
-    attributes: [
-      [Sequelize.fn("AVG", sequelize.col('stars')), 'avgRating']
-    ]
+      attributes: [
+        [Sequelize.fn("AVG", sequelize.col('stars')), 'avgStarRating']
+      ],
+      raw: true
   })
+
+
   let numReviews = await Review.count({
     where: {
       spotId
     }
   })
+
   const jsonSpot = spots.toJSON()
 
-    jsonSpot.avgRating = avgRating
+  if (rating.avgStarRating){
+    jsonSpot.avgStarRating = parseFloat(rating.avgStarRating.toFixed(1)); //star rating
+  } else {
+    jsonSpot.avgStarRating = 'spot not yet rated' // if there is no rating
+  }
     jsonSpot.numReviews = numReviews
     jsonSpot.image = image
     jsonSpot.owner = isOwner
@@ -154,7 +168,8 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
   if(!spot){
     res.status(404)
     res.json({
-      "message": 'Spot could not be found'
+      "message": 'Spot could not be found',
+      "statusCode": 404
     });
   }
 
@@ -283,7 +298,7 @@ router.post('/:spotId/reviews', requireAuth, validateReviews, async (req, res) =
 })
 if (!reviewed){
   const createReview = await Review.create({
-    spotId: spotId,
+    spotId: parseInt(spotId),
     userId: req.user.id,
     review,
     stars
@@ -398,12 +413,12 @@ router.post('/:spotId/bookings', restoreUser, requireAuth, async (req, res) => {
       })
     }
       const createBooking = await Booking.create({
-        spotId,
+        spotId : parseInt(spotId),
         userId: req.user.id,
         startDate,
         endDate
       })
-      res.status(201)
+      res.status(200)
       res.json(createBooking)
 
 
