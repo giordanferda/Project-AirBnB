@@ -360,7 +360,7 @@ router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
   }
   if (spots.ownerId !== userId){
     res.status(200)
-    res.json({usersBookings})
+    res.json({Bookings: usersBookings})
   } else {
     res.status(200)
     res.json({bookings})
