@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Image.init({
     previewImage: {
       type: DataTypes.BOOLEAN,
+      defaultValue: true
     },
     url: {
       type: DataTypes.STRING,

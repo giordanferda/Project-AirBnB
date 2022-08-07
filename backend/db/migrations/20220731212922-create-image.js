@@ -12,6 +12,7 @@ module.exports = {
       },
       previewImage: {
         type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       url: {
         type: Sequelize.STRING,

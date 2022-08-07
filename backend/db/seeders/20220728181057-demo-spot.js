@@ -25,7 +25,7 @@ module.exports = {
         price: 250
       },
       {
-        ownerId: 1,
+        ownerId: 2,
         address: '2 Coconut Lane',
         city: 'Paradise2',
         state: 'Island2',
@@ -37,7 +37,7 @@ module.exports = {
         price: 250
       },
       {
-        ownerId: 1,
+        ownerId: 3,
         address: '3 Coconut Lane',
         city: 'Paradise3',
         state: 'Island3',
@@ -49,7 +49,7 @@ module.exports = {
         price: 250
       },
       {
-        ownerId: 1,
+        ownerId: 4,
         address: '4 Coconut Lane',
         city: 'Paradise4',
         state: 'Island4',
@@ -61,7 +61,7 @@ module.exports = {
         price: 250
       },
       {
-        ownerId: 1,
+        ownerId: 5,
         address: '5 Coconut Lane',
         city: 'Paradise5',
         state: 'Island5',
