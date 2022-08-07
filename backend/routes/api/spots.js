@@ -11,7 +11,7 @@ const Sequelize = require('sequelize')
 
 //Get All Spots
 router.get('/', async (req, res, next) => {
-    const Allspots = await Spot.findAll({
+    const allSpots = await Spot.findAll({
       include: [
         { model: Review, attributes: [] }
       ],
@@ -20,10 +20,9 @@ router.get('/', async (req, res, next) => {
           [ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]
         ]
       },
-      group: ['Spot.id'],
-      where: { ownerId : req.user.id }
+      group: ['Spot.id']
     })
-    for (let spot of Allspots){
+    for (let spot of allSpots){
       let spotImg = Image.findOne({
         attributes:
           ['url'],
@@ -32,11 +31,11 @@ router.get('/', async (req, res, next) => {
           spotId: spot.id
         },
       })
-      spot.dataValues.previewImage = spotImg
+      allSpots.dataValues.previewImage = spotImg
     }
 
     res.status(200)
-    res.json({ Spots: Allspots })
+    res.json({ Spots: allSpots })
   })
 
   // Get all spots owned by the current user
