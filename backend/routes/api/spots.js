@@ -196,7 +196,7 @@ router.get('/', ValidatePagination, async (req, res, next) => {
       spot.dataValues.previewImage = spotImg.dataValues.url
     }
     res.status(200)
-    res.json({Spot: ownedSpots})
+    res.json({Spots: ownedSpots})
 
   })
 
