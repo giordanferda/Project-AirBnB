@@ -8,48 +8,159 @@ const { Op } = require('sequelize')
 const Sequelize = require('sequelize')
 
 
-
+const ValidatePagination = [
+  check('page')
+  .exists({ checkFalsy: true })
+  .isInt({ min: 0, max: 10 })
+  .optional()
+  .withMessage('Page must be greater than or equal to 0.'),
+  check('size')
+  .exists({ checkFalsy: true })
+  .isInt({ min: 0, max: 10 })
+  .optional()
+  .withMessage('Size must be greater than or equal to 0.'),
+  check('maxLat')
+  .optional()
+  .isDecimal()
+  .withMessage('Maximum latitude is invalid.'),
+  check('minLat')
+  .optional()
+  .isDecimal()
+  .withMessage('Minimum latitude is invalid.'),
+  check('minLng')
+  .optional()
+  .exists({ checkFalsy: true })
+  .isDecimal()
+  .withMessage('Maximum longitude is invalid.'),
+  check('maxLng')
+  .optional()
+  .isDecimal()
+  .withMessage('Minimum longitude is invalid.'),
+  check('minPrice')
+  .optional()
+  .custom((value, {req}) => {
+    if (parseFloat(value) < 0){
+      return Promise.reject("Minimum price must be greater than or equal to 0")
+    } else {
+      return true
+    }
+  })
+  .isDecimal({ min: 0 })
+  .withMessage('Maximum price must be greater than or equal to 0.'),
+  check('maxPrice')
+  .optional()
+  .custom((value, {req}) => {
+    if (parseFloat(value) < 0){
+      return Promise.reject("Maximum price must be greater than or equal to 0")
+    } else {
+      return true
+    }
+  })
+  .isDecimal({ min: 0 })
+  .withMessage('Minimum price must be greater than or equal to 0.'),
+  handleValidationErrors
+]
 //Get All Spots
-router.get('/', async (req, res, next) => {
-  const { size, page} = req.query
+router.get('/', ValidatePagination, async (req, res, next) => {
+  let { size, page, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
   if (!page) page = 0
   if(!size) size = 20
-
+  // console.log(minPrice)
   page = parseInt(page)
   size = parseInt(size)
-
- let pagination = {}
- if(page >= 1 && size >= 1) {
-  pagination.limit = size
-  pagination.offset = size * (page)
+ let where = {}
+ let filterArr = []
+ if (minLat){
+  filterArr.push({lat: {[Op.gte]: parseFloat(minLat)}})
  }
+ if (maxLat){
+  filterArr.push({lat: {[Op.lte]: parseFloat(maxLat)}})
+ }
+ if (minLng){
+  filterArr.push({lng: {[Op.gte]: parseFloat(minLng)}})
+ }
+ if (maxLng){
+  filterArr.push({lng: {[Op.lte]: parseFloat(maxLng)}})
+ }
+ if (minPrice){
+  filterArr.push({price: {[Op.gte]: parseFloat(minPrice)}})
+ }
+ if (maxPrice){
+  filterArr.push({price: {[Op.lte]: parseFloat(maxPrice)}})
+ }
+ console.log(...filterArr)
+
+
+//  if (parseFloat(minPrice) < 0){
+//   res.status(400)
+//   res.json({
+//     "message": "Validation Error",
+//     "statusCode": 400,
+//     "errors": { "minPrice": "Maximum price must be greater than or 0"
+//   }
+//   })
+//  }
+ let pagination = {}
+
+ if (page >= 1 && size >= 1){
+  pagination.limit = size
+  pagination.offset = size * (page - 1)
+}
+
     const allSpots = await Spot.findAll({
       include: [
         { model: Review, attributes: [] }
       ],
+      where: {[Op.and]:[...filterArr]},
       ...pagination,
-      group: ['Spot.id']
+      // group: ['Spot.id']
     })
+
     for (let spot of allSpots){
+      // console.log(spot.toJSON(), "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", spot.Images[0].previewImage)
       const reviewInfo = await spot.getReviews({
         attributes: [
           [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ]
         ]
       })
-      const avgRating = reviewInfo[0].dataValues.avgRating
-      spot.dataValues.avgRating = parseFloat(avgRating).toFixed(1);
+      let avgRating = reviewInfo[0].dataValues.avgRating
+
+
+      // allSpots[i] = allSpots[i].toJSON()
+
+
+      // let count = await Review.count({
+      //   where: {
+      //     spotId: allSpots[i].id
+      //   }
+      // })
+      // let sum = await Review.sum({
+      //   where: {
+      //     spotId: allSpots[i].id
+      //   }
+      // })
+      // allSpots[i].avgRating = sum / count
+      // console.log(allSpots[i])
+      spot.dataValues.avgRating = parseFloat(Number(avgRating)).toFixed(1);
       let spotImg = await Image.findOne({
         where: {
           previewImage: true,
           spotId: spot.id
         },
       })
+      // console.log(spot.dataValues.previewImage, "       12312     ", spotImg.dataValues.url)
+      if (spotImg){
+        spot.dataValues.previewImage = spotImg.dataValues.url
 
-      spot.dataValues.previewImage = spotImg.dataValues.url
+      }
     }
+    let result = {}
+      result.Spots = allSpots
+      result.page = page
+      result.size = size
 
     res.status(200)
-    res.json({ Spots: allSpots })
+    res.json(result)
   })
 
   // Get all spots owned by the current user
