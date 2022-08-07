@@ -258,6 +258,8 @@ const validateReviews = [
     .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
 ];
+
+
 // Create a Review for a Spot based on the Spot's id
 
 router.post('/:spotId/reviews', requireAuth, validateReviews, async (req, res) => {
@@ -305,6 +307,8 @@ if (!reviewed){
 //     .withMessage('endDate cannot be on or before startDate'),
 //   handleValidationErrors
 // ];
+
+
 //Get all Bookings for a Spot based on the Spot's id
 
 router.get('/:spotId/bookings', restoreUser, requireAuth, async (req, res) =>{
