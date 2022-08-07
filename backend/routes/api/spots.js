@@ -21,6 +21,7 @@ router.get('/', async (req, res, next) => {
         ]
       },
       group: ['Spot.id'],
+      where: { ownerId : req.user.id }
     })
     for (let spot of Allspots){
       let spotImg = Image.findOne({
