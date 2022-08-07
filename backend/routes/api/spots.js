@@ -130,7 +130,7 @@ router.get('/:spotId', async (req, res) => {
     jsonSpot.avgStarRating = 'spot not yet rated' // if there is no rating
   }
     jsonSpot.numReviews = numReviews
-    jsonSpot.image = image
+    jsonSpot.images = image
     jsonSpot.owner = isOwner
 
   res.status(200)
