@@ -169,11 +169,6 @@ router.get('/', ValidatePagination, async (req, res, next) => {
       where: {
         ownerId: req.user.id
       },
-      // include: [
-      //   {model: Review, attributes: [] }
-      // ],
-      // group: ['Spot.id'],
-
     })
     for (let spot of ownedSpots){
       const reviewInfo = await Review.findAll({
