@@ -169,10 +169,10 @@ router.get('/', ValidatePagination, async (req, res, next) => {
       where: {
         ownerId: req.user.id
       },
-      include: [
-        {model: Review, attributes: [] }
-      ],
-      group: ['Spot.id'],
+      // include: [
+      //   {model: Review, attributes: [] }
+      // ],
+      // group: ['Spot.id'],
 
     })
     for (let spot of ownedSpots){
@@ -182,7 +182,8 @@ router.get('/', ValidatePagination, async (req, res, next) => {
         ],
         where: {
           spotId: spot.id
-        }
+        },
+        raw: true
       })
       if (reviewInfo[0].avgRating){
         spot.dataValues.avgRating = parseFloat(parseFloat(reviewInfo[0].avgRating).toFixed(1)); //star rating
