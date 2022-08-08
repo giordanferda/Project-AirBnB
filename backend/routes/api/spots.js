@@ -88,7 +88,7 @@ router.get('/', ValidatePagination, async (req, res, next) => {
  if (maxPrice){
   filterArr.push({price: {[Op.lte]: parseFloat(maxPrice)}})
  }
- console.log(...filterArr)
+//  console.log(...filterArr)
 
 
 //  if (parseFloat(minPrice) < 0){
@@ -182,8 +182,8 @@ router.get('/', ValidatePagination, async (req, res, next) => {
         ]
       })
       const avgRating = reviewInfo[0].dataValues.avgRating
-      if (reviewInfo.avgRating){
-        spot.dataValues.avgRating = parseFloat(avgRating.toFixed(1)); //star rating
+      if (avgRating){
+        spot.dataValues.avgRating = parseFloat(parseFloat(avgRating.toFixed(1))); //star rating
       } else {
         spot.dataValues.avgRating = 'spot not yet rated' // if there is no rating
       }
