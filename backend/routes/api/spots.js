@@ -176,14 +176,16 @@ router.get('/', ValidatePagination, async (req, res, next) => {
 
     })
     for (let spot of ownedSpots){
-      const reviewInfo = await spot.getReviews({
+      const reviewInfo = await Review.findAll({
         attributes: [
           [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ]
-        ]
+        ],
+        where: {
+          spotId: spot.id
+        }
       })
-      const avgRating = reviewInfo[0].dataValues.avgRating
-      if (avgRating){
-        spot.dataValues.avgRating = parseFloat(parseFloat(avgRating.toFixed(1))); //star rating
+      if (reviewInfo[0].avgRating){
+        spot.dataValues.avgRating = parseFloat(parseFloat(reviewInfo[0].avgRating).toFixed(1)); //star rating
       } else {
         spot.dataValues.avgRating = 'spot not yet rated' // if there is no rating
       }
