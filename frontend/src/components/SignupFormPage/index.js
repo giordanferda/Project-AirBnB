@@ -81,7 +81,7 @@ function SignupFormPage() {
         />
       </label>
       <label>
-        Password
+       Last Name
         <input
           type="text"
           value={lastName}

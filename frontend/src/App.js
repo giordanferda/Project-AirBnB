@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import { allSpots } from "./store/spots";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -11,6 +13,11 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+
+  useEffect(() => {
+    dispatch(allSpots())
+  }, [dispatch])
 
   return (
     <>

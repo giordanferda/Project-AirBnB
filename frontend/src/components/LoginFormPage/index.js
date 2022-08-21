@@ -49,6 +49,7 @@ function LoginFormPage() {
         />
       </label>
       <button type="submit">Log In</button>
+
     </form>
   );
 }
