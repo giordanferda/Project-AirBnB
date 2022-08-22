@@ -6,18 +6,18 @@ router.use('/api', apiRouter);
 
 
 // //test route delete later.
-// router.get('/hello/world', function (req, res) {
-//     res.cookie('XRSF-TOKEN', req.csrfToken());
-//     res.send('Hello World!')
-// });
+router.get('/hello/world', function (req, res) {
+    res.cookie('XRSF-TOKEN', req.csrfToken());
+    res.send('Hello World!')
+});
 //this route was not react auth me read me, delete or comment out if not neccessary this was written out in the backend API.
-// router.get("/api/csrf/restore", (req, res) => {
-//     const csrfToken = req.csrfToken();
-//     res.cookie("XSRF-TOKEN", csrfToken);
-//     res.status(200).json({
-//       'XSRF-Token': csrfToken
-//     });
-//   });
+router.get("/api/csrf/restore", (req, res) => {
+    const csrfToken = req.csrfToken();
+    res.cookie("XSRF-TOKEN", csrfToken);
+    res.status(200).json({
+      'XSRF-Token': csrfToken
+    });
+  });
 
 //   router.get("/api/csrf/restore", (req, res) => {
 //     const csrfToken = req.csrfToken();

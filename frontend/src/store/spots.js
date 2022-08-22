@@ -7,6 +7,7 @@ export const OWNEDSPOTS = 'spots/current'
 export const CREATEDSPOT = 'spots/CREATESPOT'
 export const ADDIMGTOSPOTID = 'spots/IMGSPOT'
 export const EDITASPOT = 'spots/editspot'
+export const DELETEASPOT = 'spots/deletespot'
 export const GETREVIEWSBYSPOTID = 'spots/reviews'
 export const CREATEDREVIEWSPOTID = 'spots/reviewspotid'
 export const GETALLBOOKINGSSPOTID = 'spots/getbookings'
@@ -30,37 +31,52 @@ export const allSpots = () => async (dispatch) => {
 }
 
 
-const spotDetailAction = (spotId) => {
+const spotDetailAction = (payload) => {
     return {
         type: GETDETAILSFROMSPOT,
-        spotId
+        payload
     }
 }
+export const getSpotDetailById = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'GET'
+    })
+    const data = await response.json();
+    dispatch(spotDetailAction(data))
+    return response;
+}
 
-const ownedSpots = (ownerId) => {
+const ownedSpots = (payload) => {
     return {
         type: OWNEDSPOTS,
-        ownerId
+        payload
     }
+}
+export const getSpotsById = () => async (dispatch) => {
+    const response = await csrfFetch('/api/spots/current', {
+        method: 'GET'
+    })
+    const data = await response.json();
+    dispatch(ownedSpots(data))
+    return response;
 }
 
 const createdSpot = (ownerId, payload) => {
     return {
-
         type: CREATEDSPOT,
         ownerId,
         payload
     }
 }
 
-const addImgToSpot = (spotId, url, userId) => {
-    return {
-        type: ADDIMGTOSPOTID,
-        spotId,
-        url,
-        userId
-    }
-}
+// const addImgToSpot = (spotId, url, userId) => {
+//     return {
+//         type: ADDIMGTOSPOTID,
+//         spotId,
+//         url,
+//         userId
+//     }
+// }
 
 const editSpot = (spotId) => {
     return {
@@ -69,33 +85,33 @@ const editSpot = (spotId) => {
     }
 }
 
-const getReviews = (spotId) => {
-    return {
-        type: GETREVIEWSBYSPOTID,
-        spotId
-    }
-}
+// const getReviews = (spotId) => {
+//     return {
+//         type: GETREVIEWSBYSPOTID,
+//         spotId
+//     }
+// }
 
-const createReview = (spotId, payload) => {
-    return {
-        type: CREATEDREVIEWSPOTID,
-        payload
-    }
-}
+// const createReview = (spotId, payload) => {
+//     return {
+//         type: CREATEDREVIEWSPOTID,
+//         payload
+//     }
+// }
 
-const getBookings = (userId, spotId, payload) => {
-    return {
-        type: GETALLBOOKINGSSPOTID,
-        userId,
-        spotId,
-        payload
-    }
-}
+// const getBookings = (userId, spotId, payload) => {
+//     return {
+//         type: GETALLBOOKINGSSPOTID,
+//         userId,
+//         spotId,
+//         payload
+//     }
+// }
 
-const createBooking = (spotId, payload) => {
-    return {
-        type: CREATEABOOKINGSPOTID,
-        spotId,
-        payload
-    }
-}
+// const createBooking = (spotId, payload) => {
+//     return {
+//         type: CREATEABOOKINGSPOTID,
+//         spotId,
+//         payload
+//     }
+// }
