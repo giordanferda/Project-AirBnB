@@ -5,13 +5,13 @@ export const GETALLSPOTS = 'spots/getAllSpots'
 export const GETDETAILSFROMSPOT = 'spots/spotId'
 export const OWNEDSPOTS = 'spots/current'
 export const CREATEDSPOT = 'spots/CREATESPOT'
-export const ADDIMGTOSPOTID = 'spots/IMGSPOT'
+// export const ADDIMGTOSPOTID = 'spots/IMGSPOT'
 export const EDITASPOT = 'spots/editspot'
 export const DELETEASPOT = 'spots/deletespot'
-export const GETREVIEWSBYSPOTID = 'spots/reviews'
-export const CREATEDREVIEWSPOTID = 'spots/reviewspotid'
-export const GETALLBOOKINGSSPOTID = 'spots/getbookings'
-export const CREATEABOOKINGSPOTID = 'spots/createbookings'
+// export const GETREVIEWSBYSPOTID = 'spots/reviews'
+// export const CREATEDREVIEWSPOTID = 'spots/reviewspotid'
+// export const GETALLBOOKINGSSPOTID = 'spots/getbookings'
+// export const CREATEABOOKINGSPOTID = 'spots/createbookings'
 
 
 const getAllSpots = (payload) => {
