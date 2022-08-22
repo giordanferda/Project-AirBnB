@@ -49,7 +49,7 @@ function LoginForm() {
       className='login-button'
       type='submit'
       onClick={(e) => {
-        setCredential('demoUser')
+        setCredential('TOTHEMOON')
         setPassword('password')
       }}
       >Demo User</button>
