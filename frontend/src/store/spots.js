@@ -6,7 +6,7 @@ export const CREATEDSPOT = 'spots/CREATESPOT'
 export const EDITASPOT = 'spots/editspot'
 export const DELETEASPOT = 'spots/deletespot'
 export const GETDETAILSFROMSPOT = 'spots/spotId'
-// export const OWNEDSPOTS = 'spots/current'
+export const OWNEDSPOTS = 'spots/current'
 // export const ADDIMGTOSPOTID = 'spots/IMGSPOT'
 // export const GETREVIEWSBYSPOTID = 'spots/reviews'
 // export const CREATEDREVIEWSPOTID = 'spots/reviewspotid'
@@ -56,6 +56,16 @@ const editSpot = (spotId) => {
         spotId
     }
 }
+export const EditSpot = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT'
+    })
+    if (response.ok){
+        const data = await response.json();
+        dispatch(editSpot(data))
+        return response;
+    }
+}
 
 
 const spotDetailAction = (payload) => {
@@ -76,6 +86,21 @@ export const getSpotDetailById = (spotId) => async (dispatch) => {
 }
 
 
+const ownedSpots = (payload) => {
+    return {
+        type: OWNEDSPOTS,
+        payload
+    }
+}
+
+export const getSpotsById = () => async (dispatch) => {
+    const response = await csrfFetch('/api/spots/current', {
+        method: 'GET'
+    })
+    const data = await response.json();
+    dispatch(ownedSpots(data))
+    return response;
+}
 
 
 
@@ -83,20 +108,6 @@ export const getSpotDetailById = (spotId) => async (dispatch) => {
 
 
 
-// const ownedSpots = (payload) => {
-//     return {
-//         type: OWNEDSPOTS,
-//         payload
-//     }
-// }
-// export const getSpotsById = () => async (dispatch) => {
-//     const response = await csrfFetch('/api/spots/current', {
-//         method: 'GET'
-//     })
-//     const data = await response.json();
-//     dispatch(ownedSpots(data))
-//     return response;
-// }
 
 // const addImgToSpot = (spotId, url, userId) => {
     //     return {

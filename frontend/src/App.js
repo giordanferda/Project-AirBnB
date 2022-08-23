@@ -8,7 +8,7 @@ import { allSpots, getSpotDetailById} from "./store/spots";
 import Spots from './components/getAllSpots/getAllSpots'
 import GetSpotbyId from './components/getSpotId/detailspotId'
 import CreateSpot from "./components/CreateSpotForm/CreateSpotForm";
-
+import MyOwnedSpots from "./components/mySpots/myOwnedSpots";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,9 +25,7 @@ function App() {
   //   dispatch(getSpotDetailById(2))
   // }, [dispatch])
 
-  useEffect(() => {
-    dispatch(allSpots())
-  }, [dispatch])
+
 
   return (
     <>
@@ -45,6 +43,9 @@ function App() {
           </Route>
           <Route exact path={`/createSpotForm`}>
             {user ? <CreateSpot />: <Redirect to='/' /> }
+          </Route>
+          <Route to='/myListings'>
+          {user ? <MyOwnedSpots />: <Redirect to='/' /> }
           </Route>
         </Switch>
       )}

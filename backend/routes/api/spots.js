@@ -165,6 +165,7 @@ router.get('/', ValidatePagination, async (req, res, next) => {
 
   // Get all spots owned by the current user
   router.get('/current', restoreUser, requireAuth, async (req,res) => {
+
     const ownedSpots = await Spot.findAll({
       where: {
         ownerId: req.user.id

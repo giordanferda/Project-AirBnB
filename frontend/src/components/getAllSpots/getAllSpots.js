@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { allSpots } from '../../store/spots';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import './getAllSpots.css'
 
 function Spots(){
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(allSpots())
+  }, [dispatch])
     const spots = useSelector((state) => Object.values(state.spots));
     // console.log(spots, 'THIS IS OUR SPOT')
+
   return (
     <div className="page-container">
       <div className="spots-container">
