@@ -26,13 +26,14 @@ function LoginFormPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='Login-Modal'>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
         Username or Email
         <input
+        placeholder='Username or Email'
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}

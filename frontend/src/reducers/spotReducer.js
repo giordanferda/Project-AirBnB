@@ -7,10 +7,13 @@ const spotReducer = (state = {}, action) => {
         case spotReducerString.GETALLSPOTS:
             newState = {...state, ...action.payload.Spots};
             return newState
-            case spotReducerString.OWNEDSPOTS:
-            newState = {...state, ...action.payload.Spots};
-            return newState
+            // case spotReducerString.OWNEDSPOTS:
+            // newState = {...state, ...action.payload.Spots};
+            // return newState
             case spotReducerString.GETDETAILSFROMSPOT:
+                newState = {...state, ...action.payload}
+                return newState
+            case spotReducerString.CREATEDSPOT:
                 newState = {...state, ...action.payload}
                 return newState
         default:

@@ -1,0 +1,19 @@
+
+
+.Login-Form-Modal-Header{
+    display: flex;
+
+}
+
+
+.Login-Modal {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.Modal-Title {
+    text-align: center;
+    width: 100%;
+}
