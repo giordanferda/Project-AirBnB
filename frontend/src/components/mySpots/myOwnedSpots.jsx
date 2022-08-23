@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {getSpotsById } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { EditSpot } from "../../store/spots";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const MyOwnedSpots = () => {
     const history = useHistory()
@@ -13,17 +13,12 @@ const MyOwnedSpots = () => {
     useEffect(() => {
         dispatch(getSpotsById())
     }, [dispatch])
-    const handleClick = (id) => {
-        // history.go(`/editSpot/${id}`);
-        history.go('/')
-    }
-    // if (mySpots.length < 1){
-    //     return
-    // }
     return (
         <div>{mySpots.map((spot, i) => {
             return <div key={i}>{spot.address}
-            <button onClick={() => handleClick(spot.id)}>Edit Your Spot</button>
+            <Link to={`/editSpot/${spot.id}`}>Edit Your Spot</Link>
+            <div>{spot.city}, {spot.state}</div>
+            <div>{`$${spot.price} /night`}</div>
             </div>
         })}</div>
     )

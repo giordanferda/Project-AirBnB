@@ -11,13 +11,14 @@ const spotReducer = (state = {}, action) => {
             // newState = {...state, ...action.payload.Spots};
             // return newState
             case spotReducerString.GETDETAILSFROMSPOT:
-                newState = {...state, ...action.payload}
+                // const imgDetails = {}
+                newState = {0:{...action.payload}}
                 return newState
             case spotReducerString.CREATEDSPOT:
                 newState = {...state, ...action.payload}
                 return newState
             case spotReducerString.OWNEDSPOTS:
-            newState = {...state, ...action.payload.Spots}
+            newState = {...action.payload.Spots}
                 return newState
         default:
             return state

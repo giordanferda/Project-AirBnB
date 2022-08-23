@@ -44,10 +44,10 @@ function App() {
           <Route exact path={`/createSpotForm`}>
             {user ? <CreateSpot />: <Redirect to='/' /> }
           </Route>
-          <Route to='/myListings'>
+          <Route exact path='/myListings'>
           {user ? <MyOwnedSpots />: <Redirect to='/' /> }
           </Route>
-          <Route to='/editSpot/:spotId'>
+          <Route exact path='/editSpot/:spotId'>
           {user ? <EditSpotForm />: <Redirect to='/' /> }
           </Route>
         </Switch>

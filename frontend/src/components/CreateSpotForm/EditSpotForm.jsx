@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {createSpot, getSpotDetailById, getSpotsById} from '../../store/spots'
-import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { createSpot, getSpotDetailById, getSpotsById } from '../../store/spots'
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 
@@ -10,6 +10,7 @@ const LNG = -122.4730327
 
 function EditSpotForm(){
 
+
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -17,10 +18,10 @@ function EditSpotForm(){
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
+
     const {spotId} = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
-    const location = useLocation()
 
     const handleSubmit = () => {
         const payload = {
@@ -37,12 +38,13 @@ function EditSpotForm(){
         dispatch(createSpot(payload))
         history.push('/')
     }
+    const spot = useSelector((state) => state.spots[0])
+    console.log(spot)
 
     useEffect(() => {
         dispatch(getSpotDetailById(spotId))
-
+        setAddress(spot.address)
     }, [])
-
     return(
         <form onSubmit={handleSubmit}>
             <label>

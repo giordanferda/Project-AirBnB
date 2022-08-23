@@ -109,6 +109,7 @@ export const getSpotsById = () => async (dispatch) => {
 
 
 
+
 // const addImgToSpot = (spotId, url, userId) => {
     //     return {
         //         type: ADDIMGTOSPOTID,
