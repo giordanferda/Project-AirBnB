@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { allSpots } from '../../store/spots';
 import {useSelector} from 'react-redux'
 import { NavLink } from 'react-router-dom';
+import './getAllSpots.css'
 
 function Spots(){
     const spots = useSelector((state) => Object.values(state.spots));
@@ -10,14 +11,15 @@ function Spots(){
     <div className="page-container">
       <div className="spots-container">
         <div className="spots">
-          {spots.map((spot) => (
-           <>
+          {spots.map((spot, index) => (
+           <div key={`${index}_${spot.id}`}>
            <NavLink className='allSpots' to={`/spots/${spot.id}`}>
             <div>{spot.city},{spot.state}</div>
             <div>{`$${spot.price} night`}</div>
-           <img src={spot.previewImage} alt={spot.name}></img>
+           <img className='Image' src={spot.previewImage} alt={spot.name}></img>
+           <div className='spotName'>{spot.name}</div>
            </NavLink>
-           </>
+           </div>
           ))
           }
         </div>

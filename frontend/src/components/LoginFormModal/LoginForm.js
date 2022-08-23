@@ -7,6 +7,7 @@ function LoginForm() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [showLogin, setShowLogin] = useState(false) // for the x on logout onclick
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,11 +22,11 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className='Login-Modal'>
-      <div className="Login-Form-Modal-Header">
       <div>&#10006;</div>
+      <div className="Login-Form-Modal-Header">
       <h3 className="Modal-Title">Log in</h3>
       </div>
-      <h2>Welcome to FerdaBNB</h2>
+      <h2>Welcome to FerdaBnB</h2>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>

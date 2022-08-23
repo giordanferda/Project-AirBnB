@@ -31,71 +31,74 @@ function SignUpForm() {
   };
 
   return (
-    <div className>
-      <form onSubmit={handleSubmit}>
+        <div>
+    <form onSubmit={handleSubmit} className='Signup-Modal'>
+    <div className="Signup-Form-Modal-Header">
+      <h3 className="Modal-Title">Sign up</h3>
+      </div>
+      <h2>Welcome to FerdaBnB</h2>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
-          Email
+
+
           <input
             className="signup-form-input"
+            placeholder="Email"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Username
+
           <input
             className="signup-form-input"
+            placeholder="Username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Password
+
           <input
             className="signup-form-input"
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Confirm Password
+
           <input
             className="signup-form-input"
             type="password"
+            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </label>
-        <label>
-          First Name
+
+
+
           <input
             className="signup-form-input"
             type="text"
+            placeholder="First Name"
             value={firstName}
             onChange={(e) => setfirstName(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Last Name
+
+
           <input
             className="signup-form-input"
             type="text"
+            placeholder="Last Name"
             value={lastName}
             onChange={(e) => setlastName(e.target.value)}
             required
           />
-        </label>
+
         <button type="submit">Sign Up</button>
       </form>
     </div>

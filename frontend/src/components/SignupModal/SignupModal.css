@@ -1,0 +1,17 @@
+.Signup-Form-Modal-Header{
+    display: flex;
+
+}
+
+
+.Signup-Modal {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.Signup-Title {
+    text-align: center;
+    width: 100%;
+}

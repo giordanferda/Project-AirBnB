@@ -33,10 +33,9 @@ export const allSpots = () => async (dispatch) => {
 }
 
 
-const createdSpot = (ownerId, payload) => {
+const createdSpot = (payload) => {
     return {
         type: CREATEDSPOT,
-        ownerId,
         payload
     }
 }
