@@ -4,11 +4,11 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import { allSpots, getSpotDetailById} from "./store/spots";
 import Spots from './components/getAllSpots/getAllSpots'
 import GetSpotbyId from './components/getSpotId/detailspotId'
 import CreateSpot from "./components/CreateSpotForm/CreateSpotForm";
 import MyOwnedSpots from "./components/mySpots/myOwnedSpots";
+import EditSpotForm from "./components/CreateSpotForm/EditSpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +46,9 @@ function App() {
           </Route>
           <Route to='/myListings'>
           {user ? <MyOwnedSpots />: <Redirect to='/' /> }
+          </Route>
+          <Route to='/editSpot/:spotId'>
+          {user ? <EditSpotForm />: <Redirect to='/' /> }
           </Route>
         </Switch>
       )}
