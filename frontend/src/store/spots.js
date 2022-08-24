@@ -7,13 +7,8 @@ export const EDITASPOT = 'spots/editspot'
 export const DELETEASPOT = 'spots/deletespot'
 export const GETDETAILSFROMSPOT = 'spots/spotId'
 export const OWNEDSPOTS = 'spots/current'
-// export const ADDIMGTOSPOTID = 'spots/IMGSPOT'
-// export const GETREVIEWSBYSPOTID = 'spots/reviews'
-// export const CREATEDREVIEWSPOTID = 'spots/reviewspotid'
-// export const GETALLBOOKINGSSPOTID = 'spots/getbookings'
-// export const CREATEABOOKINGSPOTID = 'spots/createbookings'
 
-
+//Get all spots
 const getAllSpots = (payload) => {
     return {
         type: GETALLSPOTS,
@@ -109,6 +104,8 @@ export const getSpotsById = () => async (dispatch) => {
     return response;
 }
 
+
+//Delete a spot
 const deleteSpot = (payload) => {
     return {
         type: DELETEASPOT,
@@ -116,12 +113,12 @@ const deleteSpot = (payload) => {
     }
 }
 export const deleteYourSpot = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}`, {
+    await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
     // const data = await response.json()
     dispatch(deleteSpot(spotId))
-    // return response
+
 }
 
 const spotReducer = (state = {}, action) => {
@@ -160,49 +157,5 @@ const spotReducer = (state = {}, action) => {
     }
 }
 
-
-
-
-
-
-// const addImgToSpot = (spotId, url, userId) => {
-    //     return {
-        //         type: ADDIMGTOSPOTID,
-        //         spotId,
-        //         url,
-        //         userId
-        //     }
-        // }
-
-        // const getReviews = (spotId) => {
-            //     return {
-                //         type: GETREVIEWSBYSPOTID,
-//         spotId
-//     }
-// }
-
-// const createReview = (spotId, payload) => {
-//     return {
-//         type: CREATEDREVIEWSPOTID,
-//         payload
-//     }
-// }
-
-// const getBookings = (userId, spotId, payload) => {
-//     return {
-//         type: GETALLBOOKINGSSPOTID,
-//         userId,
-//         spotId,
-//         payload
-//     }
-// }
-
-// const createBooking = (spotId, payload) => {
-//     return {
-//         type: CREATEABOOKINGSPOTID,
-//         spotId,
-//         payload
-//     }
-// }
 
 export default spotReducer

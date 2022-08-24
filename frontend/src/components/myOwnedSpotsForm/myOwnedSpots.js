@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {getSpotsById } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
-import { EditSpot } from "../../store/spots";
 import { useHistory, Link } from "react-router-dom";
 import { deleteYourSpot } from "../../store/spots";
 
@@ -18,8 +17,6 @@ const MyOwnedSpots = () => {
         dispatch(getSpotsById())
     }, [dispatch])
 
-
-    console.log(spots, 'SPOTS', user, 'USER')
     const handleDelete = (spotId) => {
         dispatch(deleteYourSpot(spotId))
         history.push('/')
