@@ -124,7 +124,41 @@ export const deleteYourSpot = (spotId) => async (dispatch) => {
     // return response
 }
 
-
+const spotReducer = (state = {}, action) => {
+    let newState;
+    switch (action.type){
+        case GETALLSPOTS:
+            newState = {  }
+            action.payload.forEach((spot) => {
+                newState[spot.id] = spot
+            })
+            return newState;
+            case GETDETAILSFROMSPOT:
+                newState = { ...state };
+                newState[action.spot.id] = action.spot;
+                return newState;
+            case CREATEDSPOT:
+                newState = { ...state };
+                newState[action.spot.id] = action.spot;
+                return newState;
+            case OWNEDSPOTS:
+                newState = {  }
+                Object.values(action.payload.Spots).forEach((spot) => {
+                    newState[spot.id] = spot
+                })
+                return newState;
+            case EDITASPOT:
+                newState = { ...state };
+                newState[action.spot.id] = action.spot;
+                return newState;
+            case DELETEASPOT:
+                newState = {...state}
+                delete newState[action.payload]
+                return newState
+        default:
+            return state
+    }
+}
 
 
 
@@ -170,3 +204,5 @@ export const deleteYourSpot = (spotId) => async (dispatch) => {
 //         payload
 //     }
 // }
+
+export default spotReducer

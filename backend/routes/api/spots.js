@@ -186,13 +186,13 @@ router.get('/', ValidatePagination, async (req, res, next) => {
       } else {
         spot.dataValues.avgRating = 'spot not yet rated' // if there is no rating
       }
-      let spotImg = await Image.findOne({
-        where: {
-          previewImage: true,
-          spotId: spot.id
-        },
-      })
-      spot.dataValues.previewImage = spotImg.dataValues.url
+      // let spotImg = await Image.findOne({
+      //   where: {
+      //     previewImage: true,
+      //     spotId: spot.id
+      //   },
+      // })
+      // spot.dataValues.previewImage = spotImg.dataValues.url
     }
     res.status(200)
     res.json({Spots: ownedSpots})

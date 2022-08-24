@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { restoreCSRF, csrfFetch } from '../store/csrf';
 import * as sessionActions from './session';
 import sessionReducer from './session.js';
-import spotReducer from "../reducers/spotReducer";
+import spotReducer from "./spots";
 
 
 const rootReducer = combineReducers({
