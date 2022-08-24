@@ -21,8 +21,11 @@ const spotReducer = (state = {}, action) => {
                 newState = {...state, ...action.payload}
                 return newState
             case spotReducerString.OWNEDSPOTS:
-            newState = {...action.payload.Spots}
-                return newState
+                newState = {  }
+                Object.values(action.payload.Spots).forEach((spot) => {
+                    newState[spot.id] = spot
+                })
+                return newState;
             case spotReducerString.EDITASPOT:
                 newState = { ...state };
                 newState[action.spot.id] = action.spot;

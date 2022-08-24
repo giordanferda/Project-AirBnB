@@ -101,8 +101,11 @@ export const getSpotsById = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots/current', {
         method: 'GET'
     })
-    const data = await response.json();
-    dispatch(ownedSpots(data))
+    if (response.ok){
+        const data = await response.json();
+        dispatch(ownedSpots(data))
+        return data
+    }
     return response;
 }
 
@@ -116,9 +119,9 @@ export const deleteYourSpot = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     })
-    const data = await response.json()
+    // const data = await response.json()
     dispatch(deleteSpot(spotId))
-    return response
+    // return response
 }
 
 

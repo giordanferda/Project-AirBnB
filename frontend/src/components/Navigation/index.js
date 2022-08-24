@@ -27,12 +27,8 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
-        <NavLink exact to="/">
-        <i class="fa-solid fa-spade"></i>
-        </NavLink>
+        <NavLink exact to="/">Home</NavLink>
         {isLoaded && sessionLinks}
-        <div>
-        </div>
       </li>
     </ul>
   );
