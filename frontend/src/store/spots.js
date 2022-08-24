@@ -42,23 +42,27 @@ const createdSpot = (payload) => {
 export const createSpot = (payload) => async (dispatch) => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(payload),
-        headers: {"Content-Type": "application/json"}
     })
     const data = await response.json()
     dispatch(createdSpot(data))
     return response
 }
 
+
+//edit
 const editSpot = (spotId) => {
     return {
         type: EDITASPOT,
         spotId
     }
 }
-export const EditSpot = (spotId) => async (dispatch) => {
+export const EditSpot = (payload, spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
-        method: 'PUT'
+        method: 'PUT',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
     })
     if (response.ok){
         const data = await response.json();
@@ -67,7 +71,7 @@ export const EditSpot = (spotId) => async (dispatch) => {
     }
 }
 
-
+//Get one spot
 const spotDetailAction = (payload) => {
     return {
         type: GETDETAILSFROMSPOT,
@@ -85,7 +89,7 @@ export const getSpotDetailById = (spotId) => async (dispatch) => {
     }
 }
 
-
+//myListings route
 const ownedSpots = (payload) => {
     return {
         type: OWNEDSPOTS,
@@ -102,6 +106,20 @@ export const getSpotsById = () => async (dispatch) => {
     return response;
 }
 
+const deleteSpot = (payload) => {
+    return {
+        type: DELETEASPOT,
+        payload
+    }
+}
+export const deleteYourSpot = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+    const data = await response.json()
+    dispatch(deleteSpot(spotId))
+    return response
+}
 
 
 

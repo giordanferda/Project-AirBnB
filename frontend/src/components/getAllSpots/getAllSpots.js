@@ -16,7 +16,7 @@ function Spots(){
   return (
     <div className="page-container">
       <div className="spots-container">
-        <div className="spots">
+        <div className="gridSpot">
           {spots.map((spot, index) => (
            <div key={`${index}_${spot.id}`}>
            <NavLink className='allSpots' to={`/spots/${spot.id}`}>

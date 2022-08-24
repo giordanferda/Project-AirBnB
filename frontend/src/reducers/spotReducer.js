@@ -20,6 +20,13 @@ const spotReducer = (state = {}, action) => {
             case spotReducerString.OWNEDSPOTS:
             newState = {...action.payload.Spots}
                 return newState
+            case spotReducerString.EDITASPOT:
+                newState = {...state, ...action.payload.Spots}
+                return newState
+            case spotReducerString.DELETEASPOT:
+                newState = {...state}
+                delete newState[action.payload]
+                return newState
         default:
             return state
     }

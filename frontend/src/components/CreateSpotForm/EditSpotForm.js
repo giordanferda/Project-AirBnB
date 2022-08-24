@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { createSpot, getSpotDetailById, getSpotsById } from '../../store/spots'
+import { getSpotDetailById, getSpotsById, EditSpot} from '../../store/spots'
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
+
 
 
 const LAT = 37.7645358
@@ -35,15 +36,15 @@ function EditSpotForm(){
             lat:LAT,
             lng:LNG
         }
-        dispatch(createSpot(payload))
+        dispatch(EditSpot(payload, spotId))
         history.push('/')
     }
     const spot = useSelector((state) => state.spots[0])
-    console.log(spot)
+    // console.log(spot)
 
     useEffect(() => {
         dispatch(getSpotDetailById(spotId))
-        setAddress(spot.address)
+        // setAddress(spot.address)
     }, [])
     return(
         <form onSubmit={handleSubmit}>
