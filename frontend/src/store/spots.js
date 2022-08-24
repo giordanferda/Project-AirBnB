@@ -28,6 +28,7 @@ export const allSpots = () => async (dispatch) => {
     if (response.ok){
         const data = await response.json();
         dispatch(getAllSpots(data.Spots))
+        return response
     }
 }
 
@@ -51,10 +52,10 @@ export const createSpot = (payload) => async (dispatch) => {
 
 
 //edit
-const editSpot = (spotId) => {
+const editSpot = (spot) => {
     return {
         type: EDITASPOT,
-        spotId
+        spot
     }
 }
 export const EditSpot = (payload, spotId) => async (dispatch) => {
