@@ -5,8 +5,11 @@ const spotReducer = (state = {}, action) => {
     let newState;
     switch (action.type){
         case spotReducerString.GETALLSPOTS:
-            newState = {...state, ...action.payload.Spots};
-            return newState
+            newState = {  }
+            action.payload.forEach((spot) => {
+                newState[spot.id] = spot
+            })
+            return newState;
             // case spotReducerString.OWNEDSPOTS:
             // newState = {...state, ...action.payload.Spots};
             // return newState
@@ -21,8 +24,9 @@ const spotReducer = (state = {}, action) => {
             newState = {...action.payload.Spots}
                 return newState
             case spotReducerString.EDITASPOT:
-                newState = {...state, ...action.payload.Spots}
-                return newState
+                newState = { ...state };
+                newState[action.spot.id] = action.spot;
+                return newState;
             case spotReducerString.DELETEASPOT:
                 newState = {...state}
                 delete newState[action.payload]

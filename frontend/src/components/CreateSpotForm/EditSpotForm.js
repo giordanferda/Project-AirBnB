@@ -49,14 +49,14 @@ function EditSpotForm(){
     return(
         <form onSubmit={handleSubmit}>
             <label>
-                addy
+                Address
             <input
             value={address}
             onChange={(e) => setAddress(e.target.value)}>
             </input>
             </label>
             <label>
-                city
+                City
                 </label>
             <input
             value={city}
@@ -67,17 +67,17 @@ function EditSpotForm(){
             value={state}
             onChange={(e) => setState(e.target.value)}>
             </input>
-            <label>country</label>
+            <label>Country</label>
             <input
             value={country}
             onChange={(e) => setCountry(e.target.value)}>
             </input>
-            <label>name</label>
+            <label>Name</label>
             <input
             value={name}
             onChange={(e) => setName(e.target.value)}>
             </input>
-            <label>desc</label>
+            <label>Desc</label>
             <input
             value={description}
             onChange={(e) => setDescription(e.target.value)}>
