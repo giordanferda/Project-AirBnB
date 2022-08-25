@@ -21,12 +21,14 @@ ul {
 .nav-button {
     padding: 15px 24px;
     width: 40px;
+    cursor: pointer;
 
 }
 
 ul li {
     list-style: none;
     cursor: pointer;
+
 }
 
 a {

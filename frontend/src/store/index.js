@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { restoreCSRF, csrfFetch } from '../store/csrf';
+import reviewReducer from "./reviews";
 import * as sessionActions from './session';
 import sessionReducer from './session.js';
 import spotReducer from "./spots";
@@ -9,7 +10,8 @@ import spotReducer from "./spots";
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
-  spots: spotReducer
+  spots: spotReducer,
+  reviews: reviewReducer
 });
 
 

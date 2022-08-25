@@ -427,6 +427,7 @@ router.post('/:spotId/reviews', requireAuth, validateReviews, async (req, res) =
    spotId:spotId, userId: req.user.id
   }
 })
+console.log(reviewed)
 if (!reviewed){
   const createReview = await Review.create({
     spotId: parseInt(spotId),

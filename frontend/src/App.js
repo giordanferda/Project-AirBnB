@@ -5,7 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Spots from './components/getAllSpots/getAllSpots'
-import GetSpotbyId from './components/getSpotId/detailspotId'
+import GetSpotbyId from './components/getSpotId/SpotShowPage'
 import CreateSpot from "./components/CreateSpotForm/CreateSpotForm";
 import MyOwnedSpots from "./components/myOwnedSpotsForm/myOwnedSpots";
 import EditSpotForm from "./components/CreateSpotForm/EditSpotForm";

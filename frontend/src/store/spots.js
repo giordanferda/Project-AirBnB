@@ -7,6 +7,8 @@ export const EDITASPOT = 'spots/editspot'
 export const DELETEASPOT = 'spots/deletespot'
 export const GETDETAILSFROMSPOT = 'spots/spotId'
 export const OWNEDSPOTS = 'spots/current'
+export const CREATEREVIEW = 'spots/createReview'
+
 
 //Get all spots
 const getAllSpots = (payload) => {
@@ -27,7 +29,7 @@ export const allSpots = () => async (dispatch) => {
     }
 }
 
-
+//Create Spot
 const createdSpot = (payload) => {
     return {
         type: CREATEDSPOT,
@@ -118,8 +120,8 @@ export const deleteYourSpot = (spotId) => async (dispatch) => {
     })
     // const data = await response.json()
     dispatch(deleteSpot(spotId))
-
 }
+
 
 const spotReducer = (state = {}, action) => {
     let newState;
@@ -132,12 +134,11 @@ const spotReducer = (state = {}, action) => {
             return newState;
             case GETDETAILSFROMSPOT:
                 newState = { ...state };
-                newState[action.spot.id] = action.spot;
+                newState[action.payload.id] = action.payload;
                 return newState;
                 case CREATEDSPOT:
                     newState = { ...state };
                     newState[action.payload.id] = action.payload;
-
                     return newState;
             case OWNEDSPOTS:
                 newState = {  }
@@ -159,4 +160,4 @@ const spotReducer = (state = {}, action) => {
 }
 
 
-export default spotReducer
+export default spotReducer;
