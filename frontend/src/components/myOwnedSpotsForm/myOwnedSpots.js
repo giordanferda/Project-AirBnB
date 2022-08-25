@@ -27,9 +27,10 @@ const MyOwnedSpots = () => {
     return (
         <div>{userSpots.map((spot, i) => {
             return <div key={i}>{spot.address}
-            <Link to={`/editSpot/${spot.id}`}>Edit Your Spot</Link>
+            <Link to={{pathname: `/editSpot/${spot.id}`, state: {spot}}}>Edit Your Spot</Link>
             <div>{spot.city}, {spot.state}</div>
             <div>{`$${spot.price} /night`}</div>
+            <img src={spot.previewImage}></img>
             <button onClick={() => {handleDelete(spot.id)}}>Delete</button>
             </div>
         })}</div>

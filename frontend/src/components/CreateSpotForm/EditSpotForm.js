@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { getSpotDetailById, EditSpot} from '../../store/spots'
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 
 
-const LAT = 37.7645358
-const LNG = -122.4730327
+// const LAT = 37.7645358
+// const LNG = -122.4730327
 
 function EditSpotForm(){
 
 
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [country, setCountry] = useState('')
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState(0)
+    const location = useLocation()
+
+    const [address, setAddress] = useState(location.state.spot.address)
+    const [city, setCity] = useState(location.state.spot.city)
+    const [state, setState] = useState(location.state.spot.state)
+    const [country, setCountry] = useState(location.state.spot.country)
+    const [name, setName] = useState(location.state.spot.name)
+    const [description, setDescription] = useState(location.state.spot.description)
+    const [price, setPrice] = useState(location.state.spot.price)
 
     const {spotId} = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         const payload = {
             address,
             city,
@@ -32,18 +35,17 @@ function EditSpotForm(){
             country,
             name,
             description,
-            price,
-            lat:LAT,
-            lng:LNG
+            price
         }
         dispatch(EditSpot(payload, spotId))
         history.push('/')
     }
     // const spot = useSelector((state) => state.spots[0])
 
-    useEffect(() => {
-        dispatch(getSpotDetailById(spotId))
-    }, [dispatch, spotId])
+    // useEffect(() => {
+    //     dispatch(getSpotDetailById(spotId))
+    // }, [dispatch, spotId])
+
     return(
         <form onSubmit={handleSubmit}>
             <label>
@@ -86,7 +88,7 @@ function EditSpotForm(){
             value={price}
             onChange={(e) => setPrice(e.target.value)}>
             </input>
-            <button disabled={address.length === 0 || city.length === 0 || state.length === 0 || country.length === 0 || name.length === 0 || description.length === 0 || price < 1 }>Submit</button>
+            <button type='submit'>Submit</button>
         </form>
     )
 }

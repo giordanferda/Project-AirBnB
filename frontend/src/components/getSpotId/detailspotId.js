@@ -11,7 +11,7 @@ function GetSpotbyId(){
     // if (!spot){
     //     return null
     // }
-
+console.log(spot)
     return (
 
             <div>

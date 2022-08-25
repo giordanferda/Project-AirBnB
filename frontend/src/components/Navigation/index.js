@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
@@ -9,8 +9,9 @@ import ModalSignUp from '../SignupModal';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-
+  const history = useHistory()
   let sessionLinks;
+
   if (sessionUser) {
     sessionLinks = (
       <ProfileButton user={sessionUser} />
@@ -25,12 +26,16 @@ function Navigation({ isLoaded }){
   }
 
   return (
+    <div className='nav-wrapper'>
+      <img className='logo' src='https://1000logos.net/wp-content/uploads/2017/08/Airbnb-Logo-500x181.png' onClick={() => history.push('/')}></img>
     <ul>
+      <li onClick={() => history.push('/createSpotForm')}>Host Your Place</li>
+
       <li>
-        <NavLink exact to="/">Home</NavLink>
         {isLoaded && sessionLinks}
       </li>
     </ul>
+    </div>
   );
 }
 

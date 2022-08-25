@@ -6,7 +6,8 @@ const { check } = require('express-validator');
 const {User, Booking, Spot, Image, Review, sequelize} = require('../../db/models');
 const { Op } = require('sequelize')
 const Sequelize = require('sequelize')
-
+// const img = require('../../assets/noimg.jpg');
+// import img from '../../assets/noimg.jpg'
 
 const ValidatePagination = [
   check('page')
@@ -186,12 +187,14 @@ router.get('/', ValidatePagination, async (req, res, next) => {
       } else {
         spot.dataValues.avgRating = 'spot not yet rated' // if there is no rating
       }
-      // let spotImg = await Image.findOne({
-      //   where: {
-      //     previewImage: true,
-      //     spotId: spot.id
-      //   },
-      // })
+      let spotImg = await Image.findOne({
+        where: {
+          previewImage: true,
+          spotId: spot.id
+        },
+      })
+      // console.log(spotImg)
+      spot.dataValues.previewImage = !!spotImg ? spotImg.dataValues.url : 'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg'
       // spot.dataValues.previewImage = spotImg.dataValues.url
     }
     res.status(200)
@@ -277,6 +280,12 @@ router.post('/', requireAuth, restoreUser, async (req, res) => {
     description,
     price
   });
+  await Image.create({
+    spotId: createdSpot.id,
+    userId: ownersId,
+    url: 'https://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png',
+  })
+
 
   res.status(201)
   res.json(createdSpot)

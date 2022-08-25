@@ -134,10 +134,11 @@ const spotReducer = (state = {}, action) => {
                 newState = { ...state };
                 newState[action.spot.id] = action.spot;
                 return newState;
-            case CREATEDSPOT:
-                newState = { ...state };
-                newState[action.spot.id] = action.spot;
-                return newState;
+                case CREATEDSPOT:
+                    newState = { ...state };
+                    newState[action.payload.id] = action.payload;
+
+                    return newState;
             case OWNEDSPOTS:
                 newState = {  }
                 Object.values(action.payload.Spots).forEach((spot) => {

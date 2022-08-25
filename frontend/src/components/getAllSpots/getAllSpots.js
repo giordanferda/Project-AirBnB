@@ -3,7 +3,7 @@ import { allSpots } from '../../store/spots';
 import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import './getAllSpots.css'
-
+import img from '../../assets/noimg.jpg'
 function Spots(){
   const dispatch = useDispatch()
 
@@ -11,7 +11,7 @@ function Spots(){
     dispatch(allSpots())
   }, [dispatch])
     const spots = useSelector((state) => Object.values(state.spots));
-    // console.log(spots, 'THIS IS OUR SPOT')
+    // console.log((spots), 'THIS IS OUR SPOT')
 
   return (
     <div className="page-container">
@@ -22,7 +22,7 @@ function Spots(){
            <NavLink className='allSpots' to={`/spots/${spot.id}`}>
             <div>{spot.city},{spot.state}</div>
             <div>{`$${spot.price} night`}</div>
-           <img className='Image' src={spot.previewImage} alt={spot.name}></img>
+           <img className='Image' src={spot.previewImage === undefined ? img : spot.previewImage } alt={spot.name}></img>
            <div className='spotName'>{spot.name}</div>
            </NavLink>
            </div>
