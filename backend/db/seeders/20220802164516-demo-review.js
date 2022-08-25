@@ -15,7 +15,7 @@ module.exports = {
      stars: 5
     },
     {
-      spotId: 2,
+      spotId: 1,
       userId: 2,
       review: 'My stay at the ferdaBNB was amazing, I loved the experience here.',
       stars: 4

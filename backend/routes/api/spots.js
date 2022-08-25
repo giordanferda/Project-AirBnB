@@ -383,7 +383,7 @@ router.get('/:spotId/reviews', async (req, res) => {
       "statusCode": 404
     })
   }
-  const reviews = await Review.findOne({
+  const reviews = await Review.findAll({
     where: {
       spotId: spotId
     },
@@ -427,7 +427,6 @@ router.post('/:spotId/reviews', requireAuth, validateReviews, async (req, res) =
    spotId:spotId, userId: req.user.id
   }
 })
-console.log(reviewed)
 if (!reviewed){
   const createReview = await Review.create({
     spotId: parseInt(spotId),
