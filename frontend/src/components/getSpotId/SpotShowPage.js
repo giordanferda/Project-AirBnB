@@ -8,12 +8,12 @@ import { allReviews, deleteYourReview } from "../../store/reviews";
 function GetSpotbyId() {
   const { spotId } = useParams();
   const spots = useSelector((state) => Object.values(state.spots));
-  const spot = spots.find((spot) => spot.id == spotId);
+  const spot = spots.find((spot) => spot.id === parseInt(spotId));
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
   const reviews = useSelector((state) => Object.values(state.reviews));
-  console.log(reviews);
+  // console.log(reviews);
   useEffect(() => {
     dispatch(getSpotDetailById(spotId));
     dispatch(allReviews(spotId));
@@ -51,7 +51,11 @@ function GetSpotbyId() {
     <div className="spot-detail-review">
       {spot &&
         spot?.Images?.map((image, index) => (
-          <img src={image.url} key={"imageId: " + JSON.stringify(index)} />
+          <img
+            src={image.url}
+            key={"imageId: " + JSON.stringify(index)}
+            alt="NOT FOUND"
+          />
         ))}
       {user && alreadyReviewed(filterReviews) === false && (
         <CreateReview spotId={spot?.id} />

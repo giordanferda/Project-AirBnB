@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
@@ -29,9 +29,16 @@ function Navigation({ isLoaded }) {
         className="logo"
         src="https://1000logos.net/wp-content/uploads/2017/08/Airbnb-Logo-500x181.png"
         onClick={() => history.push("/")}
+        alt="NOT FOUND"
       ></img>
       <ul>
-        <li onClick={() => history.push("/createSpotForm")}>Host Your Place</li>
+        <li
+          onClick={() =>
+            history.push(sessionUser ? "/createSpotForm" : "/signup")
+          }
+        >
+          Host Your Place
+        </li>
 
         <li>{isLoaded && sessionLinks}</li>
       </ul>
