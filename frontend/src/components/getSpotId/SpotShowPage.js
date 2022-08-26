@@ -57,9 +57,9 @@ function GetSpotbyId() {
             alt="NOT FOUND"
           />
         ))}
-      {user && alreadyReviewed(filterReviews) === false && (
-        <CreateReview spotId={spot?.id} />
-      )}
+      {user &&
+        alreadyReviewed(filterReviews) === false &&
+        user.id !== spot.ownerId && <CreateReview spotId={spot?.id} />}
       REVIEWS:{" "}
       {filterReviews.map((review, i) => (
         <div key={review.id} review={review}>

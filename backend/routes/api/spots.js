@@ -129,28 +129,14 @@ router.get("/", ValidatePagination, async (req, res, next) => {
     ...pagination,
     // group: ['Spot.id']
   });
+  console.log({ allSpots });
 
   for (let spot of allSpots) {
-    // console.log(spot.toJSON(), "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", spot.Images[0].previewImage)
     const reviewInfo = await spot.getReviews({
       attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
     });
     let avgRating = reviewInfo[0].dataValues.avgRating;
-
-    // allSpots[i] = allSpots[i].toJSON()
-
-    // let count = await Review.count({
-    //   where: {
-    //     spotId: allSpots[i].id
-    //   }
-    // })
-    // let sum = await Review.sum({
-    //   where: {
-    //     spotId: allSpots[i].id
-    //   }
-    // })
-    // allSpots[i].avgRating = sum / count
-    // console.log(allSpots[i])
+    console.log({ [spot.id]: reviewInfo });
     spot.dataValues.avgRating = parseFloat(Number(avgRating)).toFixed(1);
     let spotImg = await Image.findOne({
       where: {
@@ -158,7 +144,8 @@ router.get("/", ValidatePagination, async (req, res, next) => {
         spotId: spot.id,
       },
     });
-    // console.log(spot.dataValues.previewImage, "       12312     ", spotImg.dataValues.url)
+
+    console.log({ spot, spotImg });
     if (spotImg) {
       spot.dataValues.previewImage = spotImg.dataValues.url;
     }
@@ -250,12 +237,12 @@ router.get("/:spotId", async (req, res) => {
 
   const jsonSpot = spots.toJSON();
 
-  if (rating.avgStarRating) {
-    jsonSpot.avgStarRating = isNaN(
-      parseFloat(parseFloat(rating.avgStarRating).toFixed(1))
-    ); //star rating
+  if (isNaN(parseFloat(parseFloat(rating.avgStarRating).toFixed(1)))) {
+    jsonSpot.avgStarRating = null;
   } else {
-    jsonSpot.avgStarRating = "spot not yet rated"; // if there is no rating
+    jsonSpot.avgStarRating = parseFloat(
+      parseFloat(rating.avgStarRating).toFixed(1)
+    );
   }
   jsonSpot.numReviews = numReviews;
   jsonSpot.Images = image;
