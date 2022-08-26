@@ -82,7 +82,8 @@ function CreateSpot() {
           country.length === 0 ||
           name.length === 0 ||
           description.length === 0 ||
-          price < 1
+          price < 1 ||
+          url.length < 1
         }
       >
         Submit

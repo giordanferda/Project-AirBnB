@@ -164,9 +164,9 @@ const spotReducer = (state = {}, action) => {
       newState[action.spot.id] = action.spot;
       return newState;
     case DELETEASPOT:
-      //   newState = { ...state };
-      //   delete newState[action.payload];
-      return {};
+      newState = { ...state };
+      delete newState[action.payload];
+      return newState;
     default:
       return state;
   }

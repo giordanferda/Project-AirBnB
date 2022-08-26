@@ -266,8 +266,18 @@ router.get("/:spotId", async (req, res) => {
 // Create a spot
 router.post("/", requireAuth, restoreUser, async (req, res) => {
   const ownersId = req.user.id;
-  const { address, city, state, country, lat, lng, name, description, price } =
-    req.body;
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+    url,
+  } = req.body;
   const createdSpot = await Spot.create({
     ownerId: ownersId,
     address,
@@ -280,11 +290,13 @@ router.post("/", requireAuth, restoreUser, async (req, res) => {
     description,
     price,
   });
-  await Image.create({
-    spotId: createdSpot.id,
-    userId: ownersId,
-    url: "https://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png",
-  });
+  //  Image.create({
+  //   spotId: createdSpot.id,
+  //   userId: ownersId,
+  //   url:
+  //     url ||
+  //     "https://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png",
+  // });
 
   res.status(201);
   res.json(createdSpot);
