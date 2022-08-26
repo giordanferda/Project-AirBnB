@@ -211,6 +211,7 @@ router.get("/:spotId", async (req, res) => {
   }
   let isOwner = await User.findByPk(spots.ownerId, {
     attributes: ["id", "firstName", "lastName"],
+    group: ['User.id']
   });
   let image = await Image.findAll({
     where: {
