@@ -402,7 +402,7 @@ router.get("/:spotId/reviews", async (req, res) => {
       { model: User, attributes: ["id", "firstName", "lastName"] },
       { model: Image, attributes: ["id", ["reviewId", "imageableId"], "url"] },
     ],
-    group: ["Review.id", "User.id"],
+    group: ["Review.id", "User.id", "Images.id"],
   });
   res.status(200);
   res.json({ Reviews: reviews });
