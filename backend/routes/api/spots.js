@@ -172,7 +172,7 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
       where: {
         spotId: spot.id,
       },
-      group: ["User.id"],
+
       raw: true,
     });
     if (reviewInfo[0].avgRating) {
@@ -402,7 +402,7 @@ router.get("/:spotId/reviews", async (req, res) => {
       { model: User, attributes: ["id", "firstName", "lastName"] },
       { model: Image, attributes: ["id", ["reviewId", "imageableId"], "url"] },
     ],
-    group: ["Review.id"],
+    group: ["Review.id", "User.id"],
   });
   res.status(200);
   res.json({ Reviews: reviews });
