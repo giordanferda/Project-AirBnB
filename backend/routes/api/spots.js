@@ -251,7 +251,9 @@ router.get("/:spotId", async (req, res) => {
   const jsonSpot = spots.toJSON();
 
   if (rating.avgStarRating) {
-    jsonSpot.avgStarRating = parseFloat(rating.avgStarRating.toFixed(1)); //star rating
+    jsonSpot.avgStarRating = isNaN(
+      parseFloat(parseFloat(rating.avgStarRating).toFixed(1))
+    ); //star rating
   } else {
     jsonSpot.avgStarRating = "spot not yet rated"; // if there is no rating
   }
