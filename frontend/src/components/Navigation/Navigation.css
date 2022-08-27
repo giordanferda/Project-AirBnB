@@ -3,7 +3,7 @@
   height: 7.5%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .logo {
@@ -20,8 +20,9 @@ ul {
 
 .nav-button {
   padding: 15px 24px;
-  width: 40px;
+  /* width: 40px; */
   cursor: pointer;
+  border-radius: 15px;
 }
 
 ul li {
@@ -31,4 +32,63 @@ ul li {
 
 a {
   text-decoration: none;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0px;
+  top: 55px;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  outline: 0.5px solid #717171;
+  border-radius: 5px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0px;
+  width: 200px;
+  box-shadow: 0 4px 15px 0 solid 717171;
+}
+
+.profile-dropdown li {
+  border-bottom: 0.5px solid #717171;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.profile-dropdown button {
+  border-radius: 20px;
+  padding: 10px 24px;
+  cursor: pointer;
+  background-color: #ff385c;
+  border: none;
+  outline: 1px solid #717171;
+}
+
+.profile-dropdown li:last-child {
+  border: none;
+}
+
+.hamburger {
+  position: relative;
+  justify-content: space-evenly;
+}
+
+.host-your-place {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #806767;
+}
+
+.button-login-signup {
+  padding: 15px 24px;
+  /* width: 40px; */
+  cursor: pointer;
+  border-radius: 15px;
+  height: 7.5%;
+  display: flex;
+  align-items: center;
 }

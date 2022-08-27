@@ -14,10 +14,15 @@ function CreateSpot() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [url, setUrl] = useState("");
+  const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleSubmit = () => {
+  function isImg(url) {
+    return /\.(jpg|png|jpeg|svg|gif)$/.test(url);
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const payload = {
       address,
       city,
@@ -31,13 +36,26 @@ function CreateSpot() {
       url,
       previewImage: true,
     };
-    dispatch(createSpot(payload)).then(() => dispatch(allSpots()));
-    // dispatch(createSpot(payload));
-    history.push("/");
+    if (!isImg(url)) {
+      setErrors({
+        error: "Must be a valid image, expample: .jpg, .png, .jpeg, .svg, .gif",
+      });
+    }
+
+    if (isImg(url)) {
+      dispatch(createSpot(payload)).then(() => dispatch(allSpots()));
+      // dispatch(createSpot(payload));
+      history.push("/");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <ul>
+        {Object.values(errors).map((error, i) => (
+          <li key={i}>{error}</li>
+        ))}
+      </ul>
       <label>
         Address
         <input
@@ -60,7 +78,7 @@ function CreateSpot() {
       ></input>
       <label>Country</label>
       <input
-      placeholder="Country"
+        placeholder="Country"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
       ></input>

@@ -25,10 +25,11 @@ const CurrentUserReviews = () => {
 
   return (
     <div>
+      <h2>My Reviews</h2>
       {reviews.map((review, i) => (
         <div key={`${review.id} ${i + 1}`}>
           <div>{`${user.firstName} ${user.lastName}`}</div>
-          <div>{review.review}</div>
+          <div>{`Review ${i + 1}: ${review.review}`}</div>
           <button onClick={() => handleDeleteButton(review.id)}>Delete</button>
         </div>
       ))}

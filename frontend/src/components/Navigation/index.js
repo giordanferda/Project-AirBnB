@@ -33,6 +33,7 @@ function Navigation({ isLoaded }) {
       ></img>
       <ul>
         <li
+          className="host-your-place"
           onClick={() =>
             history.push(sessionUser ? "/createSpotForm" : "/signup")
           }
@@ -40,7 +41,7 @@ function Navigation({ isLoaded }) {
           Host Your Place
         </li>
 
-        <li>{isLoaded && sessionLinks}</li>
+        <li className="button-login-signup">{isLoaded && sessionLinks}</li>
       </ul>
     </div>
   );

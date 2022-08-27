@@ -1,19 +1,71 @@
-
-
-.Login-Form-Modal-Header{
-    display: flex;
-
+.Login-Form-Modal-Header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 0px 24px;
+  min-height: 64px;
+  border-bottom: 0.5px solid rgb(110, 107, 107);
+  justify-content: space-between;
+  color: solid black;
+  font-size: 20px;
 }
-
 
 .Login-Modal {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  line-height: 26px;
+  width: 375px;
 }
 
-
 .Modal-Title {
-    text-align: center;
-    width: 100%;
+  text-align: center;
+  width: 100%;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.login-x-out {
+  cursor: pointer;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  cursor: pointer;
+  color: rgb(228, 234, 240);
+  padding: 12px 20px;
+  font-size: 16px;
+  margin-top: 20px;
+  border: none;
+  background-color: #ff385c;
+}
+
+.Username-Email {
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid rgb(186, 211, 219);
+  border-radius: 5px;
+  box-shadow: lightblue;
+}
+
+.password {
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid rgb(186, 211, 219);
+  border-radius: 5px;
+  box-shadow: lightblue;
+}
+
+.WelcomeMessage {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding: 20px;
 }
