@@ -49,11 +49,12 @@ const getUsersReview = (payload) => {
 };
 
 export const getUserReview = () => async (dispatch) => {
-  const response = await csrfFetch(`/api/review/current`, {
+  const response = await csrfFetch(`/api/reviews/current`, {
     headers: { "Content-Type": "application/json" },
   });
   const data = await response.json();
-  dispatch(getUsersReview(data));
+  console.log(data, "this is data");
+  dispatch(getUsersReview(data.Reviews));
   return response;
 };
 
@@ -94,6 +95,9 @@ const reviewReducer = (state = {}, action) => {
       action.payload.forEach((review) => {
         newState[review.id] = review;
       });
+      console.log(newState, "tis is new state");
+      console.log(action, "thos is action");
+
       return newState;
     default:
       return state;

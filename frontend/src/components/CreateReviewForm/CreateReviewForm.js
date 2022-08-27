@@ -32,6 +32,7 @@ function CreateReview({ spotId }) {
           }
           setReview(e.target.value);
         }}
+        placeholder="Enter Your Review"
       ></input>
       <label>Star Rating</label>
       <input
@@ -45,7 +46,9 @@ function CreateReview({ spotId }) {
           setStars(e.target.value);
         }}
       ></input>
-      <button type="submit">Submit Review</button>
+      <button disabled={review.length === 0} type="submit">
+        Submit Review
+      </button>
     </form>
   );
 }
