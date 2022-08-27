@@ -12,8 +12,9 @@ function GetSpotbyId() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
-  const reviews = useSelector((state) => Object.values(state.reviews));
+  const reviewState = useSelector((state) => state.reviews);
   // console.log(reviews);
+  const reviews = Object.values(reviewState);
   useEffect(() => {
     dispatch(getSpotDetailById(spotId));
     dispatch(allReviews(spotId));

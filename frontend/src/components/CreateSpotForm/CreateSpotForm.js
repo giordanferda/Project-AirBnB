@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { createSpot } from "../../store/spots";
+import { createSpot, allSpots } from "../../store/spots";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 const LAT = 37.7645358;
 const LNG = -122.4730327;
 
@@ -32,7 +31,8 @@ function CreateSpot() {
       url,
       previewImage: true,
     };
-    dispatch(createSpot(payload));
+    dispatch(createSpot(payload)).then(() => dispatch(allSpots()));
+    // dispatch(createSpot(payload));
     history.push("/");
   };
 
@@ -41,29 +41,44 @@ function CreateSpot() {
       <label>
         Address
         <input
+          placeholder="City"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         ></input>
       </label>
       <label>City</label>
-      <input value={city} onChange={(e) => setCity(e.target.value)}></input>
+      <input
+        placeholder="City"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      ></input>
       <label>State</label>
-      <input value={state} onChange={(e) => setState(e.target.value)}></input>
+      <input
+        placeholder="State"
+        value={state}
+        onChange={(e) => setState(e.target.value)}
+      ></input>
       <label>Country</label>
       <input
         value={country}
         onChange={(e) => setCountry(e.target.value)}
       ></input>
       <label>Name</label>
-      <input value={name} onChange={(e) => setName(e.target.value)}></input>
-      <label>Desc</label>
       <input
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      ></input>
+      <label>Description</label>
+      <input
+        placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       ></input>
       <label>price</label>
       <input
         type="number"
+        placeholder="price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
       ></input>

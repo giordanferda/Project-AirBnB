@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 export const CREATEAREVIEW = "reviews/createReview";
 export const GETALLREVIEWS = "reviews/getAllReviews";
 export const DELETEREVIEW = "reviews/deleteReview";
-
+export const GETUSERREVIEW = "reviews/current";
 //Create a review
 const createReview = (payload) => {
   return {
@@ -40,6 +40,23 @@ export const allReviews = (spotId) => async (dispatch) => {
   return response;
 };
 
+//Get current user review
+const getUsersReview = (payload) => {
+  return {
+    type: GETUSERREVIEW,
+    payload,
+  };
+};
+
+export const getUserReview = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/review/current`, {
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  dispatch(getUsersReview(data));
+  return response;
+};
+
 //Delete a review
 
 const deleteReview = (payload) => {
@@ -69,9 +86,15 @@ const reviewReducer = (state = {}, action) => {
       });
       return newState;
     case DELETEREVIEW:
-      // newState = { ...state };
-      // delete newState[action.payload];
-      return {};
+      newState = { ...state };
+      delete newState[action.payload];
+      return newState;
+    case GETUSERREVIEW:
+      newState = {};
+      action.payload.forEach((review) => {
+        newState[review.id] = review;
+      });
+      return newState;
     default:
       return state;
   }

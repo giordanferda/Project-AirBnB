@@ -148,6 +148,8 @@ const spotReducer = (state = {}, action) => {
     case GETDETAILSFROMSPOT:
       newState = { ...state };
       newState[action.payload.id] = action.payload;
+      // ...newState[action.payload.id]
+
       return newState;
     case CREATEDSPOT:
       newState = { ...state };

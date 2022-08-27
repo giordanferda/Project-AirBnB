@@ -14,34 +14,36 @@ function Spots() {
   // console.log(spots, "THIS IS OUR SPOT");
 
   return (
-    <div className="page-container">
-      <div className="spots-container">
-        <div className="gridSpot">
-          {spots.map((spot, index) => (
-            <div key={`${index}_${spot.id}`}>
-              <NavLink className="allSpots" to={`/spots/${spot.id}`}>
-                <div>
-                  {spot.city},{spot.state}
-                </div>
-                <span>
-                  <i className="fa-solid fa-star"></i>
-                  {`${spot.avgRating}`}
-                </span>
-                <div>{`$${spot.price} night`}</div>
-                <img
-                  className="Image"
-                  src={
-                    spot.previewImage === undefined ? img : spot.previewImage
-                  }
-                  alt={spot.name}
-                ></img>
-                <div className="spotName">{spot.name}</div>
-              </NavLink>
-            </div>
-          ))}
+    spots && (
+      <div className="page-container">
+        <div className="spots-container">
+          <div className="gridSpot">
+            {spots.map((spot, index) => (
+              <div key={`${index}_${spot.id}`}>
+                <NavLink className="allSpots" to={`/spots/${spot.id}`}>
+                  <div>
+                    {spot.city},{spot.state}
+                  </div>
+                  <span>
+                    <i className="fa-solid fa-star"></i>
+                    {`${spot.avgRating}`}
+                  </span>
+                  <div>{`$${spot.price} night`}</div>
+                  <img
+                    className="Image"
+                    src={
+                      spot.previewImage === undefined ? img : spot.previewImage
+                    }
+                    alt={spot.name}
+                  ></img>
+                  <div className="spotName">{spot.name}</div>
+                </NavLink>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 }
 
