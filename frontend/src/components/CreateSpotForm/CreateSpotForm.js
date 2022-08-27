@@ -60,6 +60,7 @@ function CreateSpot() {
       ></input>
       <label>Country</label>
       <input
+      placeholder="Country"
         value={country}
         onChange={(e) => setCountry(e.target.value)}
       ></input>

@@ -45,38 +45,41 @@ function EditSpotForm() {
   // }, [dispatch, spotId])
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Address
+    <>
+      <h2>Edit Your Spot</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Address
+          <input
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          ></input>
+        </label>
+        <label>City</label>
+        <input value={city} onChange={(e) => setCity(e.target.value)}></input>
+        <label>state</label>
+        <input value={state} onChange={(e) => setState(e.target.value)}></input>
+        <label>Country</label>
         <input
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
         ></input>
-      </label>
-      <label>City</label>
-      <input value={city} onChange={(e) => setCity(e.target.value)}></input>
-      <label>state</label>
-      <input value={state} onChange={(e) => setState(e.target.value)}></input>
-      <label>Country</label>
-      <input
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-      ></input>
-      <label>Name</label>
-      <input value={name} onChange={(e) => setName(e.target.value)}></input>
-      <label>Desc</label>
-      <input
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      ></input>
-      <label>price</label>
-      <input
-        type="number"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      ></input>
-      <button type="submit">Submit</button>
-    </form>
+        <label>Name</label>
+        <input value={name} onChange={(e) => setName(e.target.value)}></input>
+        <label>Desc</label>
+        <input
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></input>
+        <label>price</label>
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        ></input>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 }
 

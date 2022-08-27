@@ -25,6 +25,7 @@ const MyOwnedSpots = () => {
   }
   return (
     <div>
+      <h2>My Spots</h2>
       {userSpots.map((spot, i) => {
         return (
           <div key={i}>
