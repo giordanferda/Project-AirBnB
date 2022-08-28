@@ -6,43 +6,48 @@ module.exports = {
      * Add seed commands here.
      *
      * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
      */
-    await queryInterface.bulkInsert("Bookings", [
-      {
-        userId: 1,
-        spotId: 1,
-        startDate: "2023-01-01",
-        endDate: "2023-01-10",
-      },
-      {
-        userId: 2,
-        spotId: 2,
-        startDate: "2023-02-10",
-        endDate: "2023-02-20",
-      },
-      {
-        userId: 3,
-        spotId: 3,
-        startDate: "2023-03-10",
-        endDate: "2023-03-20",
-      },
-      {
-        userId: 4,
-        spotId: 4,
-        startDate: "2023-04-10",
-        endDate: "2023-04-20",
-      },
-      {
-        userId: 5,
-        spotId: 5,
-        startDate: "2023-05-10",
-        endDate: "2023-05-20",
-      },
-    ]);
+    await queryInterface.bulkInsert(
+      "Reviews",
+      [
+        {
+          spotId: 1,
+          userId: 2,
+          review:
+            "Great Experience. I would reccommend to my friends & family.",
+          stars: 5,
+        },
+        {
+          spotId: 2,
+          userId: 1,
+          review:
+            "My stay at the ferdaBNB was amazing, I loved the experience here.",
+          stars: 4,
+        },
+        {
+          spotId: 3,
+          userId: 4,
+          review:
+            "I am definetly coming back This was by far one of the best experiences that me and my friends had at this stay",
+          stars: 4,
+        },
+        {
+          spotId: 4,
+          userId: 3,
+          review:
+            "I had an amazing time using ferdaBNB, it was way better than getting a hotel.",
+          stars: 5,
+        },
+        {
+          spotId: 5,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 5,
+        },
+      ],
+      {}
+    );
   },
 
   async down(queryInterface, Sequelize) {
@@ -52,6 +57,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Bookings", null, {});
+    await queryInterface.bulkDelete("Reviews", null, {});
   },
 };
