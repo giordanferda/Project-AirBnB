@@ -1,4 +1,4 @@
-.Login-Form-Modal-Header {
+/* .Login-Form-Modal-Header {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
@@ -10,18 +10,9 @@
   font-size: 20px;
 }
 
-.Login-Modal {
-  display: flex;
-  flex-direction: column;
-  margin-top: 0px;
-  font-size: 20px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  line-height: 26px;
-  width: 375px;
-}
 
-.Modal-Title {
+
+/* .Modal-Title {
   text-align: center;
   width: 100%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -68,4 +59,68 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   padding: 20px;
+} */
+
+.Login-Modal {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  padding: 20px;
+  width: max(35vw, 500px);
+  gap: 25px;
+}
+
+.Login-Modal div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.Login-Modal div .input-label {
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.Login-Modal div input {
+  box-sizing: border-box;
+  padding: 15px;
+  outline: 0.5px solid rgb(186, 211, 219);
+  border-radius: 5px;
+  box-shadow: lightblue;
+  font-size: 18px;
+  width: 100%;
+  border: none;
+}
+
+.Modal-Title {
+  width: 100%;
+  font-weight: 800;
+  font-size: 3vh;
+  border-bottom: 0.5px solid #e8e8e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Link-Login {
+  text-align: center;
+  width: 100%;
+}
+
+.Login-Modal div button {
+  border-radius: 15px;
+  cursor: pointer;
+  color: rgb(228, 234, 240);
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #ff385c;
+  height: 5vh;
+}
+
+.login-x-out {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  margin: 3px;
+  padding: 3px;
 }

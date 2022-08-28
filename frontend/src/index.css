@@ -137,6 +137,12 @@ table {
   cursor: pointer;
 }
 
+.auth-button:hover {
+  opacity: 0.5;
+  color: #b4b4b4d8;
+  transition: all 0.4s ease-in-out;
+}
+
 * {
   font-family: "Circular,-apple-system," system-ui
     ",Roboto,Helvetica Neue,sans-serif";

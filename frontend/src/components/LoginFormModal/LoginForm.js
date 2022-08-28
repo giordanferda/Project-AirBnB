@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import "./LoginForm.css";
-function LoginForm() {
+import { Link } from "react-router-dom";
+function LoginForm({ setShowModal }) {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -31,37 +32,50 @@ function LoginForm() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <input
-        className="Username-Email"
-        placeholder="Username or Email"
-        type="text"
-        value={credential}
-        onChange={(e) => setCredential(e.target.value)}
-        required
-      />
-
-      <input
-        className="password"
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-
-      <button type="submit" className="login-button">
-        Log In
-      </button>
-      <button
-        className="login-button"
-        type="submit"
-        onClick={(e) => {
-          setCredential("TOTHEMOON");
-          setPassword("password");
-        }}
+      <div>
+        <label className="input-label">Username or Email</label>
+        <input
+          className="Username-Email"
+          placeholder="Username or Email"
+          type="text"
+          value={credential}
+          onChange={(e) => setCredential(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label className="input-label">Password</label>
+        <input
+          className="password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <Link
+        className="Link-Login"
+        to="/signup"
+        onClick={() => setShowModal(false)}
       >
-        Demo User
-      </button>
+        Dont Have an account?
+      </Link>
+      <div>
+        <button type="submit" className="login-button">
+          Log In
+        </button>
+        <button
+          className="login-button"
+          type="submit"
+          onClick={(e) => {
+            setCredential("TOTHEMOON");
+            setPassword("password");
+          }}
+        >
+          Demo User
+        </button>
+      </div>
     </form>
   );
 }

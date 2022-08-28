@@ -17,7 +17,7 @@ function LoginFormModal() {
               <i className="fa-solid fa-x"></i>
             </button>
           </div>
-          <LoginForm />
+          <LoginForm setShowModal={setShowModal} />
         </Modal>
       )}
     </>

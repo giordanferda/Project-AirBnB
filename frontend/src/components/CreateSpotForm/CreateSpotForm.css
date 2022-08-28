@@ -1,4 +1,4 @@
-#signup-container-form {
+.createSpotForm {
   border: none;
   outline: 1px solid #e8e8e8;
   display: flex;
@@ -7,53 +7,49 @@
   align-items: center;
   padding: 30px;
   gap: 15px;
-  width: 40%;
+  width: max(40vw, 400px);
 }
 
-#signup-page {
-  display: flex;
-  font-size: 3vh;
-  font-weight: 800;
-  margin: 15px 0px;
-}
-
-.sign-Up-Info-Container div {
+.Form-Component div {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  margin-bottom: 10px;
+  width: 100%;
+  gap: 10px;
 }
 
-.signup-form-style {
-  font-weight: bolder;
-  font-size: 18px;
-}
-
-.input-box-signup {
+.Form-Component div input {
+  width: 100%;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 20px;
+  border: none;
+  font-size: 16px;
   outline: 0.5px solid rgb(186, 211, 219);
   border-radius: 5px;
   box-shadow: lightblue;
-  font-size: 18px;
+  height: 20px;
+}
+
+.Form-Component div label {
+  font-size: 1.5vh;
+}
+.Form-Component {
   width: 100%;
-  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.input-box-signup::placeholder {
-  opacity: 0.5;
-}
-
-.signupButton {
+.SpotButton {
   border-radius: 15px;
   cursor: pointer;
   color: rgb(228, 234, 240);
   padding: 12px 20px;
   font-size: 16px;
+  margin-top: 20px;
   border: none;
   background-color: #ff385c;
 }
 
-.form {
-  width: 100%;
+.create-your-spot {
+  font-size: 2.5vh;
 }

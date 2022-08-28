@@ -19,19 +19,68 @@
 }
 
 .imgParentContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(285px, 1fr));
-  padding: 3em;
-  grid-gap: 2em;
+  display: flex;
+  justify-content: center;
+  /* grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(285px, 1fr)); */
+  /* padding: 3em;
+  grid-gap: 2em; */
+  width: 100%;
 }
 
 .oneSpot-Image {
-  height: 285px;
-  width: 285px;
+  height: auto;
+  width: auto;
+  max-width: 40%;
+  max-height: 40%;
 }
 
 .Big {
-  grid-column: auto/span 2;
-  grid-row: auto/span 2;
+  /* grid-column: auto/span 2;
+  grid-row: auto/span 2; */
+  height: auto;
+  width: auto;
+}
+
+.secondaryImgContainer {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+}
+
+.description-checkin-container {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+}
+
+.spotContainer {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spot-detail-review {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkin {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+}
+
+.checkin-description {
+  width: 75%;
+}
+
+.mainImgContainer {
+  width: 50%;
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createSpot, allSpots } from "../../store/spots";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import "./CreateSpotForm.css";
 const LAT = 37.7645358;
 const LNG = -122.4730327;
 
@@ -38,7 +39,7 @@ function CreateSpot() {
     };
     if (!isImg(url)) {
       setErrors({
-        error: "Must be a valid image, expample: .jpg, .png, .jpeg, .svg, .gif",
+        error: "Must be a valid image, example: .jpg, .png, .jpeg, .svg, .gif",
       });
     }
 
@@ -50,79 +51,109 @@ function CreateSpot() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {Object.values(errors).map((error, i) => (
-          <li key={i}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Address
-        <input
-          placeholder="City"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        ></input>
-      </label>
-      <label>City</label>
-      <input
-        placeholder="City"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      ></input>
-      <label>State</label>
-      <input
-        placeholder="State"
-        value={state}
-        onChange={(e) => setState(e.target.value)}
-      ></input>
-      <label>Country</label>
-      <input
-        placeholder="Country"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-      ></input>
-      <label>Name</label>
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      ></input>
-      <label>Description</label>
-      <input
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      ></input>
-      <label>price</label>
-      <input
-        type="number"
-        placeholder="price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      ></input>
-      <label>Spot Image</label>
-      <input
-        type="text"
-        placeholder="image url"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      ></input>
-      <button
-        disabled={
-          address.length === 0 ||
-          city.length === 0 ||
-          state.length === 0 ||
-          country.length === 0 ||
-          name.length === 0 ||
-          description.length === 0 ||
-          price < 1 ||
-          url.length < 1
-        }
-      >
-        Submit
-      </button>
-    </form>
+    <div className="createSpotForm">
+      <h3 className="create-your-spot">Create Your Spot</h3>
+
+      <form className="Form-Component" onSubmit={handleSubmit}>
+        <ul>
+          {Object.values(errors).map((error, i) => (
+            <li key={i}>{error}</li>
+          ))}
+        </ul>
+
+        <div>
+          <label>Address</label>
+          <input
+            className="input-box-signup"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>City</label>
+          <input
+            className="input-box-signup"
+            placeholder="City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>State</label>
+          <input
+            className="input-box-signup"
+            placeholder="State"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>Country</label>
+          <input
+            className="input-box-signup"
+            placeholder="Country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>Name</label>
+          <input
+            className="input-box-signup"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>Description</label>
+          <input
+            className="input-box-signup"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>price</label>
+          <input
+            className="input-box-signup"
+            type="number"
+            placeholder="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>Spot Image</label>
+          <input
+            className="input-box-signup"
+            type="text"
+            placeholder="image url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <button
+            className="SpotButton"
+            disabled={
+              address.length === 0 ||
+              city.length === 0 ||
+              state.length === 0 ||
+              country.length === 0 ||
+              name.length === 0 ||
+              description.length === 0 ||
+              price < 1 ||
+              url.length < 1
+            }
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 

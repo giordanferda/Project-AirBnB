@@ -20,10 +20,15 @@ ul {
 }
 
 .nav-button {
-  padding: 15px 24px;
+  padding: 22px 15px;
   /* width: 40px; */
   cursor: pointer;
   border-radius: 15px;
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  border: none;
+  outline: 1px solid #b8b8b8;
 }
 
 ul li {
@@ -42,18 +47,18 @@ a {
   display: flex;
   flex-direction: column;
   border: none;
-  outline: 0.5px solid #717171;
+  outline: 0.5px solid #b8b8b8;
   border-radius: 5px;
   background-color: white;
   justify-content: center;
   align-items: center;
   padding: 15px 0px;
   width: 200px;
-  box-shadow: 0 4px 15px 0 solid 717171;
+  box-shadow: 0 4px 15px 0 solid #717171;
 }
 
 .profile-dropdown li {
-  border-bottom: 0.5px solid #717171;
+  border-bottom: 0.5px solid #b8b8b8;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -61,6 +66,9 @@ a {
   height: 30px;
 }
 
+.profile-dropdown li:hover {
+  color: #b4b4b4d8;
+}
 .profile-dropdown button {
   border-radius: 20px;
   padding: 10px 24px;
@@ -82,9 +90,13 @@ a {
 .host-your-place {
   display: flex;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #806767;
   justify-content: center;
   align-items: center;
+}
+
+.host-your-place:hover {
+  opacity: 0.2;
+  transition: all 0.4s ease-out;
 }
 
 .button-login-signup {
