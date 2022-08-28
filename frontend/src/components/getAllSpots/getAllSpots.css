@@ -1,0 +1,45 @@
+.allSpots {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
+  padding: 10px 0px;
+  width: 100%;
+  max-width: 285px;
+  margin: 0;
+}
+
+.Image {
+  width: 285px;
+  height: 285px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.grouping-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gridSpot {
+  display: grid;
+  /* grid-gap: 2em; */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, max(285px, 100%/5)), 1fr)
+  );
+  width: 100%;
+  justify-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

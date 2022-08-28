@@ -1,9 +1,10 @@
 .nav-wrapper {
   width: 100%;
+  max-width: 1760px;
   height: 7.5%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .logo {
@@ -79,8 +80,11 @@ a {
 }
 
 .host-your-place {
+  display: flex;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #806767;
+  justify-content: center;
+  align-items: center;
 }
 
 .button-login-signup {
@@ -91,4 +95,12 @@ a {
   height: 7.5%;
   display: flex;
   align-items: center;
+}
+
+.button-login-signup {
+  font-size: 16px;
+  margin: 15px;
+  background-color: initial;
+  border: none;
+  cursor: pointer;
 }

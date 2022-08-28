@@ -10,6 +10,7 @@ import CreateSpot from "./components/CreateSpotForm/CreateSpotForm";
 import MyOwnedSpots from "./components/myOwnedSpotsForm/myOwnedSpots";
 import EditSpotForm from "./components/CreateSpotForm/EditSpotForm";
 import CurrentSpots from "./components/GetCurrentUserReview/CurrentUserReview";
+import "./app.css";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,7 +26,7 @@ function App() {
   // }, [dispatch])
 
   return (
-    <>
+    <div className="app">
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -52,7 +53,7 @@ function App() {
           </Route>
         </Switch>
       )}
-    </>
+    </div>
   );
 }
 

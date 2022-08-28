@@ -16,31 +16,31 @@ function Spots() {
   return (
     spots && (
       <div className="page-container">
-        <div className="spots-container">
-          <div className="gridSpot">
-            {spots.map((spot, index) => (
-              <div key={`${index}_${spot.id}`}>
-                <NavLink className="allSpots" to={`/spots/${spot.id}`}>
-                  <div>
+        <div className="gridSpot">
+          {spots.map((spot, index) => (
+            <div key={`${index}_${spot.id}`} className="card">
+              <NavLink className="allSpots" to={`/spots/${spot.id}`}>
+                <img
+                  className="Image"
+                  src={
+                    spot.previewImage === undefined ? img : spot.previewImage
+                  }
+                  alt={spot.name}
+                ></img>
+                <div className="grouping-info">
+                  <h1>
                     {spot.city},{spot.state}
-                  </div>
+                  </h1>
                   <span>
                     <i className="fa-solid fa-star"></i>
                     {`${spot.avgRating}`}
                   </span>
-                  <div>{`$${spot.price} night`}</div>
-                  <img
-                    className="Image"
-                    src={
-                      spot.previewImage === undefined ? img : spot.previewImage
-                    }
-                    alt={spot.name}
-                  ></img>
-                  <div className="spotName">{spot.name}</div>
-                </NavLink>
-              </div>
-            ))}
-          </div>
+                </div>
+                <h1>{`$${spot.price} /night`}</h1>
+                <h1 className="spotName">{spot.name}</h1>
+              </NavLink>
+            </div>
+          ))}
         </div>
       </div>
     )

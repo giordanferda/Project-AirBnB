@@ -4,6 +4,7 @@ import { getSpotDetailById } from "../../store/spots";
 import { useParams } from "react-router-dom";
 import CreateReview from "../CreateReviewForm/CreateReviewForm";
 import { allReviews, deleteYourReview } from "../../store/reviews";
+import "./spotShowPage.css";
 
 function GetSpotbyId() {
   const { spotId } = useParams();
@@ -52,32 +53,66 @@ function GetSpotbyId() {
     <div className="spot-detail-review">
       {spot &&
         spot?.Images?.map((image, index) => (
-          <img
-            src={image.url}
-            key={"imageId: " + JSON.stringify(index)}
-            alt="NOT FOUND"
-          />
+          <div className="imgParentContainer">
+            <img
+              classname="oneSpot-Image Big"
+              src={image.url}
+              key={"imageId: " + JSON.stringify(index)}
+              alt="NOT FOUND"
+            />
+
+            <img
+              classname="oneSpot-Image"
+              src={image.url}
+              key={"imageId: " + JSON.stringify(index)}
+              alt="NOT FOUND"
+            />
+            <img
+              classname="oneSpot-Image"
+              src={image.url}
+              key={"imageId: " + JSON.stringify(index)}
+              alt="NOT FOUND"
+            />
+            <img
+              classname="oneSpot-Image"
+              src={image.url}
+              key={"imageId: " + JSON.stringify(index)}
+              alt="NOT FOUND"
+            />
+            <img
+              classname="oneSpot-Image"
+              src={image.url}
+              key={"imageId: " + JSON.stringify(index)}
+              alt="NOT FOUND"
+            />
+          </div>
         ))}
+
       {user &&
         alreadyReviewed(filterReviews) === false &&
         user.id !== spot.ownerId && <CreateReview spotId={spot?.id} />}
-      REVIEWS:{" "}
-      {filterReviews.map((review, i) => (
-        <div key={review.id} review={review}>
-          Review {i + 1}: {""}
-          <i className="fa-solid fa-star"></i> {review.stars} {review.review}
-          {user && reviewBelongsToUser(review) && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                dispatch(deleteYourReview(review.id));
-              }}
-            >
-              Delete Review
-            </button>
-          )}
-        </div>
-      ))}
+      <div className="reviewContainer">
+        <div>REVIEWS: </div>
+        {filterReviews.map((review, i) => (
+          <div className="reviewOne" key={review.id} review={review}>
+            Review {i + 1}: {""}
+            <div>
+              <i className="fa-solid fa-star"></i> {review.stars}{" "}
+              {review.review}
+              {user && reviewBelongsToUser(review) && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(deleteYourReview(review.id));
+                  }}
+                >
+                  Delete Review
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
