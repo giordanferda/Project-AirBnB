@@ -96,7 +96,6 @@ a {
 
 .host-your-place:hover {
   opacity: 0.2;
-  transition: all 0.4s ease-out;
 }
 
 .button-login-signup {

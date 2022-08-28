@@ -19,6 +19,9 @@
 .grouping-info {
   display: flex;
   justify-content: space-between;
+  font-weight: 200;
+  font-size: 2vh;
+  color: black;
 }
 
 .gridSpot {
@@ -43,4 +46,12 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.spot-price-h1 {
+  color: black;
+}
+
+.spotName {
+  color: black;
 }

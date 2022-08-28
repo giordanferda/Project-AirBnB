@@ -36,7 +36,7 @@ function Spots() {
                     {`${spot.avgRating}`}
                   </span>
                 </div>
-                <h1>{`$${spot.price} /night`}</h1>
+                <h1 className="spot-price-h1">{`$${spot.price} /night`}</h1>
                 <h1 className="spotName">{spot.name}</h1>
               </NavLink>
             </div>

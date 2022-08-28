@@ -3,6 +3,7 @@ import { createdReview } from "../../store/reviews";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../../context/Modal.css";
+import "./CreateReviewForm.css";
 
 function CreateReview({ spotId }) {
   const [review, setReview] = useState("");

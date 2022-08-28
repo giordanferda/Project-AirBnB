@@ -124,3 +124,9 @@
   margin: 3px;
   padding: 3px;
 }
+
+.WelcomeMessage {
+  width: 100%;
+  padding: 10px;
+  font-weight: bold;
+}
