@@ -60,7 +60,9 @@ function ProfileButton({ user }) {
             My Reviews
           </li>
           <li>
-            <button onClick={logout}>Log Out</button>
+            <button className="profile-logout-button" onClick={logout}>
+              Log Out
+            </button>
           </li>
         </ul>
       )}

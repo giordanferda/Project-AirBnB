@@ -1,0 +1,11 @@
+.editFormContainer {
+  border: none;
+  outline: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  align-items: center;
+  padding: 30px;
+  gap: 15px;
+  width: max(55vw, 400px);
+}

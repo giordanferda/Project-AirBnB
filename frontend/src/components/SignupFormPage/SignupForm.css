@@ -13,8 +13,9 @@
 #signup-page {
   display: flex;
   font-size: 3vh;
-  font-weight: 800;
+  font-weight: 200;
   margin: 15px 0px;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .sign-Up-Info-Container div {
@@ -25,8 +26,9 @@
 }
 
 .signup-form-style {
-  font-weight: bolder;
+  font-weight: light;
   font-size: 18px;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .input-box-signup {
@@ -52,6 +54,7 @@
   font-size: 16px;
   border: none;
   background-color: #ff385c;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .form {

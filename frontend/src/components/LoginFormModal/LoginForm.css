@@ -93,12 +93,13 @@
 
 .Modal-Title {
   width: 100%;
-  font-weight: 800;
+  font-weight: 500;
   font-size: 3vh;
   border-bottom: 0.5px solid #e8e8e8;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .Link-Login {
@@ -129,4 +130,13 @@
   width: 100%;
   padding: 10px;
   font-weight: bold;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.input-label {
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.Link-Login {
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }

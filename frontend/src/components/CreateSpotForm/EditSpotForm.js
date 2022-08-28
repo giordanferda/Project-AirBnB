@@ -3,7 +3,7 @@ import { getSpotDetailById, EditSpot } from "../../store/spots";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
+import "./EditSpotForm.css";
 // const LAT = 37.7645358
 // const LNG = -122.4730327
 
@@ -46,39 +46,73 @@ function EditSpotForm() {
 
   return (
     <>
-      <h2>Edit Your Spot</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Address
-          <input
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          ></input>
-        </label>
-        <label>City</label>
-        <input value={city} onChange={(e) => setCity(e.target.value)}></input>
-        <label>state</label>
-        <input value={state} onChange={(e) => setState(e.target.value)}></input>
-        <label>Country</label>
-        <input
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-        ></input>
-        <label>Name</label>
-        <input value={name} onChange={(e) => setName(e.target.value)}></input>
-        <label>Desc</label>
-        <input
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></input>
-        <label>price</label>
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        ></input>
-        <button type="submit">Submit</button>
-      </form>
+      <div className="editFormContainer">
+        <h2 className="create-your-spot">Edit Your Spot</h2>
+        <form className="Form-Component" onSubmit={handleSubmit}>
+          <div>
+            <label>Address</label>
+            <input
+              className="input-box-singup"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label>City</label>
+            <input
+              className="input-box-singup"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label>state</label>
+            <input
+              className="input-box-singup"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label>Country</label>
+            <input
+              className="input-box-singup"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label>Name</label>
+            <input
+              className="input-box-singup"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label>Desc</label>
+            <input
+              className="input-box-singup"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label>price</label>
+            <input
+              className="input-box-singup"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <button className="SpotButton" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

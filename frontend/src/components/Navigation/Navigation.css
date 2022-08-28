@@ -55,6 +55,7 @@ a {
   padding: 15px 0px;
   width: 200px;
   box-shadow: 0 4px 15px 0 solid #717171;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .profile-dropdown li {
@@ -64,6 +65,7 @@ a {
   justify-content: center;
   align-items: center;
   height: 30px;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .profile-dropdown li:hover {
@@ -76,6 +78,7 @@ a {
   background-color: #ff385c;
   border: none;
   outline: 1px solid #717171;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .profile-dropdown li:last-child {
@@ -89,7 +92,7 @@ a {
 
 .host-your-place {
   display: flex;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Roboto, Helvetica Neue, sans-serif;
   justify-content: center;
   align-items: center;
 }
