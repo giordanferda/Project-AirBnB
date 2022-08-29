@@ -2,7 +2,7 @@
 
 ## About FerdaBnB
 
-FerdaDnD is a full-stack-application clone of Airbnb deployed on heroku. The App Uses React & Redux in the Front-end and for the backend we use Express.js & an ORM called Sequelize.
+FerdaBnB is a full-stack-application clone of Airbnb deployed on heroku. The App Uses React & Redux in the Front-end and for the backend we use Express.js & an ORM called Sequelize.
 
 Live Link: https://ferdabnb.herokuapp.com/
 
