@@ -124,15 +124,15 @@ function GetSpotbyId() {
             </div>
             <div className="checkin-star-price">
               <div>Cleaning Fee</div>
-              <div>$100</div>
+              <div>Free</div>
             </div>
             <div className="checkin-star-price">
               <div>Service Fee</div>
-              <div>$100</div>
+              <div>Free</div>
             </div>
             <div className="checkin-star-price total-price">
               <div>Total before Taxes</div>
-              <div>${spot.price + 200}</div>
+              <div>${spot.price}</div>
             </div>
           </div>
         </div>
