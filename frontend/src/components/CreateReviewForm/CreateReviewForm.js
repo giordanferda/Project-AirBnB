@@ -22,9 +22,13 @@ function CreateReview({ spotId }) {
   };
 
   return (
-    <form onSubmit={() => handleSubmit(spotId)}>
-      <label>Review</label>
+    <form
+      className="review-form-container"
+      onSubmit={() => handleSubmit(spotId)}
+    >
+      <div className="review-form-title">Leave A Review</div>
       <input
+        className="review-text-area"
         value={review}
         onChange={(e) => {
           const textValue = e.target.value;

@@ -10,3 +10,8 @@ button:hover {
   opacity: 0.9;
   color: black;
 }
+
+input:focus,
+input:hover {
+  outline: 1px solid rgb(135, 164, 173);
+}

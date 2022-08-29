@@ -82,7 +82,7 @@ router.get("/", ValidatePagination, async (req, res, next) => {
     req.query;
   if (!page) page = 0;
   if (!size) size = 20;
-  // console.log(minPrice)
+
   page = parseInt(page);
   size = parseInt(size);
   let where = {};
@@ -105,7 +105,6 @@ router.get("/", ValidatePagination, async (req, res, next) => {
   if (maxPrice) {
     filterArr.push({ price: { [Op.lte]: parseFloat(maxPrice) } });
   }
-  //  console.log(...filterArr)
 
   //  if (parseFloat(minPrice) < 0){
   //   res.status(400)
@@ -129,14 +128,13 @@ router.get("/", ValidatePagination, async (req, res, next) => {
     ...pagination,
     // group: ['Spot.id']
   });
-  console.log({ allSpots });
 
   for (let spot of allSpots) {
     const reviewInfo = await spot.getReviews({
       attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
     });
     let avgRating = reviewInfo[0].dataValues.avgRating;
-    console.log({ [spot.id]: reviewInfo });
+
     spot.dataValues.avgRating = parseFloat(Number(avgRating)).toFixed(1);
     let spotImg = await Image.findOne({
       where: {
@@ -145,7 +143,6 @@ router.get("/", ValidatePagination, async (req, res, next) => {
       },
     });
 
-    console.log({ spot, spotImg });
     if (spotImg) {
       spot.dataValues.previewImage = spotImg.dataValues.url;
     }
@@ -188,7 +185,6 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
         spotId: spot.id,
       },
     });
-    // console.log(spotImg)
     spot.dataValues.previewImage = !!spotImg
       ? spotImg.dataValues.url
       : "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg";

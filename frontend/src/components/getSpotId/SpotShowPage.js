@@ -70,7 +70,7 @@ function GetSpotbyId() {
                 <img
                   className="Big"
                   src={image.url}
-                  key={"imageId: " + JSON.stringify(index)}
+                  key={"imageId: " + JSON.stringify(index) + "big"}
                   alt="NOT FOUND"
                 />
               </div>
@@ -78,26 +78,26 @@ function GetSpotbyId() {
                 <img
                   className="oneSpot-Image small"
                   src={image.url}
-                  key={"imageId: " + JSON.stringify(index)}
+                  key={"imageId: " + JSON.stringify(index) + "topleft"}
                   alt="NOT FOUND"
                 />
 
                 <img
                   className="oneSpot-Image small corner-top"
                   src={image.url}
-                  key={"imageId: " + JSON.stringify(index)}
+                  key={"imageId: " + JSON.stringify(index) + "topright"}
                   alt="NOT FOUND"
                 />
                 <img
                   className="oneSpot-Image small"
                   src={image.url}
-                  key={"imageId: " + JSON.stringify(index)}
+                  key={"imageId: " + JSON.stringify(index) + "bottomleft"}
                   alt="NOT FOUND"
                 />
                 <img
                   className="oneSpot-Image small corner-bottom"
                   src={image.url}
-                  key={"imageId: " + JSON.stringify(index)}
+                  key={"imageId: " + JSON.stringify(index) + "bottomright"}
                   alt="NOT FOUND"
                 />
               </div>
@@ -122,6 +122,18 @@ function GetSpotbyId() {
                 }`}</span>
               </span>
             </div>
+            <div className="checkin-star-price">
+              <div>Cleaning Fee</div>
+              <div>$100</div>
+            </div>
+            <div className="checkin-star-price">
+              <div>Service Fee</div>
+              <div>$100</div>
+            </div>
+            <div className="checkin-star-price total-price">
+              <div>Total before Taxes</div>
+              <div>${spot.price + 200}</div>
+            </div>
           </div>
         </div>
         <div className="reviewContainer">
@@ -133,6 +145,7 @@ function GetSpotbyId() {
                 {review.review}
                 {user && reviewBelongsToUser(review) && (
                   <button
+                    className="Delete-button"
                     onClick={(e) => {
                       e.preventDefault();
                       dispatch(deleteYourReview(review.id));

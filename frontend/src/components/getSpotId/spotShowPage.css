@@ -78,14 +78,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 815px;
+  gap: 20px;
 }
 
 .checkin {
-  border: 1px solid rgb(221, 221, 221);
+  outline: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
   padding: 24px;
+  border: none;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
   width: 30%;
+  min-width: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .checkin-description {
@@ -103,6 +110,17 @@
   width: 100%;
   justify-content: space-between;
   gap: 10px;
+  height: 20px;
+  align-items: center;
+}
+
+.checkin-star-price div:first-child {
+  font-weight: 600;
+}
+
+.total-price {
+  margin-top: 10px;
+  border-top: 1px solid #e8e8e8;
 }
 
 .spancheckin {
@@ -143,4 +161,20 @@
 
 .review-box {
   margin-top: 10px;
+  width: 90%;
+  border: none;
+  outline: 1px solid #e8e8e8;
+}
+
+.Delete-Button {
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  cursor: pointer;
+  color: rgb(228, 234, 240);
+  padding: 5px 10px;
+  font-size: 8px;
+  margin-top: 10px;
+  border: none;
+  background-color: #ff385c;
 }

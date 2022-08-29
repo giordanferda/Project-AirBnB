@@ -122,7 +122,12 @@ function CreateSpot() {
             type="number"
             placeholder="price"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value < 0) {
+                return;
+              }
+              setPrice(e.target.value);
+            }}
           ></input>
         </div>
         <div>

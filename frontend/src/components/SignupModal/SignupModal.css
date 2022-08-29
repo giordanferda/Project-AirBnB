@@ -41,8 +41,9 @@
 .signup-form-input {
   box-sizing: border-box;
   padding: 20px;
-  border: 1px solid rgb(186, 211, 219);
+  outline: 1px solid rgb(186, 211, 219);
   border-radius: 5px;
+  border: none;
   box-shadow: lightblue;
 }
 

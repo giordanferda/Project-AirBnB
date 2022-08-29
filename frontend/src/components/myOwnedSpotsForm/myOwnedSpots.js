@@ -13,7 +13,6 @@ const MyOwnedSpots = () => {
 
   const spots = useSelector((state) => Object.values(state.spots));
   const userSpots = spots.filter((spot) => spot.ownerId === user.id);
-  console.log(spots);
   useEffect(() => {
     dispatch(getSpotsById());
   }, [dispatch]);
