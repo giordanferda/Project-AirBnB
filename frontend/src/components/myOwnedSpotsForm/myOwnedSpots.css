@@ -1,0 +1,95 @@
+* {
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.allSpots {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
+  padding: 10px 0px;
+  width: 100%;
+  max-width: 285px;
+  margin: 0;
+}
+
+.Image {
+  width: 285px;
+  height: 285px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.Image:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.grouping-info {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 200;
+  font-size: 1.5vh;
+  color: black;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.gridSpot {
+  display: grid;
+  /* grid-gap: 2em; */
+  /* grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, max(285px, 100%/5)), 1fr)
+  ); */
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 75%;
+  justify-items: center;
+  grid-gap: max(3%, 20px);
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.spotAddy-Owned {
+  font-size: 2.5vh;
+  font-weight: 200;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.cardsforOwned {
+  border: none;
+  outline: 1px solid #e8e8e8;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: max(1.5vh, 10px);
+}
+
+.buttonforowned {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.buttonforowned button {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  cursor: pointer;
+  color: rgb(228, 234, 240);
+  padding: 12px 20px;
+  font-size: 12px;
+  border: none;
+  background-color: #ff385c;
+}
+
+.MySpotHeader {
+  font-size: 3vh;
+  margin-bottom: 30px;
+}

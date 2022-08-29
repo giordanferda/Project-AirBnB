@@ -1,28 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { getSpotDetailById, EditSpot } from "../../store/spots";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./EditSpotForm.css";
+// import getAllSpots from "../getAllSpots/getAllSpots";
 // const LAT = 37.7645358
 // const LNG = -122.4730327
 
 function EditSpotForm() {
+  const history = useHistory();
   const location = useLocation();
-
-  const [address, setAddress] = useState(location.state.spot.address);
-  const [city, setCity] = useState(location.state.spot.city);
-  const [state, setState] = useState(location.state.spot.state);
-  const [country, setCountry] = useState(location.state.spot.country);
-  const [name, setName] = useState(location.state.spot.name);
-  const [description, setDescription] = useState(
-    location.state.spot.description
-  );
-  const [price, setPrice] = useState(location.state.spot.price);
-
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
+  useEffect(() => {
+    if (!location.state) {
+      dispatch(getSpotDetailById(spotId));
+    }
+  }, [dispatch]);
+  const spot = useSelector((state) => state.spots[parseInt(spotId)]);
+
+  const [address, setAddress] = useState(spot?.address);
+  const [city, setCity] = useState(spot?.city);
+  const [state, setState] = useState(spot?.state);
+  const [country, setCountry] = useState(spot?.country);
+  const [name, setName] = useState(spot?.name);
+  const [description, setDescription] = useState(spot?.description);
+  const [price, setPrice] = useState(spot?.price);
+
+  if (!spot) {
+    return;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,12 +46,6 @@ function EditSpotForm() {
     dispatch(EditSpot(payload, spotId));
     history.push("/");
   };
-  // const spot = useSelector((state) => state.spots[0])
-
-  // useEffect(() => {
-  //     dispatch(getSpotDetailById(spotId))
-  // }, [dispatch, spotId])
-
   return (
     <>
       <div className="editFormContainer">

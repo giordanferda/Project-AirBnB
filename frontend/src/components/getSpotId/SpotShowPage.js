@@ -15,7 +15,6 @@ function GetSpotbyId() {
   const user = useSelector((state) => state.session.user);
   const reviewState = useSelector((state) => state.reviews);
 
-  // console.log(reviews);
   const reviews = Object.values(reviewState);
   useEffect(() => {
     dispatch(getSpotDetailById(spotId));
@@ -23,7 +22,6 @@ function GetSpotbyId() {
   }, [dispatch, spotId]);
 
   const filterReviews = reviews.filter((review) => {
-    // console.log(review.spotId, spotId);
     return review.spotId === parseInt(spotId);
   });
 
@@ -39,16 +37,12 @@ function GetSpotbyId() {
   };
 
   const reviewBelongsToUser = (review) => {
-    // console.log(review.userId === user.id);
-    // console.log(review.userId);
-    // console.log(user.id);
     return review.userId === user.id;
   };
 
   if (spot === undefined) {
     return;
   }
-  // console.log(filterReviews, "THIS IS FILTER", reviews, "THIS IS REVIEWS!");
 
   return (
     <div className="spotContainer">

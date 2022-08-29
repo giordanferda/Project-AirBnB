@@ -41,6 +41,10 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
+  outline: 1px solid #e8e8e8;
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
 }
 .page-container {
   display: flex;

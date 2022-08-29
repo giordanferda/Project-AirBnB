@@ -11,7 +11,6 @@ function Spots() {
     dispatch(allSpots());
   }, [dispatch]);
   const spots = useSelector((state) => Object.values(state.spots));
-  // console.log(spots, "THIS IS OUR SPOT");
 
   return (
     spots && (

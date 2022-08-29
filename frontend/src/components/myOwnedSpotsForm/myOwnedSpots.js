@@ -3,6 +3,8 @@ import { getSpotsById } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { deleteYourSpot } from "../../store/spots";
+// import "../getAllSpots/getAllSpots.css";
+import "./myOwnedSpots.css";
 
 const MyOwnedSpots = () => {
   const history = useHistory();
@@ -24,30 +26,38 @@ const MyOwnedSpots = () => {
     return null;
   }
   return (
-    <div>
-      <h2>My Spots</h2>
-      {userSpots.map((spot, i) => {
-        return (
-          <div key={i}>
-            {spot.address}
-            <Link to={{ pathname: `/editSpot/${spot.id}`, state: { spot } }}>
-              Edit Your Spot
-            </Link>
-            <div>
-              {spot.city}, {spot.state}
+    <div className="page-container">
+      <h2 className="MySpotHeader">My Spots</h2>
+      <div className="gridSpot">
+        {userSpots.map((spot, i) => {
+          return (
+            <div className="cardsforOwned" key={i}>
+              <img className="Image" src={spot.previewImage}></img>
+              <div className="spotAddy-Owned">{spot.address}</div>
+              <div className="grouping-info">
+                {spot.city}, {spot.state}
+              </div>
+              <div className="spot-price-h1">{`$${spot.price} /night`}</div>
+              <span>
+                <i className="fa-solid fa-star"></i>
+                {`${spot.avgRating}`}
+              </span>
+              <div className="buttonforowned">
+                <button
+                  onClick={() => {
+                    handleDelete(spot.id);
+                  }}
+                >
+                  Delete Spot
+                </button>
+                <button onClick={() => history.push(`/editSpot/${spot.id}`)}>
+                  Edit Spot
+                </button>
+              </div>
             </div>
-            <div>{`$${spot.price} /night`}</div>
-            <img src={spot.previewImage}></img>
-            <button
-              onClick={() => {
-                handleDelete(spot.id);
-              }}
-            >
-              Delete
-            </button>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

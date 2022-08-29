@@ -53,7 +53,7 @@ export const getUserReview = () => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
   });
   const data = await response.json();
-  console.log(data, "this is data");
+
   dispatch(getUsersReview(data.Reviews));
   return response;
 };
@@ -95,8 +95,6 @@ const reviewReducer = (state = {}, action) => {
       action.payload.forEach((review) => {
         newState[review.id] = review;
       });
-      console.log(newState, "tis is new state");
-      console.log(action, "thos is action");
 
       return newState;
     default:

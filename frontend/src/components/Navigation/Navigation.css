@@ -118,3 +118,7 @@ a {
   border: none;
   cursor: pointer;
 }
+
+.profile-logout-button {
+  color: white;
+}

@@ -29,7 +29,9 @@ function LoginForm({ setShowModal }) {
       <h2 className="WelcomeMessage">Welcome to FerdaBnB</h2>
       <ul>
         {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
+          <li className="error-login" key={idx}>
+            {error}
+          </li>
         ))}
       </ul>
       <div>
@@ -59,7 +61,7 @@ function LoginForm({ setShowModal }) {
         to="/signup"
         onClick={() => setShowModal(false)}
       >
-        Dont Have an account?
+        Don't have an account?
       </Link>
       <div>
         <button type="submit" className="login-button">

@@ -5,3 +5,8 @@
   flex-direction: column;
   width: 100%;
 }
+
+button:hover {
+  opacity: 0.9;
+  color: black;
+}

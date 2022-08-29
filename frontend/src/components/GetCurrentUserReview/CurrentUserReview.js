@@ -8,7 +8,6 @@ const CurrentUserReviews = () => {
   const user = useSelector((state) => state.session.user);
 
   const reviews = useSelector((state) => Object.values(state.reviews));
-  console.log(reviews, "THIS IS REVIEWS");
 
   const dispatch = useDispatch();
   const history = useHistory();
