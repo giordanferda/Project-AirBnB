@@ -3,19 +3,15 @@
 
   width: 285px;
   height: 285px;
-  border-radius: 12px;
+
   object-fit: cover;
 }
 
-.reviewOne {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 .reviewContainer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  width: 90%;
 }
 
 .imgParentContainer {
@@ -26,20 +22,32 @@
   /* padding: 3em;
   grid-gap: 2em; */
   width: 100%;
+  gap: 5px;
 }
 
 .oneSpot-Image {
   height: auto;
   width: auto;
-  max-width: 40%;
-  max-height: 40%;
+  width: 40%;
+  height: 40%;
+}
+.small {
+  height: 100%;
+  width: 100%;
+}
+
+.corner-top {
+  border-top-right-radius: 15px;
+}
+.corner-bottom {
+  border-bottom-right-radius: 15px;
 }
 
 .Big {
-  /* grid-column: auto/span 2;
-  grid-row: auto/span 2; */
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .secondaryImgContainer {
@@ -47,16 +55,18 @@
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   grid-gap: 5px;
+  width: 45%;
 }
 
 .description-checkin-container {
   display: flex;
-  width: 60%;
+  width: 90%;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .spotContainer {
-  width: 75%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,7 +74,7 @@
 }
 
 .spot-detail-review {
-  width: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,12 +85,62 @@
   border-radius: 12px;
   padding: 24px;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+  width: 30%;
 }
 
 .checkin-description {
-  width: 75%;
+  width: 60%;
+  padding: 15px;
+  word-wrap: break-word;
 }
 
 .mainImgContainer {
-  width: 50%;
+  width: 45%;
+}
+
+.checkin-star-price {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.spancheckin {
+  display: flex;
+  gap: 10px;
+}
+
+.period {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  font-size: 2vh;
+}
+
+.title-container {
+  align-self: flex-start;
+  margin-left: 6%;
+  margin-bottom: 10px;
+}
+
+.title-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.star {
+  font-size: 15;
+}
+
+.title-Spot {
+  font-size: 2vh;
+}
+
+.description {
+  font-size: 1.5vh;
+}
+
+.review-box {
+  margin-top: 10px;
 }

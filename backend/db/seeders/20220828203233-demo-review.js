@@ -45,6 +45,55 @@ module.exports = {
             "I had a good time with my friends and my family, the stay was beautiful, views all around.",
           stars: 5,
         },
+        {
+          spotId: 1,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 4,
+        },
+        {
+          spotId: 1,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 5,
+        },
+        {
+          spotId: 1,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 5,
+        },
+        {
+          spotId: 1,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 5,
+        },
+        {
+          spotId: 1,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 5,
+        },
+        {
+          spotId: 1,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 5,
+        },
+        {
+          spotId: 1,
+          userId: 1,
+          review:
+            "I had a good time with my friends and my family, the stay was beautiful, views all around.",
+          stars: 5,
+        },
       ],
       {}
     );

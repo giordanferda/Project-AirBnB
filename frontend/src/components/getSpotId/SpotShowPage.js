@@ -47,6 +47,22 @@ function GetSpotbyId() {
   return (
     <div className="spotContainer">
       <div className="spot-detail-review">
+        <div className="title-container">
+          <h3 className="title-Spot">{spot.name}</h3>
+          <div className="title-info">
+            <i className="fa-solid fa-star star"></i>
+            <span>
+              {spot.avgStarRating
+                ? parseFloat(spot.avgStarRating).toFixed(1)
+                : "No reviews yet"}{" "}
+              ({reviews.length} reviews)
+            </span>
+            <span>
+              {spot.city}, {spot.state}, {spot.country}
+            </span>
+          </div>
+        </div>
+
         {spot &&
           spot?.Images?.map((image, index) => (
             <div className="imgParentContainer">
@@ -65,8 +81,9 @@ function GetSpotbyId() {
                   key={"imageId: " + JSON.stringify(index)}
                   alt="NOT FOUND"
                 />
+
                 <img
-                  className="oneSpot-Image small"
+                  className="oneSpot-Image small corner-top"
                   src={image.url}
                   key={"imageId: " + JSON.stringify(index)}
                   alt="NOT FOUND"
@@ -78,7 +95,7 @@ function GetSpotbyId() {
                   alt="NOT FOUND"
                 />
                 <img
-                  className="oneSpot-Image small"
+                  className="oneSpot-Image small corner-bottom"
                   src={image.url}
                   key={"imageId: " + JSON.stringify(index)}
                   alt="NOT FOUND"
@@ -87,16 +104,24 @@ function GetSpotbyId() {
             </div>
           ))}
 
-        {user &&
-          alreadyReviewed(filterReviews) === false &&
-          user.id !== spot.ownerId && <CreateReview spotId={spot?.id} />}
         <div className="description-checkin-container">
           <div className="checkin-description">
             <div className="description">{spot.description}</div>
           </div>
           <div className="checkin">
-            <i className="fa-solid fa-star"></i>
-            {`$${spot.price} /night`}
+            <div className="checkin-star-price">
+              <div>{`$${spot.price} /night`}</div>
+              <span className="spancheckin">
+                <div>
+                  <i className="fa-solid fa-star"></i>
+                  {spot.avgStarRating}
+                </div>
+                <div className="period">·</div>
+                <span>{`${reviews.length} review${
+                  reviews.length === 1 ? "" : "s"
+                }`}</span>
+              </span>
+            </div>
           </div>
         </div>
         <div className="reviewContainer">
@@ -119,6 +144,11 @@ function GetSpotbyId() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="review-box">
+          {user &&
+            alreadyReviewed(filterReviews) === false &&
+            user.id !== spot.ownerId && <CreateReview spotId={spot?.id} />}
         </div>
       </div>
     </div>

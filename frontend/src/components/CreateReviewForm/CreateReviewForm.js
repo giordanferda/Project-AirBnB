@@ -22,7 +22,7 @@ function CreateReview({ spotId }) {
   };
 
   return (
-    <form id="modal-content" onSubmit={() => handleSubmit(spotId)}>
+    <form onSubmit={() => handleSubmit(spotId)}>
       <label>Review</label>
       <input
         value={review}
