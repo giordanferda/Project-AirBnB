@@ -11,6 +11,7 @@ Live Link: https://ferdabnb.herokuapp.com/
 - [API-Routes-Documentation](https://github.com/giordanferda/Project-AirBnB/wiki/API-Routes-Documentation)
 - [App Features](https://github.com/giordanferda/Project-AirBnB/wiki/App-Features)
 - [Database-Schema](https://github.com/giordanferda/Project-AirBnB/wiki/Database-Schema)
+- [Redux State Shape](https://github.com/giordanferda/Project-AirBnB/wiki/Redux-State-Shape)
 
 ## Technologies Used
 
