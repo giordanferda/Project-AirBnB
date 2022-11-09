@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      unique: true
+      // unique: true
     },
     spotId: {
       type: DataTypes.INTEGER,
