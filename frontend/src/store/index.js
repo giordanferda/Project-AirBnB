@@ -1,20 +1,19 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { restoreCSRF, csrfFetch } from '../store/csrf';
+import { restoreCSRF, csrfFetch } from "../store/csrf";
 import reviewReducer from "./reviews";
-import * as sessionActions from './session';
-import sessionReducer from './session.js';
+import * as sessionActions from "./session";
+import sessionReducer from "./session.js";
 import spotReducer from "./spots";
-
+import bookingsReducer from "./bookings";
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
   spots: spotReducer,
-  reviews: reviewReducer
+  reviews: reviewReducer,
+  bookings: bookingsReducer,
 });
-
-
 
 let enhancer;
 
@@ -33,7 +32,7 @@ const configureStore = (preloadedState) => {
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   restoreCSRF();
 
   window.csrfFetch = csrfFetch;

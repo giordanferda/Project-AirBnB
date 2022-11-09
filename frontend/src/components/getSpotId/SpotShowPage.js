@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSpotDetailById } from "../../store/spots";
 import { useParams } from "react-router-dom";
 import CreateReview from "../CreateReviewForm/CreateReviewForm";
 import { allReviews, deleteYourReview } from "../../store/reviews";
+import CreateBooking from "../CreateBooking/CreateBooking";
 import "./spotShowPage.css";
 
 function GetSpotbyId() {
   const { spotId } = useParams();
+  const { ownerId } = useParams();
+
+  const todayDate = new Date().toISOString().slice(0, 10);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
   const spots = useSelector((state) => Object.values(state.spots));
   const spot = spots.find((spot) => spot.id === parseInt(spotId));
   const dispatch = useDispatch();
@@ -110,6 +117,16 @@ function GetSpotbyId() {
           </div>
           <div className="checkin">
             <div className="checkin-star-price">
+              <div className="spotDetailBoxTwo">
+                <CreateBooking
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                  todayDate={todayDate}
+                  startDate={startDate}
+                  endDate={endDate}
+                  spotId={spotId}
+                />
+              </div>
               <div>{`$${spot.price} /night`}</div>
               <span className="spancheckin">
                 <div>

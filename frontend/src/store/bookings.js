@@ -30,14 +30,16 @@ export const createBookings = (booking) => {
   };
 };
 
-export const createNewUserBoooking =
+export const createNewUserBooking =
   (spotId, bookingData) => async (dispatch) => {
     const reqData = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookingData),
     };
+    // console.log('THIS IS REQDATA', reqData)
     const res = await csrfFetch(`/api/spots/${spotId}/bookings`, reqData);
+    // console.log('THIS IS RES', res)
     if (res.ok) {
       const data = await res.json();
       dispatch(createBookings(data));
@@ -92,7 +94,7 @@ export const editBooking = (payload, reviewId) => async (dispatch) => {
     body: JSON.stringify(payload),
   });
   if (res.ok) {
-    const data = await response.json();
+    const data = await res.json();
     dispatch(updateBooking(data.Bookings));
     return res;
   }

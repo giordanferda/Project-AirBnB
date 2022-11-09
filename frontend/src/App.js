@@ -10,7 +10,9 @@ import CreateSpot from "./components/CreateSpotForm/CreateSpotForm";
 import MyOwnedSpots from "./components/myOwnedSpotsForm/myOwnedSpots";
 import EditSpotForm from "./components/CreateSpotForm/EditSpotForm";
 import CurrentSpots from "./components/GetCurrentUserReview/CurrentUserReview";
+import CreateBooking from "./components/CreateBooking/CreateBooking";
 import "./app.css";
+import UserBookings from "./components/UserBookings/UserBookings";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -50,6 +52,12 @@ function App() {
           </Route>
           <Route exact path="/myReviews">
             {user ? <CurrentSpots /> : <Redirect to="/" />}
+          </Route>
+          <Route exact path="/testBooking">
+            <CreateBooking />
+          </Route>
+          <Route exact path='/test'>
+            <UserBookings />
           </Route>
         </Switch>
       )}
