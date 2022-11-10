@@ -36,7 +36,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .Link-Login {
@@ -67,16 +66,10 @@
   width: 100%;
   padding: 10px;
   font-weight: bold;
-  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
-.input-label {
-  font-family: Roboto, Helvetica Neue, sans-serif;
-}
 
-.Link-Login {
-  font-family: Roboto, Helvetica Neue, sans-serif;
-}
+
 
 .error-login {
   color: red;

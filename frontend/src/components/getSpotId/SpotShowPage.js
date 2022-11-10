@@ -117,16 +117,6 @@ function GetSpotbyId() {
           </div>
           <div className="checkin">
             <div className="checkin-star-price">
-              <div className="spotDetailBoxTwo">
-                <CreateBooking
-                  setStartDate={setStartDate}
-                  setEndDate={setEndDate}
-                  todayDate={todayDate}
-                  startDate={startDate}
-                  endDate={endDate}
-                  spotId={spotId}
-                />
-              </div>
               <div>{`$${spot.price} /night`}</div>
               <span className="spancheckin">
                 <div>
@@ -139,6 +129,18 @@ function GetSpotbyId() {
                 }`}</span>
               </span>
             </div>
+              <div className="spotDetailBoxTwo ">
+                <CreateBooking
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                  todayDate={todayDate}
+                  startDate={startDate}
+                  endDate={endDate}
+                  spotId={spotId}
+                />
+                <span className="you-wont-be-charged">You won't be charged yet</span>
+              </div>
+
             <div className="checkin-star-price">
               <div>Cleaning Fee</div>
               <div>Free</div>

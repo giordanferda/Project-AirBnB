@@ -82,7 +82,7 @@ const CreateBooking = (
       <div className="createBookingErrorList">
         {errors.map((error, i) => (
           <div className="errorMessageContainer" key={i}>
-            <i class="fa-solid fa-exclamation exclamation-point"></i>
+            <i class="fa-solid fa-exclamation exclamation-point point"></i>
             <div className="errorMessage">{error}</div>
           </div>
         ))}
@@ -118,7 +118,7 @@ const CreateBooking = (
 
         <div className="createBookingDiv">
           <div className="createBookingInputContainer">
-            <label className="checkin-label">CHECK-IN</label>
+            <label className="checkin-label">CHECK-IN {"   "} </label>
             <input
               className="BookingCheckinInput"
               type="date"
@@ -130,7 +130,7 @@ const CreateBooking = (
           </div>
 
           <div className="createBookingInputContainer">
-            <label className="checkout-label">CHECK-OUT</label>
+            <label className="checkout-label"> CHECKOUT </label>
             <input
               className="BookingCheckOutInput"
               type="date"
@@ -141,13 +141,13 @@ const CreateBooking = (
             />
           </div>
         </div>
-        <div className="howManyGuestsContainer">
+        {/* <div className="howManyGuestsContainer">
           <div className="howManyGuestsLabel">GUESTS</div>
           <div className="HowManyGuestInput">4 guests</div>
-        </div>
+        </div> */}
         <div className="CreateBookingContainer">
           <input
-            className="BookingSubmit"
+            className="BookingSubmit "
             type="Submit"
             defaultValue="Reserve"
           />

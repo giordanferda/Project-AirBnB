@@ -85,7 +85,7 @@
 .checkin {
   outline: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
-  padding: 24px;
+  padding: 5%;
   border: none;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
   width: 30%;
@@ -93,6 +93,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+    font-family: "Montserrat", sans-serif;
+
 }
 
 .checkin-description {
@@ -145,6 +147,8 @@
   display: flex;
   gap: 10px;
   align-items: center;
+    font-family: "Montserrat", sans-serif;
+
 }
 
 .star {
@@ -153,10 +157,14 @@
 
 .title-Spot {
   font-size: 2vh;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 2.5px;
 }
 
 .description {
   font-size: 1.5vh;
+    font-family: "Montserrat", sans-serif;
+
 }
 
 .review-box {
@@ -169,12 +177,36 @@
 .Delete-Button {
   display: flex;
   justify-content: center;
-  border-radius: 15px;
+    border-radius: 15px;
   cursor: pointer;
   color: rgb(228, 234, 240);
-  padding: 5px 10px;
-  font-size: 8px;
-  margin-top: 10px;
+  padding: 6px 15px;
+  font-size: 16px;
+  /* margin-top: 20px; */
   border: none;
   background-color: #ff385c;
+}
+
+
+.you-wont-be-charged {
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  /* margin-top: 8px; */
+  font-family: 'Montserrat', sans-serif;
+  line-height: 26px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.checkin-label {
+  font-weight:600
+}
+
+.checkout-label {
+  font-weight:600
+}
+
+.reviewOne {
+  font-family: 'Montserrat', sans-serif;
 }

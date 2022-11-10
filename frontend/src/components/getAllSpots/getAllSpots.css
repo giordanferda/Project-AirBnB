@@ -22,7 +22,6 @@
   font-weight: 200;
   font-size: 2vh;
   color: black;
-  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .gridSpot {
@@ -51,14 +50,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .spot-price-h1 {
   color: black;
-  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .spotName {
   color: black;
-  font-family: Roboto, Helvetica Neue, sans-serif;
 }
