@@ -32,6 +32,18 @@ function GetSpotbyId() {
     return review.spotId === parseInt(spotId);
   });
 
+  // to dynamically render the price based on different dates
+
+  let dateInt;
+
+  if (isNaN((new Date(endDate) - new Date(startDate)) / 86400000) || ((new Date(endDate) - new Date(startDate)) / 86400000) < 0) {
+    dateInt = 0;
+  } else {
+    dateInt = (new Date(endDate) - new Date(startDate)) / 86400000
+  }
+  console.log('this is dateInt', dateInt)
+
+
   //if the user has already reviewed the spot then the input box for reviews will not show up
   const alreadyReviewed = (reviews) => {
     let alreadyReviewedByUser = false;
@@ -151,7 +163,7 @@ function GetSpotbyId() {
             </div>
             <div className="checkin-star-price total-price">
               <div>Total before Taxes</div>
-              <div>${spot.price}</div>
+              <div>${dateInt * spot?.price}</div>
             </div>
           </div>
         </div>

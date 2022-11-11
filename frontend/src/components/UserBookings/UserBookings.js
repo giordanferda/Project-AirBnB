@@ -7,15 +7,16 @@ import "./UserBookings.css";
 
 function UserBookings() {
 const bookings = useSelector((state) => Object.values(state.bookings));
+ const spot = useSelector((state) => Object.values(state.spots));
 console.log("THIS IS BOOKINGS", bookings);
 const dispatch = useDispatch();
 const history = useHistory();
 
 const todayDate = (new Date().toISOString().slice(0, 10));
 
-// bookings.sort(function(a,b) {
-//     return new Date(a.endDate) - new Date(b.endDate);
-// });
+bookings.sort(function(a,b) {
+    return new Date(a.endDate) - new Date(b.endDate);
+});
 
 // const filteredBookings = bookings.filter((booking) => {
 //     return booking.endDate >= todayDate;
@@ -42,25 +43,28 @@ if (Object.keys(bookings).length === 0) {
     )
 } else {
     userBookings = (
-        <div className="bookings-container">
-            <h2>Upcoming Bookings</h2>
+        <div className="bookings-container page-container">
+            <h2 className="mySpotHeader">Upcoming Bookings</h2>
+            <div className="gridSpot">
+
             {bookings.map((booking) => (
-                <div className="booking-card" key={booking.id}>
+                <div className="booking-card cardsforOwned" key={booking.id}>
                     <div className="booking-card-left">
+                    <div className="booking-card-right">
+                        <img className='Image' src={booking.Spot.previewImage} alt="Spot" />
+                    </div>
                         <div className="booking-card-info">
-                            <h3>{booking.Spot.name}</h3>
-                            <p>{booking.startDate} - {booking.endDate}</p>
+                            <h3 className="spotAddy-Owned spacing">{booking.Spot.name}</h3>
+                            <p className="grouping-info spacing">{booking.startDate} - {booking.endDate}</p>
                         </div>
                         <div className="booking-card-buttons">
-                            <NavLink to={`/spots/${booking.Spot.id}`} className="booking-card-button">View Spot</NavLink>
-                            <button className="booking-card-button" onClick={() => dispatch(deleteBookingId(booking.id))}>Cancel Booking</button>
+                            <NavLink to={`/spots/${booking.Spot.id}`} className="spacing booking-card-button">View Spot</NavLink>
+                            <button className="buttonforowned booking-card-button spacing" onClick={() => dispatch(deleteBookingId(booking.id))}>Cancel Booking</button>
                         </div>
-                    </div>
-                    <div className="booking-card-right">
-                        <img src={booking.Spot.previewImage} alt="Spot" />
                     </div>
                 </div>
             ))}
+            </div>
         </div>
     )
 }
@@ -68,7 +72,7 @@ if (Object.keys(bookings).length === 0) {
 return (
  <div className="user-booking-container">
       <div className="user-booking-inner-container">
-        <div className="user-booking-header">My Bookings</div>
+        {/* <div className="user-booking-header mySpotHeader">My Bookings</div> */}
         {userBookings}
       </div>
     </div>

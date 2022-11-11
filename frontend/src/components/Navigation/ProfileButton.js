@@ -59,6 +59,16 @@ function ProfileButton({ user }) {
           >
             My Reviews
           </li>
+          <li
+            onClick={() => {
+              if (location.pathname === "/myBookings") {
+                return;
+              }
+              history.push("/myBookings");
+            }}
+          >
+            My Bookings
+          </li>
           <li>
             <button className="profile-logout-button" onClick={logout}>
               Log Out

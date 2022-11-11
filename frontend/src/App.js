@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import Navigation from "./components/Navigation";
 import Spots from "./components/getAllSpots/getAllSpots";
 import GetSpotbyId from "./components/getSpotId/SpotShowPage";
@@ -38,9 +39,9 @@ function App() {
           <Route exact path="/">
             <Spots />
           </Route>
-          <Route exact path={`/spots/:spotId`}>
+          <ProtectedRoute exact path={`/spots/:spotId`}>
             <GetSpotbyId />
-          </Route>
+          </ProtectedRoute>
           <Route exact path={`/createSpotForm`}>
             {user ? <CreateSpot /> : <Redirect to="/" />}
           </Route>
@@ -53,12 +54,9 @@ function App() {
           <Route exact path="/myReviews">
             {user ? <CurrentSpots /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/testBooking">
-            <CreateBooking />
-          </Route>
-          <Route exact path='/test'>
+          <ProtectedRoute exact path='/myBookings'>
             <UserBookings />
-          </Route>
+          </ProtectedRoute>
         </Switch>
       )}
     </div>

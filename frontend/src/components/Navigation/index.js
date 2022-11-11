@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import picture from "../../assets/FerdaBnb.jpg";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
 
@@ -24,7 +25,7 @@ function Navigation({ isLoaded }) {
     <div className="nav-wrapper">
       <img
         className="logo"
-        src="https://1000logos.net/wp-content/uploads/2017/08/Airbnb-Logo-500x181.png"
+        src={picture}
         onClick={() => history.push("/")}
         alt="NOT FOUND"
       ></img>

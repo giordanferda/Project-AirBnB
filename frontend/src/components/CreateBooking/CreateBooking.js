@@ -6,16 +6,16 @@ import "./CreateBooking.css";
 
 const CreateBooking = (
   {
-    // setStartDate,
-    // setEndDate,
-    // todayDate,
-    // startDate,
-    // endDate,
+    setStartDate,
+    setEndDate,
+    todayDate,
+    startDate,
+    endDate,
   }
 ) => {
-  const todayDate = new Date().toISOString().slice(0, 10);
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  // const todayDate = new Date().toISOString().slice(0, 10);
+  // const [startDate, setStartDate] = useState();
+  // const [endDate, setEndDate] = useState();
 
   const [errors, setErrors] = useState([]);
   const {spotId} = useParams();
@@ -105,7 +105,7 @@ const CreateBooking = (
       }
       if (errors.length === 0 && spot?.ownerId !== sessionUser.id) {
         dispatch(createNewUserBooking(spotId, data)).then((res) =>
-          history.push(`/confirmed/${spotId}/${res.booking.id}`)
+          history.push(`/myBookings`)
         );
       }
     // return dispatch(createNewUserBooking(spotId, data))
