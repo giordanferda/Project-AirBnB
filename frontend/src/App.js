@@ -12,6 +12,7 @@ import MyOwnedSpots from "./components/myOwnedSpotsForm/myOwnedSpots";
 import EditSpotForm from "./components/CreateSpotForm/EditSpotForm";
 import CurrentSpots from "./components/GetCurrentUserReview/CurrentUserReview";
 import CreateBooking from "./components/CreateBooking/CreateBooking";
+import Search from './components/Search/Search'
 import "./app.css";
 import UserBookings from "./components/UserBookings/UserBookings";
 function App() {
@@ -57,6 +58,9 @@ function App() {
           <ProtectedRoute exact path='/myBookings'>
             <UserBookings />
           </ProtectedRoute>
+          <Route exact path='/test'>
+            <Search />
+          </Route>
         </Switch>
       )}
     </div>

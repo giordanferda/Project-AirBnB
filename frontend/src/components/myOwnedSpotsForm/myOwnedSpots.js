@@ -1,21 +1,30 @@
 import React, { useEffect } from "react";
-import { getSpotsById } from "../../store/spots";
+import { getAllSpotsThunk, getSpotsById } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { deleteYourSpot } from "../../store/spots";
+import { useModalContext } from "../../context/Modal";
 // import "../getAllSpots/getAllSpots.css";
 import "./myOwnedSpots.css";
 
-const MyOwnedSpots = () => {
+const MyOwnedSpots = ({ spot }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
 
   const spots = useSelector((state) => Object.values(state.spots));
-  const userSpots = spots.filter((spot) => spot.ownerId === user.id);
+  const userSpots = spots.filter((spot) => spot?.ownerId === user.id);
+
   useEffect(() => {
     dispatch(getSpotsById());
+    dispatch(getAllSpotsThunk());
   }, [dispatch]);
+
+  const { setUserSearch } = useModalContext();
+  const openPage = () => {
+    setUserSearch("");
+    history.push(`/spots/${spot.id}`);
+  };
 
   const handleDelete = (spotId) => {
     dispatch(deleteYourSpot(spotId));

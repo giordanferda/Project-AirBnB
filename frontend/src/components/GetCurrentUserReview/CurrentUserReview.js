@@ -2,20 +2,27 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserReview, deleteYourReview } from "../../store/reviews";
-import { allSpots } from "../../store/spots";
+import { allSpots, getAllSpotsThunk } from "../../store/spots";
+import { useModalContext } from "../../context/Modal";
 import "./CurrentUserReview.css";
-const CurrentUserReviews = () => {
+const CurrentUserReviews = ({ spot }) => {
   const user = useSelector((state) => state.session.user);
 
   const reviews = useSelector((state) => Object.values(state.reviews));
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const { setUserSearch } = useModalContext();
+  const openPage = () => {
+    setUserSearch("");
+    history.push(`/spots/${spot.id}`);
+  };
 
   useEffect(() => {
     dispatch(getUserReview());
     dispatch(allSpots());
-  }, []);
+    dispatch(getAllSpotsThunk());
+  }, [dispatch]);
 
   const handleDeleteButton = (reviewId) => {
     dispatch(deleteYourReview(reviewId));
@@ -53,7 +60,7 @@ const CurrentUserReviews = () => {
   };
 
   return (
-    <div className="currentReviewContainer">
+    <div className="currentReviewContainer" onClick={openPage}>
       <h2 className="MyReviewHeader">My Reviews</h2>
       <div className="current-review-wrap">
         {reviews.map((review, i) => (

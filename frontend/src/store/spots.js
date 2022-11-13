@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 export const GETALLSPOTS = "spots/getAllSpots";
+export const GET_ALL_SPOTS_SEARCH = "spots/getAllSpotsSearch";
 export const CREATEDSPOT = "spots/CREATESPOT";
 export const EDITASPOT = "spots/editspot";
 export const DELETEASPOT = "spots/deletespot";
@@ -25,6 +26,24 @@ export const allSpots = () => async (dispatch) => {
     dispatch(getAllSpots(data.Spots));
     return response;
   }
+};
+
+const getAllSpotsAction = (spots) => {
+    return {
+        type: GET_ALL_SPOTS_SEARCH,
+        payload: spots
+    };
+};
+
+export const getAllSpotsThunk = () => async (dispatch) => {
+
+    const response = await csrfFetch('/api/spots');
+    const spots = await response.json();
+
+    // console.log(spots)
+
+    dispatch(getAllSpotsAction(spots));
+    return response;
 };
 
 //Create Spot
@@ -138,6 +157,7 @@ export const deleteYourSpot = (spotId) => async (dispatch) => {
 
 const spotReducer = (state = {}, action) => {
   let newState;
+  let spots;
   switch (action.type) {
     case GETALLSPOTS:
       newState = {};
@@ -145,6 +165,14 @@ const spotReducer = (state = {}, action) => {
         newState[spot.id] = spot;
       });
       return newState;
+    case GET_ALL_SPOTS_SEARCH:
+      spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: null }
+            let allSpots = {}
+            for (let spot of action.payload.Spots) {
+                allSpots[spot.id] = spot
+            }
+            spots.allSpots = allSpots
+            return spots
     case GETDETAILSFROMSPOT:
       newState = {};
       newState[action.payload.id] = action.payload;

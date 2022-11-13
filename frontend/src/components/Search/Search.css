@@ -1,0 +1,79 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.Search-icon {
+  height: 85px;
+}
+
+.search_inputbox {
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  padding-left: 20px;
+  border-radius: 5px;
+  border: 1px solid #b8b8b8;
+}
+
+.search_inputbox:focus {
+  border: 1px solid black;
+}
+
+.Search_results {
+  position: absolute;
+  width: 300px;
+  top: 55px;
+  margin-left: 28px;
+}
+.Search_card {
+  cursor: pointer;
+  width: 310px;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.762);
+  text-decoration: none;
+  color: black;
+}
+
+.Search_Null {
+  cursor: not-allowed;
+  width: 310px;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.SearchImg {
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
+  border-radius: 3px;
+}
+
+.Search_Lower {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.Search_Title {
+  font-size: 15px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+}
+
+.Search_Sub {
+  font-size: 11px;
+  margin-left: 0px;
+  font-family: "Montserrat", sans-serif;
+}

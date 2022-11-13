@@ -1,31 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSpotDetailById } from "../../store/spots";
+import { useHistory } from "react-router-dom";
+import { getAllSpotsThunk, getSpotDetailById } from "../../store/spots";
 import { useParams } from "react-router-dom";
 import CreateReview from "../CreateReviewForm/CreateReviewForm";
 import { allReviews, deleteYourReview } from "../../store/reviews";
 import CreateBooking from "../CreateBooking/CreateBooking";
+import { useModalContext } from "../../context/Modal";
 import "./spotShowPage.css";
 
 function GetSpotbyId() {
   const { spotId } = useParams();
   const { ownerId } = useParams();
-
+  const history = useHistory();
   const todayDate = new Date().toISOString().slice(0, 10);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
   const spots = useSelector((state) => Object.values(state.spots));
-  const spot = spots.find((spot) => spot.id === parseInt(spotId));
+  const spot = spots.find((spot) => spot?.id === parseInt(spotId));
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
   const reviewState = useSelector((state) => state.reviews);
+  const { setUserSearch } = useModalContext();
+  const openPage = () => {
+    setUserSearch("");
+    history.push(`/spots/${spot.id}`);
+  };
 
   const reviews = Object.values(reviewState);
   useEffect(() => {
     dispatch(getSpotDetailById(spotId));
     dispatch(allReviews(spotId));
+    dispatch(getAllSpotsThunk());
   }, [dispatch, spotId]);
 
   const filterReviews = reviews.filter((review) => {
@@ -36,13 +44,15 @@ function GetSpotbyId() {
 
   let dateInt;
 
-  if (isNaN((new Date(endDate) - new Date(startDate)) / 86400000) || ((new Date(endDate) - new Date(startDate)) / 86400000) < 0) {
+  if (
+    isNaN((new Date(endDate) - new Date(startDate)) / 86400000) ||
+    (new Date(endDate) - new Date(startDate)) / 86400000 < 0
+  ) {
     dateInt = 0;
   } else {
-    dateInt = (new Date(endDate) - new Date(startDate)) / 86400000
+    dateInt = (new Date(endDate) - new Date(startDate)) / 86400000;
   }
-  console.log('this is dateInt', dateInt)
-
+  console.log("this is dateInt", dateInt);
 
   //if the user has already reviewed the spot then the input box for reviews will not show up
   const alreadyReviewed = (reviews) => {
@@ -64,7 +74,7 @@ function GetSpotbyId() {
   }
 
   return (
-    <div className="spotContainer">
+    <div className="spotContainer" onClick={openPage}>
       <div className="spot-detail-review">
         <div className="title-container">
           <h3 className="title-Spot">{spot.name}</h3>
@@ -141,17 +151,19 @@ function GetSpotbyId() {
                 }`}</span>
               </span>
             </div>
-              <div className="spotDetailBoxTwo ">
-                <CreateBooking
-                  setStartDate={setStartDate}
-                  setEndDate={setEndDate}
-                  todayDate={todayDate}
-                  startDate={startDate}
-                  endDate={endDate}
-                  spotId={spotId}
-                />
-                <span className="you-wont-be-charged">You won't be charged yet</span>
-              </div>
+            <div className="spotDetailBoxTwo ">
+              <CreateBooking
+                setStartDate={setStartDate}
+                setEndDate={setEndDate}
+                todayDate={todayDate}
+                startDate={startDate}
+                endDate={endDate}
+                spotId={spotId}
+              />
+              <span className="you-wont-be-charged">
+                You won't be charged yet
+              </span>
+            </div>
 
             <div className="checkin-star-price">
               <div>Cleaning Fee</div>
