@@ -36,7 +36,7 @@ function Search({ allSpots }) {
         className="search_inputbox"
         type="text"
         value={userSearch}
-        onChange={(e) => setUserSearch(e.target.value)}
+        onChange={(e) => setUserSearch(e.target.value) && setSearchToggle(true)}
         required
         placeholder="Search listed spots..."
       ></input>
