@@ -34,7 +34,7 @@
   width: 100%;
   justify-items: center; */
 
-    display: flex;
+  display: flex;
   flex-wrap: wrap;
   place-items: center;
   justify-content: center;
@@ -50,14 +50,13 @@
   padding: 20px;
   border: none;
   border-radius: 10px;
+  font-family: "Montserrat", sans-serif;
 }
 .page-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-    font-family: 'Montserrat', sans-serif;
-
+  margin-bottom: 48px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .spot-price-h1 {

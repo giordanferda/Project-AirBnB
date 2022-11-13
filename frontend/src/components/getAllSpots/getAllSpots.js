@@ -21,10 +21,14 @@ function Spots({ spot }) {
     setUserSearch("");
     history.push(`/spots/${spot.id}`);
   };
+  console.log(spots, "this is spots");
+  if (spots === null) {
+    return;
+  }
 
   return (
     spots && (
-      <div className="page-container" onClick={openPage}>
+      <div className="page-container">
         <div className="gridSpot">
           {spots.map((spot, index) => (
             <div key={`${index}_${spot?.id}`} className="card">
