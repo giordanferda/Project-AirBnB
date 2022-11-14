@@ -3,13 +3,14 @@ import ReactDOM from "react-dom";
 import "./Modal.css";
 
 const ModalContext = React.createContext();
-export const useModalContext = () => useContext(ModalContext)
+export const useModalContext = () => useContext(ModalContext);
 
 export function ModalProvider({ children }) {
   const modalRef = useRef();
   const [value, setValue] = useState();
-  const [searchToggle, setSearchToggle] = useState(false)
-  const [userSearch, setUserSearch] = useState("")
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [searchToggle, setSearchToggle] = useState(false);
+  const [userSearch, setUserSearch] = useState("");
 
   useEffect(() => {
     setValue(modalRef.current);
@@ -17,7 +18,19 @@ export function ModalProvider({ children }) {
 
   return (
     <>
-      <ModalContext.Provider value={{value, searchToggle, setSearchToggle, userSearch, setUserSearch}}>{children}</ModalContext.Provider>
+      <ModalContext.Provider
+        value={{
+          value,
+          searchToggle,
+          setSearchToggle,
+          userSearch,
+          setUserSearch,
+          showLoginModal,
+          setShowLoginModal,
+        }}
+      >
+        {children}
+      </ModalContext.Provider>
       <div ref={modalRef} />
     </>
   );
@@ -32,6 +45,7 @@ export function Modal({ onClose, children }) {
       <div id="modal-background" onClick={onClose} />
       <div id="modal-content">{children}</div>
     </div>,
-    modalNode
+    document.getElementById("modal-root")
+    // modalNode
   );
 }

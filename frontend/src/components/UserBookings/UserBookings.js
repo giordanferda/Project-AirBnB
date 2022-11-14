@@ -10,7 +10,7 @@ import "./UserBookings.css";
 function UserBookings() {
   const bookings = useSelector((state) => Object.values(state.bookings));
   const spot = useSelector((state) => Object.values(state.spots));
-  console.log("THIS IS BOOKINGS", bookings);
+  // console.log("THIS IS BOOKINGS", bookings);
   const dispatch = useDispatch();
   const history = useHistory();
 

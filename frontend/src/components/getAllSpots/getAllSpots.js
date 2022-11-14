@@ -11,6 +11,9 @@ function Spots({ spot }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (spots === null || spots === undefined) {
+      return;
+    }
     dispatch(allSpots());
     dispatch(getAllSpotsThunk());
   }, [dispatch]);
@@ -22,9 +25,9 @@ function Spots({ spot }) {
     history.push(`/spots/${spot.id}`);
   };
   console.log(spots, "this is spots");
-  if (spots === null) {
-    return;
-  }
+  // if (spots === null || spots === undefined) {
+  //   return null;
+  // }
 
   return (
     spots && (
