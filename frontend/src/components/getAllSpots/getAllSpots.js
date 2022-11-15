@@ -15,16 +15,16 @@ function Spots({ spot }) {
       return;
     }
     dispatch(allSpots());
-    dispatch(getAllSpotsThunk());
+    // dispatch(getAllSpotsThunk());
   }, [dispatch]);
   const spots = useSelector((state) => Object.values(state.spots));
   const history = useHistory();
   const { setUserSearch } = useModalContext();
-  const openPage = () => {
-    setUserSearch("");
-    history.push(`/spots/${spot.id}`);
-  };
-  console.log(spots, "this is spots");
+  // const openPage = () => {
+  //   setUserSearch("");
+  //   history.push(`/spots/${spot.id}`);
+  // };
+  // console.log(spots, "this is spots");
   // if (spots === null || spots === undefined) {
   //   return null;
   // }

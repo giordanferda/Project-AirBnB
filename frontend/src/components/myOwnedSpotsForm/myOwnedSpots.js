@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getAllSpotsThunk, getSpotsById } from "../../store/spots";
+import { allSpots, getSpotsById } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { deleteYourSpot } from "../../store/spots";
@@ -17,7 +17,7 @@ const MyOwnedSpots = ({ spot }) => {
 
   useEffect(() => {
     dispatch(getSpotsById());
-    dispatch(getAllSpotsThunk());
+    dispatch(allSpots());
   }, [dispatch]);
 
   const { setUserSearch } = useModalContext();

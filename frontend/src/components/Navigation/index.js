@@ -34,7 +34,7 @@ function Navigation({ isLoaded }) {
         onClick={() => history.push("/")}
         alt="NOT FOUND"
       ></img>
-      <Search allSpots={allSpots} />
+      <Search />
       <ul>
         <li
           className="host-your-place"

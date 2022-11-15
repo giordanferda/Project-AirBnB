@@ -26,8 +26,8 @@
 }
 
 .Search_results {
-  position: absolute;
-  width: 300px;
+  position: sticky;
+  width: 267px;
   top: 55px;
   margin-left: 28px;
   gap: 5px;

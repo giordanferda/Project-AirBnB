@@ -29,21 +29,21 @@ export const allSpots = () => async (dispatch) => {
 };
 
 const getAllSpotsAction = (spots) => {
-    return {
-        type: GET_ALL_SPOTS_SEARCH,
-        payload: spots
-    };
+  return {
+    type: GET_ALL_SPOTS_SEARCH,
+    payload: spots,
+  };
 };
 
 export const getAllSpotsThunk = () => async (dispatch) => {
-
-    const response = await csrfFetch('/api/spots');
+  const response = await csrfFetch("/api/spots", {
+    method: "GET",
+  });
+  if (response.ok) {
     const spots = await response.json();
-
-    // console.log(spots)
-
     dispatch(getAllSpotsAction(spots));
     return response;
+  }
 };
 
 //Create Spot
@@ -166,13 +166,18 @@ const spotReducer = (state = {}, action) => {
       });
       return newState;
     case GET_ALL_SPOTS_SEARCH:
-      spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: null }
-            let allSpots = {}
-            for (let spot of action.payload.Spots) {
-                allSpots[spot.id] = spot
-            }
-            spots.allSpots = allSpots
-            return spots
+      spots = {
+        ...state,
+        allSpots: { ...state.allSpots },
+        allUserSpots: { ...state.allUserSpots },
+        oneSpot: null,
+      };
+      let allSpots = {};
+      for (let spot of action.payload.Spots) {
+        allSpots[spot.id] = spot;
+      }
+      spots.allSpots = allSpots;
+      return spots;
     case GETDETAILSFROMSPOT:
       newState = {};
       newState[action.payload.id] = action.payload;

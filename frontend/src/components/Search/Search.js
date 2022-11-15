@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllSpotsThunk } from "../../store/spots";
+import { allSpots, getAllSpotsThunk } from "../../store/spots";
 import { Modal, useModalContext } from "../../context/Modal";
 import search from "./SearchImg.png";
 import questionmark from "./QuestionMarkImg.png";
 import "./Search.css";
 
-function Search({ allSpots }) {
+function Search() {
   const { searchToggle, setSearchToggle, userSearch, setUserSearch } =
     useModalContext();
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getAllSpotsThunk());
+    // dispatch(getAllSpotsThunk());
+    dispatch(allSpots())
   }, [dispatch]);
 
-  allSpots = useSelector((state) => state?.spots?.allSpots);
-  if (allSpots) {
-    allSpots = Object.values(allSpots);
-  }
+  const spots = useSelector((state) => Object.values(state.spots));
+  // allSpots = useSelector((state) => state?.spots?.allSpots);
+  // if (allSpots) {
+  //   allSpots = Object.values(allSpots);
+  // }
   // console.log(allSpots, 'this is all spots')
 
   const handleSearch = (id) => {
@@ -42,8 +44,8 @@ function Search({ allSpots }) {
       ></input>
       <div className="Search_results">
         {userSearch &&
-          allSpots
-            .filter((spot) =>
+          spots.
+            filter((spot) =>
               spot?.name?.toLowerCase().startsWith(userSearch.toLowerCase())
             )
             .slice(0, 5)
@@ -63,7 +65,7 @@ function Search({ allSpots }) {
               </div>
             ))}
         {userSearch &&
-          allSpots.filter((spot) =>
+          spots.filter((spot) =>
             spot?.name?.toLowerCase().startsWith(userSearch.toLowerCase())
           ).length === 0 && (
             <div className="Search_Null">
