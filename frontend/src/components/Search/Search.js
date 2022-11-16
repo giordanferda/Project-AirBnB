@@ -34,6 +34,8 @@ function Search() {
   return (
     <div className="search-container">
       <img className="Search-icon" src={search}></img>
+      <div className="results">
+
       <input
         className="search_inputbox"
         type="text"
@@ -41,20 +43,20 @@ function Search() {
         onChange={(e) => setUserSearch(e.target.value) && setSearchToggle(true)}
         required
         placeholder="Search listed spots..."
-      ></input>
+        ></input>
       <div className="Search_results">
         {userSearch &&
           spots.
-            filter((spot) =>
-              spot?.name?.toLowerCase().startsWith(userSearch.toLowerCase())
-            )
-            .slice(0, 5)
-            .map((spot) => (
-              <div
-                key={spot.id}
-                className="Search_card"
-                onClick={() => handleSearch(spot.id)}
-              >
+          filter((spot) =>
+          spot?.name?.toLowerCase().startsWith(userSearch.toLowerCase())
+          )
+          .slice(0, 5)
+          .map((spot) => (
+            <div
+            key={spot.id}
+            className="Search_card"
+            onClick={() => handleSearch(spot.id)}
+            >
                 <img className="SearchImg" src={spot.previewImage}></img>
                 <div className="Search_Lower">
                   <div className="Search_Title">{spot.name}</div>
@@ -66,7 +68,7 @@ function Search() {
             ))}
         {userSearch &&
           spots.filter((spot) =>
-            spot?.name?.toLowerCase().startsWith(userSearch.toLowerCase())
+          spot?.name?.toLowerCase().startsWith(userSearch.toLowerCase())
           ).length === 0 && (
             <div className="Search_Null">
               <img className="SearchImg" src={questionmark}></img>
@@ -76,6 +78,7 @@ function Search() {
               </div>
             </div>
           )}
+          </div>
       </div>
     </div>
   );
