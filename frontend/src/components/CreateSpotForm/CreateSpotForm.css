@@ -8,6 +8,8 @@
   padding: 30px;
   gap: 15px;
   width: max(40vw, 400px);
+      font-family: "Montserrat", sans-serif;
+
 }
 
 .Form-Component div {
