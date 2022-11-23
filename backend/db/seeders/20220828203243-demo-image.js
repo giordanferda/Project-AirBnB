@@ -17,7 +17,6 @@ module.exports = {
      * }], {});
      */
     await queryInterface.bulkInsert(options,
-      "Images",
       [
         {
           userId: 1,
@@ -67,6 +66,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete(options, "Images", null, {});
+    await queryInterface.bulkDelete(options, null, {});
   },
 };

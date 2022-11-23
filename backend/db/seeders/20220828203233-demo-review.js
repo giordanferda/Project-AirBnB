@@ -15,7 +15,6 @@ module.exports = {
      * Example:
      */
     await queryInterface.bulkInsert(options,
-      "Reviews",
       [
         {
           spotId: 1,
@@ -115,6 +114,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete(options, "Reviews", null, {});
+    await queryInterface.bulkDelete(options,  null, {});
   },
 };

@@ -18,7 +18,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert(options, "Spots", [
+    await queryInterface.bulkInsert(options, [
       {
         ownerId: 1,
         address: "1 Nettleton House",
@@ -96,6 +96,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete(options, "Spots", null, {});
+    await queryInterface.bulkDelete(options, null, {});
   },
 };
