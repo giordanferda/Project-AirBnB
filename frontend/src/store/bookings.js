@@ -37,9 +37,7 @@ export const createNewUserBooking =
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookingData),
     };
-    // console.log('THIS IS REQDATA', reqData)
     const res = await csrfFetch(`/api/spots/${spotId}/bookings`, reqData);
-    // console.log('THIS IS RES', res)
     if (res.ok) {
       const data = await res.json();
       dispatch(createBookings(data));

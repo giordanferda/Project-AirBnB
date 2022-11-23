@@ -23,7 +23,6 @@ function Search() {
   // if (allSpots) {
   //   allSpots = Object.values(allSpots);
   // }
-  // console.log(allSpots, 'this is all spots')
 
   const handleSearch = (id) => {
     history.push(`/spots/${id}`);

@@ -24,7 +24,6 @@ function Spots({ spot }) {
   //   setUserSearch("");
   //   history.push(`/spots/${spot.id}`);
   // };
-  // console.log(spots, "this is spots");
   // if (spots === null || spots === undefined) {
   //   return null;
   // }

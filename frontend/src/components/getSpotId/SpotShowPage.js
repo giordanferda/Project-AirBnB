@@ -52,7 +52,6 @@ function GetSpotbyId() {
   } else {
     dateInt = (new Date(endDate) - new Date(startDate)) / 86400000;
   }
-  console.log("this is dateInt", dateInt);
 
   //if the user has already reviewed the spot then the input box for reviews will not show up
   const alreadyReviewed = (reviews) => {

@@ -25,9 +25,7 @@ const CreateBooking = (
   const spots = useSelector((state) => state.spots);
   const sessionUser = useSelector((state) => state.session.user);
   const spot = spots[spotId];
-  console.log(spot, 'this is spot in create booking')
   const bookings = useSelector((state) => Object.values(state.bookings));
-  console.log(bookings, 'this is bookings')
 
   const startDateNum = new Date(startDate) - 0;
   const endDateNum = new Date(endDate) - 0;
@@ -68,7 +66,6 @@ const CreateBooking = (
     });
   };
 
-  // console.log('THIS IS SPOT ID', spotId)
 
   useEffect(() => {
     dispatch(getBookingsById(spotId));
