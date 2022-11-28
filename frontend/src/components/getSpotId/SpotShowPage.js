@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getAllSpotsThunk, getSpotDetailById } from "../../store/spots";
+import { allSpots, getAllSpotsThunk, getSpotDetailById } from "../../store/spots";
 import { useParams } from "react-router-dom";
 import CreateReview from "../CreateReviewForm/CreateReviewForm";
 import { allReviews, deleteYourReview } from "../../store/reviews";
@@ -19,6 +19,7 @@ function GetSpotbyId() {
 
   const spots = useSelector((state) => Object.values(state.spots));
   const spot = spots.find((spot) => spot?.id === parseInt(spotId));
+  console.log(spot, 'this is spot')
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
@@ -33,7 +34,8 @@ function GetSpotbyId() {
   useEffect(() => {
     dispatch(getSpotDetailById(spotId));
     dispatch(allReviews(spotId));
-    dispatch(getAllSpotsThunk());
+    // dispatch(getAllSpotsThunk());
+    dispatch(allSpots())
   }, [dispatch, spotId]);
 
   const filterReviews = reviews.filter((review) => {
@@ -91,46 +93,46 @@ function GetSpotbyId() {
           </div>
         </div>
 
-        {spot &&
-          spot?.Images?.map((image, index) => (
-            <div className="imgParentContainer">
-              <div className="mainImgContainer">
-                <img
-                  className="Big"
-                  src={image.url}
-                  key={"imageId: " + JSON.stringify(index) + "big"}
-                  alt="NOT FOUND"
-                />
-              </div>
-              <div className="secondaryImgContainer">
-                <img
-                  className="oneSpot-Image small"
-                  src={image.url}
-                  key={"imageId: " + JSON.stringify(index) + "topleft"}
-                  alt="NOT FOUND"
-                />
+        {/* {spot &&
+          spot?.Images?.map((image, index) => ( */}
+        <div className="imgParentContainer">
+          <div className="mainImgContainer">
+            <img
+              className="Big"
+              src={spot.previewImage}
+              // key={"imageId: " + JSON.stringify(index) + "big"}
+              alt="NOT FOUND"
+            />
+          </div>
+          <div className="secondaryImgContainer">
+            <img
+              className="oneSpot-Image small"
+              src={spot.previewImage}
+              // key={"imageId: " + JSON.stringify(index) + "topleft"}
+              alt="NOT FOUND"
+            />
 
-                <img
-                  className="oneSpot-Image small corner-top"
-                  src={image.url}
-                  key={"imageId: " + JSON.stringify(index) + "topright"}
-                  alt="NOT FOUND"
-                />
-                <img
-                  className="oneSpot-Image small"
-                  src={image.url}
-                  key={"imageId: " + JSON.stringify(index) + "bottomleft"}
-                  alt="NOT FOUND"
-                />
-                <img
-                  className="oneSpot-Image small corner-bottom"
-                  src={image.url}
-                  key={"imageId: " + JSON.stringify(index) + "bottomright"}
-                  alt="NOT FOUND"
-                />
-              </div>
-            </div>
-          ))}
+            <img
+              className="oneSpot-Image small corner-top"
+              src={spot.previewImage}
+              // key={"imageId: " + JSON.stringify(index) + "topright"}
+              alt="NOT FOUND"
+            />
+            <img
+              className="oneSpot-Image small"
+              src={spot.previewImage}
+              // key={"imageId: " + JSON.stringify(index) + "bottomleft"}
+              alt="NOT FOUND"
+            />
+            <img
+              className="oneSpot-Image small corner-bottom"
+              src={spot.previewImage}
+              // key={"imageId: " + JSON.stringify(index) + "bottomright"}
+              alt="NOT FOUND"
+            />
+          </div>
+        </div>
+        {/* ))} */}
 
         <div className="description-checkin-container">
           <div className="checkin-description">
