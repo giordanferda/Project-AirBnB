@@ -41,7 +41,7 @@ function Search() {
         value={userSearch}
         onChange={(e) => setUserSearch(e.target.value) && setSearchToggle(true)}
         required
-        placeholder="Search listed spots..."
+        placeholder="Search listed spot names..."
         ></input>
       <div className="Search_results">
         {userSearch &&
