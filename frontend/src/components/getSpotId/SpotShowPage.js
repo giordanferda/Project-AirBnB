@@ -73,7 +73,7 @@ function GetSpotbyId() {
   if (spot === undefined) {
     return;
   }
-
+//dummy commit
   return (
     <div className="spotContainer" onClick={openPage}>
       <div className="spot-detail-review">
