@@ -95,16 +95,16 @@ function GetSpotbyId() {
 
         {/* {spot &&
           spot?.Images?.map((image, index) => ( */}
-        <div className="imgParentContainer">
-          <div className="mainImgContainer">
+        {/* <div className="imgParentContainer"> */}
+          {/* <div className="mainImgContainer"> */}
             <img
               className="Big"
               src={spot.previewImage}
               // key={"imageId: " + JSON.stringify(index) + "big"}
               alt="NOT FOUND"
             />
-          </div>
-          <div className="secondaryImgContainer">
+          {/* </div> */}
+          {/* <div className="secondaryImgContainer">
             <img
               className="oneSpot-Image small"
               src={spot.previewImage}
@@ -130,8 +130,8 @@ function GetSpotbyId() {
               // key={"imageId: " + JSON.stringify(index) + "bottomright"}
               alt="NOT FOUND"
             />
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
         {/* ))} */}
 
         <div className="description-checkin-container">
@@ -184,7 +184,7 @@ function GetSpotbyId() {
           {filterReviews.map((review, i) => (
             <div className="reviewOne" key={review.id} review={review}>
               Review {i + 1}: {""}
-              <div>
+              <div className="reviewSpace">
                 <i className="fa-solid fa-star"></i> {review.stars}{" "}
                 {review.review}
                 {user && reviewBelongsToUser(review) && (
